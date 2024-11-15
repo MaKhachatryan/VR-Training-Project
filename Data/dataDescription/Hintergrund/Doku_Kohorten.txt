@@ -1,0 +1,38 @@
+Dokumentation zum Projekt: VR-Trainings (Grundlegendes Praxisprojekt WS24/25)
+
+2 Kohorten, durchgeführt in dieser Reihenfolge:
+- Linne
+- D'Amelio (abgekürzt Dame)
+
+Trainings-Runden in der VR-Anwendung:
+-3 Baseline (Linne & Dame)
+-6 Training (Linne & Dame)
+-2 Test (nur Linne)
+-Metriken in Datei roundLogs_ gespeichert
+
+Test-Runden:
+-Linne: 2 Test in VR (roundLogs_Linne)
+-Dame: 2 Test in einem nachgebauten Szenario in der realen Welt (keine Daten vorhanden)
+
+Aufzeichnungen der physiologischen Daten:
+-Linne: Für 11 VR-Runden
+-Dame: Für 9 VR-Runden
+
+Demographische Daten:
+-Linne: userID_Linne
+-Dame: SimTLX_Dame
+
+Antworten aus Fragebogen nach dem Test für die Dame-Kohorte: SimTLX_Dame
+(Fragebogen für die Linne Kohorte nicht digitalisiert)
+
+3 Gruppen:
+-Adaptive: Training passt sich dem Nutzer laufend an
+-NonAdaptive: VR-Runden stehen vor Beginn des Trainings fest
+-Control: Probanden haben nach einem Flyer nur den finalen Test in der realen Welt absolviert - nur Dame
+
+Beschreibung des Studienablaufs (aus einem aktuellen Paper):
+"At first, participants were informed in written form about the content and purpose of the study and asked to give their written consent to participate. In a subsequent three-minute video, they were again informed about the purpose of research, the VR environment and functionalities of the controllers. Afterwards, the EmotiBit (on the inside of the right forearm), controllers and Varjo Aero were handed over and fitted individually. Depending on the assigned group (Adaptive or Non-Adaptive), each participant then independently completed the training. The variables were measured during and after the training. At the end, a unique identification number was provided to the participants so they are able to withdraw their consent and request deletion of the measured data at a later stage while maintaining anonymity.
+
+The entire user study, all content, the SIM-TLX questionnaire and the two questions asked after each training round are standardised and identical for each participant. The whole training procedure in VR is automated and completed independently. The collection of data and metrics are standardised, objective and, if possible, automated."
+
+Ein Proband braucht circa 45 min um das gesamte Training samt Test zu absolvieren.
