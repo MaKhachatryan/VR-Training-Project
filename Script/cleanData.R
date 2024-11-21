@@ -1,21 +1,24 @@
-dataCleaning <- function(data_frame) {
+dataCleaning <- function(dataFrame) {
   # Iterate through each column of the data frame
-  for (col_name in names(data_frame)) {
+  for (colName in names(dataFrame)) {
     # Check if the column is numeric
-    if (is.numeric(data_frame[[col_name]])) {
+    if (is.numeric(dataFrame[[colName]])) {
       # Extract the column
-      column <- data_frame[[col_name]]
+      column <- dataFrame[[colName]]
+      
       # Check if the column is entirely zeros
       if (all(column == 0, na.rm = TRUE)) {
         next # Skip this column; leave it as is
       }
+      
       # Calculate the mean, excluding 0 and NA
-      column_mean <- mean(column[column != 0 & !is.na(column)], na.rm = TRUE)
+      columnMean <- mean(column[column != 0 & !is.na(column)], na.rm = TRUE)
+      
       # Replace 0s and NAs with the mean
-      data_frame[[col_name]][column == 0 | is.na(column)] <- column_mean
+      dataFrame[[colName]][column == 0 | is.na(column)] <- columnMean
     }
   }
   # Return the cleaned data frame
-  return(data_frame)
+  return(dataFrame)
 }
 
