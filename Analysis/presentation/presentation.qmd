@@ -3,29 +3,38 @@ title: "Adapting Virtual Reality Training Applications"
 subtitle: "by Fabio Genz and Dieter Kranzlmüller"
 author: "Iris Dizdari, Anh Hoang Minh Dang, Margarita Khachatryan, Arsine Chinaryan"
 institute: "Supervisor: Daniel Schlichting"
+date: "2024-2-13"
 format: 
   revealjs:
-    slide-number: c
     css: customstyle.css
-    
+    slide-number: true
+    embed-resources: true
+    logo: "LMULogo.jpg"
 editor: visual
 ---
 
-## Quarto
+## Outline
 
-Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+1\. Overview about the VR-Project
 
-## Bullets
+2\. Data analyse
 
-When you click the **Render** button a document will be generated that includes:
+-   Sub-category 1
+-   Sub-category 2
 
--   Content authored with markdown
--   Output from executable code
+3\.  Summary
 
-## Code
+## Overview about the VR-Project
 
-When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+Something something:
+
+-   Content 1
+-   Content 2
+
+## Analyse 1
+
+A correlate with B: (insert plot or code, eg: plot(iris))
 
 ```{r}
-1 + 1
+plot(iris)
 ```
