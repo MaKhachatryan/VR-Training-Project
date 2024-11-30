@@ -9,7 +9,7 @@ library(cluster)
 
 #1
 #function to read the data we need from the file
-read_Data <- function(file){
+readData <- function(file){
   
   # Extract the user ID from the file name
   file_name <- basename(file)  # Extract just the file name (without the path)
@@ -36,13 +36,13 @@ read_Data <- function(file){
 
 #2
 #function for calculating avarages per round for a given data
-average_Per_Round <- function(data){
+averagePerRound <- function(data){
   
   # Dynamically generate the mean column name
   mean_col_name <- paste0("mean_", colnames(data)[3])
   
   #calculate the avarage per round
-  avg_Values_Df <- data %>%
+  avg_values_df <- data %>%
     mutate(
       Round_number = abs(as.numeric(Round_number)),  # Ensure 'Round_number' is numeric
     ) %>%
@@ -52,7 +52,7 @@ average_Per_Round <- function(data){
       User_ID = first(User_ID),  # Keep User_ID in the summarised data
       .groups = "drop"
     )
-  return(avg_Values_Df)
+  return(avg_values_df)
 }
 
 
@@ -61,7 +61,7 @@ average_Per_Round <- function(data){
 # Ensure all elements in the data list are data frames
 # make sure every data frame has all rounds, and the rounds go from 1 till 9
 # Combine all data frames into one and give it a nice structure
-combined_Data_List <- function(df_list){
+combinedDataList <- function(df_list){
   
   # Ensure User_ID is character in all data frames
   df_list <- lapply(df_list, function(df) {
@@ -93,7 +93,7 @@ combined_Data_List <- function(df_list){
 #4
 #function for selecting columns from a data frame by a given pattern
 #will mostly be used on round logs but its general
-select_columns_by_patterns <- function(data, patterns) {
+selectColumnsByPatterns <- function(data, patterns) {
   # Validate input: Ensure data is a data frame
   checkmate::assertDataFrame(data)
   
@@ -118,7 +118,7 @@ select_columns_by_patterns <- function(data, patterns) {
 #5
 #Reshape the Answer_Q... columns from RoundLogs to match Round_number
 #taking the round number from the column names and making a separate column for it
-pivoted_Data <- function(data){
+pivotedData <- function(data){
   data_long <- data %>%
     pivot_longer(
       cols = matches("_R[1-9]$"),  # Select Answer columns with _R1 to _R9
@@ -133,7 +133,7 @@ pivoted_Data <- function(data){
 
 #6
 #function replaces all 0s with NA, which is easier to ignore later
-cleaned_Data <- function(dataFrame) {
+cleanedData <- function(dataFrame) {
   # Iterate through each column of the data frame
   for (colName in names(dataFrame)) {
     # Check if the column is numeric
@@ -161,68 +161,68 @@ cleaned_Data <- function(dataFrame) {
 
 #EmotiBit Dame
 #path to the EmotiBit folder from DameDaten
-EmotiBit_Dame_Path <- "/Users/anikhachatryan/Desktop/VR-Training-Project/Data/rawData/PMD/DameDaten/EmotiBit"
+emotiBit_dame_path <- "/Users/anikhachatryan/Desktop/VR-Training-Project/Data/rawData/PMD/DameDaten/EmotiBit"
 
 # List all files in the Emotibit fol folder
-EmotiBit_Dame_File_List <- list.files(EmotiBit_Dame_Path, full.names = TRUE)
+emotiBit_dame_file_list <- list.files(emotiBit_dame_path, full.names = TRUE)
 
 # Initialize an empty list to store data frames
-EmotiBit_Dame_Data_List <- list()
+emotiBit_dame_data_list <- list()
 
-for (file in EmotiBit_Dame_File_List) {
+for (file in emotiBit_dame_file_list) {
   
   #read the data from the file
-   raw_Data <- read_Data(file)
+   raw_data <- readData(file)
    
    #calculate average per round
-   EmotiBit_Dame_Avarage_Per_Round <- average_Per_Round(raw_Data)
+   emotiBit_dame_avarage_per_round <- averagePerRound(raw_data)
    
    #make a data list from all the read data
-   EmotiBit_Dame_Data_List[[length(EmotiBit_Dame_Data_List) + 1]] <- EmotiBit_Dame_Avarage_Per_Round
+   emotiBit_dame_data_list[[length(emotiBit_dame_data_list) + 1]] <- emotiBit_dame_avarage_per_round
 }
 
 #Bringing EmotiBit to a nice form and saving
-EmotiBit_Dame <- combined_Data_List(EmotiBit_Dame_Data_List)
+emotiBit_dame <- combinedDataList(emotiBit_dame_data_list)
 
 
 #EyeTracking Dame
 #now doing the same steps for EyeTracking to have it nicely saved
 #path to the EyeTracking folder from DameDaten
-EyeTracking_Dame_Path <- "/Users/anikhachatryan/Desktop/VR-Training-Project/Data/rawData/PMD/DameDaten/Eye-Tracking"
+eyeTracking_dame_path <- "/Users/anikhachatryan/Desktop/VR-Training-Project/Data/rawData/PMD/DameDaten/Eye-Tracking"
 
-EyeTracking_Dame_File_List <- list.files(EyeTracking_Dame_Path, full.names = TRUE)
+eyeTracking_dame_file_list <- list.files(eyeTracking_dame_path, full.names = TRUE)
 
-EyeTracking_Dame_Data_List <- list()
+eyeTracking_dame_data_list <- list()
 
-for(file in EyeTracking_Dame_File_List) {
+for(file in eyeTracking_dame_file_list) {
   
-  raw_Data <- read_Data(file)
+  raw_data <- readData(file)
   
-  EyeTracking_Dame_Avarage_Per_Round <- average_Per_Round(raw_Data)
+  eyeTracking_dame_avarage_per_round <- averagePerRound(raw_data)
   
-  EyeTracking_Dame_Data_List[[length(EyeTracking_Dame_Data_List) + 1]] <- EyeTracking_Dame_Avarage_Per_Round
+  eyeTracking_dame_data_list[[length(eyeTracking_dame_data_list) + 1]] <- eyeTracking_dame_avarage_per_round
 }
 
-EyeTracking_Dame <- combined_Data_List(EyeTracking_Dame_Data_List)
+eyeTracking_dame <- combinedDataList(eyeTracking_dame_data_list)
 
 
 
 #working with Round Logs Dame
 #saving the columns from the round logs Dame that we need, also using function to clean it
-round_Logs_Dame <- cleaned_Data(select_columns_by_patterns(roundLogs_Dame,
+round_logs_dame <- cleanedData(selectColumnsByPatterns(roundLogs_Dame,
                                               c("User_ID", "Answer_Q1", "Answer_Q2", "RMSSD", "SDNN")))
-print(round_Logs_Dame, n=Inf)
+
 #pivoting it so it has a separate column for rounds, has more rows and fewer columns
-round_Logs_Dame <- pivoted_Data(round_Logs_Dame)
+round_logs_dame <- pivotedData(round_logs_dame)
 
 
 #combining the Round Logs and PMD data frames i have for Dame to get a final data frame
 # Perform a left join based on User_ID and Round_number
-clean_Dame_Data <- round_Logs_Dame %>%
-  left_join(EmotiBit_Dame, by = c("User_ID", "Round_number")) %>%
-  left_join(EyeTracking_Dame, by = c("User_ID", "Round_number"))
+clean_dame_data <- round_logs_dame %>%
+  left_join(emotiBit_dame, by = c("User_ID", "Round_number")) %>%
+  left_join(eyeTracking_dame, by = c("User_ID", "Round_number"))
 
-print(clean_Dame_Data)
+print(clean_dame_data)
 
 
 
@@ -230,97 +230,97 @@ print(clean_Dame_Data)
 #doing all the steps for Linne without comments cause i'm lazy :)
 
 #EmotiBit Linne
-EmotiBit_Linne_Path <- "/Users/anikhachatryan/Desktop/VR-Training-Project/Data/rawData/PMD/LinneDaten/EmotiBit"
+emotiBit_linne_path <- "/Users/anikhachatryan/Desktop/VR-Training-Project/Data/rawData/PMD/LinneDaten/EmotiBit"
 
-EmotiBit_Linne_File_List <- list.files(EmotiBit_Linne_Path, full.names = TRUE)
+emotiBit_linne_file_list <- list.files(emotiBit_linne_path, full.names = TRUE)
 
-EmotiBit_Linne_Data_List <- list()
+emotiBit_linne_data_list <- list()
 
-for (file in EmotiBit_Linne_File_List) {
+for (file in emotiBit_linne_file_list) {
   
-  raw_Data <- read_Data(file)
+  raw_data <- readData(file)
   
-  EmotiBit_Linne_Avarage_Per_Round <- average_Per_Round(raw_Data)
+  emotiBit_linne_avarage_per_Round <- averagePerRound(raw_data)
   
-  EmotiBit_Linne_Data_List[[length(EmotiBit_Linne_Data_List) + 1]] <- EmotiBit_Linne_Avarage_Per_Round
+  emotiBit_linne_data_list[[length(emotiBit_linne_data_list) + 1]] <- emotiBit_linne_avarage_per_round
 }
 
-EmotiBit_Linne <- combined_Data_List(EmotiBit_Linne_Data_List)
+emotiBit_linne <- combinedDataList(emotiBit_linne_data_list)
 
 #EyeTracking Linne
-EyeTracking_Linne_Path <- "/Users/anikhachatryan/Desktop/VR-Training-Project/Data/rawData/PMD/LinneDaten/Eye-Tracking"
+eyeTracking_linne_path <- "/Users/anikhachatryan/Desktop/VR-Training-Project/Data/rawData/PMD/LinneDaten/Eye-Tracking"
 
-EyeTracking_Linne_File_List <- list.files(EyeTracking_Linne_Path, full.names = TRUE)
+eyeTracking_linne_file_list <- list.files(eyeTracking_linne_path, full.names = TRUE)
 
-EyeTracking_Linne_Data_List <- list()
+eyeTracking_linne_data_list <- list()
 
-for(file in EyeTracking_Linne_File_List) {
+for(file in eyeTracking_linne_file_list) {
   
-  raw_Data <- read_Data(file)
+  raw_data <- readData(file)
   
-  EyeTracking_Linne_Avarage_Per_Round <- average_Per_Round(raw_Data)
+  eyeTracking_linne_avarage_per_round <- averagePerRound(raw_data)
   
-  EyeTracking_Linne_Data_List[[length(EyeTracking_Linne_Data_List) + 1]] <- EyeTracking_Linne_Avarage_Per_Round
+  eyeTracking_linne_data_list[[length(eyeTracking_linne_data_list) + 1]] <- eyeTracking_linne_avarage_per_round
 }
 
-EyeTracking_Linne <- combined_Data_List(EyeTracking_Linne_Data_List)
-print(EyeTracking_Linne)
+eyeTracking_linne <- combinedDataList(eyeTracking_linne_data_list)
+print(eyeTracking_linne)
 
 #working with Round Logs Linne
-round_Logs_Linne <- cleaned_Data(select_columns_by_patterns(roundLogs_Linne,
+round_logs_linne <- cleanedData(selectColumnsByPatterns(roundLogs_Linne,
                                                            c("User_ID", "Answer_Q1", "Answer_Q2", "RMSSD", "SDNN")))
 #selecting only the first 9 rounds for Linne
-round_Logs_Linne <- round_Logs_Linne %>%
+round_logs_linne <- round_logs_linne %>%
   select(User_ID,
     matches("_R[1-9]$")
   )
 
-round_Logs_Linne <- pivoted_Data(round_Logs_Linne)
+round_logs_linne <- pivotedData(round_logs_linne)
 
 #combining PMD data first and filtering only the first 9 rounds, cause the last two were test rounds
-clean_Linne_Data <- EmotiBit_Linne %>%
-  left_join(EyeTracking_Linne, by = c("User_ID", "Round_number")) %>%
+clean_linne_data <- emotiBit_linne %>%
+  left_join(eyeTracking_linne, by = c("User_ID", "Round_number")) %>%
   filter(Round_number <= 9)
 
-clean_Linne_Data <- round_Logs_Linne %>%
-  left_join(clean_Linne_Data, by = c("User_ID", "Round_number"))
-print(clean_Linne_Data)
+clean_linne_data <- round_logs_linne %>%
+  left_join(clean_linne_data, by = c("User_ID", "Round_number"))
+print(clean_linne_data)
 
 
 
 
 
 #finally making a data frame with both Cohorts
-Dame_Linne_combined <- bind_rows(
-  clean_Linne_Data, clean_Dame_Data
+dame_linne_combined <- bind_rows(
+  clean_linne_data, clean_dame_data
 )
 
-print(Dame_Linne_combined)
+print(dame_linne_combined)
 
 
 
 
 #calculations for correlation
 # Select numeric columns (exclude Answer_Q1 and Answer_Q2 temporarily, also round number)
-measurement_columns <- Dame_Linne_combined %>%
+measurement_columns <- dame_linne_combined %>%
   select(where(is.numeric)) %>%
   select(-c(Answer_Q1, Answer_Q2, Round_number)) %>% 
   colnames()
 print(measurement_columns)
 
 # Compute correlations between Answer_Q1 and each PMD column
-cor_Q1_PMD <- Dame_Linne_combined %>%
+cor_Q1_PMD <- dame_linne_combined %>%
   summarise(across(all_of(measurement_columns), ~ cor(Answer_Q1, .x, use = "complete.obs", method = "spearman")))
 #now with Answer_Q2
-cor_Q2_PMD <- Dame_Linne_combined %>%
+cor_Q2_PMD <- dame_linne_combined %>%
   summarise(across(all_of(measurement_columns), ~ cor(Answer_Q2, .x, use = "complete.obs", method = "spearman")))
 
 #making a tale to showcase the correlation results
 combined_tibble <- bind_rows(
-  cor_Q1_PMD %>% mutate(Row_Name = "Answer_Q1"),  # Add row name for tibble1
-  cor_Q2_PMD %>% mutate(Row_Name = "Answer_Q2")   # Add row name for tibble2
+  cor_Q1_PMD %>% mutate(row_name = "Answer_Q1"),  # Add row name for tibble1
+  cor_Q2_PMD %>% mutate(row_name = "Answer_Q2")   # Add row name for tibble2
 )%>%
-  select(Row_Name, everything())
+  select(row_name, everything())
 
 
 # View the final table, save it as a csv file
@@ -339,16 +339,16 @@ write.csv(final_tibble, "tibble_output.csv", row.names = FALSE)  # Base R
 
 #for the 2nd question "over the rounds"
 # Group by round_number and calculate correlation
-correlation_Per_Round <- Dame_Linne_combined %>%
+correlation_per_round <- dame_linne_combined %>%
   group_by(Round_number) %>%
   summarise(
     across(all_of(measurement_columns), ~ cor(Answer_Q1, .x, use = "complete.obs", method = "spearman"))
   )
 
-print(correlation_Per_Round)
+print(correlation_per_round)
 
 # Reshape data to long format
-data_long <- correlation_Per_Round %>%
+data_long <- correlation_per_round %>%
   pivot_longer(
     cols = -Round_number,             # Keep Round_number as is
     names_to = "Measurement",         # Create a new column for measurement names
@@ -379,43 +379,42 @@ ggplot(data_long, aes(x = Round_number, y = Value, color = Measurement)) +
 #some analysis for question 3 and 4
 
 #taking this from round logs bc its only there
-Linne_Trainingversion <- roundLogs_Linne["Trainingsversion"]
+linne_trainingversion <- roundLogs_Linne["Trainingsversion"]
 
-Linne_User_Demographics <- bind_cols(
-  select_columns_by_patterns(userID_Linne, c("UserID", "Gender", "Age", "Weight", "Height")),
-  Linne_Trainingversion,
+linne_user_demographics <- bind_cols(
+  selectColumnsByPatterns(userID_Linne, c("UserID", "Gender", "Age", "Weight", "Height")),
+  linne_trainingversion,
 )
 
-Linne_User_Demographics
+linne_user_demographics
 
-Dame_User_Demographics <- SimTLXAnswers_Dame[c("UserID", "Gender", "Age", "Weight", "Height", "Group")]
+dame_user_demographics <- SimTLXAnswers_Dame[c("UserID", "Gender", "Age", "Weight", "Height", "Group")]
                                                      
-
-Dame_User_Demographics
+dame_user_demographics
 
 # Boxplot for Ages
 ggplot() +
-  geom_boxplot(data = Dame_User_Demographics, aes(x = "Dame", y = Age, fill = "Dame"), alpha = 0.5) +
-  geom_boxplot(data = Linne_User_Demographics, aes(x = "Linne", y = Age, fill = "Linne"), alpha = 0.5) +
+  geom_boxplot(data = dame_user_demographics, aes(x = "Dame", y = Age, fill = "Dame"), alpha = 0.5) +
+  geom_boxplot(data = linne_user_demographics, aes(x = "Linne", y = Age, fill = "Linne"), alpha = 0.5) +
   labs(title = "Age Distribution by Cohorts", x = "Cohort", y = "Age") +
   theme_minimal()
 
 
 # Custom summary for key variables
-Dame_User_Demographics %>%
+dame_user_demographics %>%
   summarise(
-    Mean_Age = mean(Age, na.rm = TRUE),
-    Median_Height = median(Height, na.rm = TRUE),
-    Mean_Weight = mean(Weight, na.rm = TRUE),
-    SD_Weight = sd(Weight, na.rm = TRUE)
+    mean_dge = mean(Age, na.rm = TRUE),
+    median_height = median(Height, na.rm = TRUE),
+    mean_weight = mean(Weight, na.rm = TRUE),
+    SD_weight = sd(Weight, na.rm = TRUE)
   )
 
-Linne_User_Demographics %>%
+linne_user_demographics %>%
   summarise(
-    Mean_Age = mean(Age, na.rm = TRUE),
-    Median_Height = median(Height, na.rm = TRUE),
-    Mean_Weight = mean(Weight, na.rm = TRUE),
-    SD_Weight = sd(Weight, na.rm = TRUE)
+    mean_age = mean(Age, na.rm = TRUE),
+    median_height = median(Height, na.rm = TRUE),
+    mean_weight = mean(Weight, na.rm = TRUE),
+    SD_weight = sd(Weight, na.rm = TRUE)
   )
 
 # Combine data for MANOVA, but keep groups separate
@@ -431,8 +430,8 @@ Linne_User_Demographics %>%
 #across the variables tested (e.g., age, height, and weight).
 
 combined_data <- bind_rows(
-  Dame_User_Demographics %>% mutate(Group = "Dame"),
-  Linne_User_Demographics %>% mutate(Group = "Linne")
+  dame_user_demographics %>% mutate(Group = "Dame"),
+  linne_user_demographics %>% mutate(Group = "Linne")
 )
 
 manova_results <- manova(cbind(Age, Height, Weight) ~ Group, data = combined_data)
@@ -444,9 +443,9 @@ summary(manova_results)
 
 
 # Check for NA values
-colSums(is.na(Dame_User_Demographics))
+colSums(is.na(dame_user_demographics))
 #one NA in Weight column
-cleaned_data <- na.omit(Dame_User_Demographics[, c("Age", "Height", "Weight", "Gender")])
+cleaned_data <- na.omit(dame_user_demographics[, c("Age", "Height", "Weight", "Gender")])
 
 
 #using clustering or group-based analyse to lsook for subgroups within Dame or Linne, 
@@ -465,12 +464,12 @@ print(dame_clusters)
 table(cleaned_data$Cluster, cleaned_data$Gender)
 
 # For Linne
-linne_clusters <- kmeans(Linne_User_Demographics[, c("Age", "Height", "Weight")], centers = 2)
-Linne_User_Demographics$Cluster <- linne_clusters$cluster
+linne_clusters <- kmeans(linne_user_demographics[, c("Age", "Height", "Weight")], centers = 2)
+linne_user_demographics$Cluster <- linne_clusters$cluster
 
 print(linne_clusters)
 
-table(Linne_User_Demographics$Cluster, Linne_User_Demographics$Gender)
+table(linne_user_demographics$Cluster, linne_user_demographics$Gender)
 
 
 # Dame Cluster means:
