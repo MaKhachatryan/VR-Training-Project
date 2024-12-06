@@ -13,6 +13,9 @@ height_age <- plot(y = no.na_dame$Weight, x = no.na_dame$Height)
 
 cluster_dame_df <- data.frame(no.na_dame$Weight, no.na_dame$Height, cluster_dame$cluster)
 colnames(cluster_dame_df) <- c("weight", "height", "cluster")
+library(dplyr)
+cluster_dame_df |> group_by(cluster) |> summarize(mean_weight = mean(weight, na.rm = TRUE),
+mean_height = mean(height, na.rm = TRUE))
 
 library(ggplot2)
 ggplot(cluster_dame_df, aes(x = height, y = weight, color = as.factor(cluster))) + 
