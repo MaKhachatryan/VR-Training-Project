@@ -22,7 +22,7 @@ combined_tibble <- bind_rows(
 
 
 #save it as a csv file
-write.csv(combined_tibble, "tibble_output.csv", row.names = FALSE)  # Base R
+write.csv(combined_tibble, "correlationTable.csv", row.names = FALSE)  # Base R
 
 #not final just trying some stuff, turned out it was pretty stupid
 
