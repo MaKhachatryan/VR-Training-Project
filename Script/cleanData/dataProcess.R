@@ -83,7 +83,7 @@ for (file in emotiBit_linne_file_list) {
   
   raw_data <- readData(file)
   
-  emotiBit_linne_avarage_per_Round <- averagePerRound(raw_data)
+  emotiBit_linne_avarage_per_round <- averagePerRound(raw_data)
   
   emotiBit_linne_data_list[[length(emotiBit_linne_data_list) + 1]] <- emotiBit_linne_avarage_per_round
 }
