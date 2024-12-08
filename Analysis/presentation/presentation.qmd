@@ -1,14 +1,14 @@
 ---
 title: "Adapting Virtual Reality Training Applications"
 subtitle: "by Fabio Genz and Dieter Kranzlmüller"
-author: "Iris Dizdari, Anh Hoang Minh Dang, Margarita Khachatryan, Arsine Chinaryan"
+author: "Arsine Chinaryan, Anh Hoang Minh Dang, Iris Dizdari, Margarita Khachatryan"
 institute: "Supervisor: Daniel Schlichting"
 date: "2024-2-13"
 format: 
   revealjs:
     css: customstyle.css
-    slide-number: true
     embed-resources: true
+    slide-number: true
     logo: "LMULogo.jpg"
 editor: visual
 ---
