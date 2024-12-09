@@ -6,11 +6,32 @@ institute: "Supervisor: Daniel Schlichting"
 date: "2024-2-13"
 format: 
   revealjs:
-    css: customstyle.css
     embed-resources: true
     slide-number: true
     logo: "LMULogo.jpg"
 editor: visual
+---
+
+<style>
+/* Slide number styles */
+.reveal.has-logo .slide-number{
+  top: initial;
+  right: 8px;
+  bottom: 8px;
+}
+
+/* Logo style */
+.reveal .slide-logo{
+  display : block;
+  position: fixed;
+  bottom: initial;
+  right: 12px;
+  max-height: 2.2rem;
+  height: 100%;
+  width: auto;
+  z-index: 2;
+}
+</style>
 ---
 
 ## Outline
@@ -22,7 +43,7 @@ editor: visual
 -   Sub-category 1
 -   Sub-category 2
 
-3\.  Summary
+3\. Summary
 
 ## Overview about the VR-Project
 
