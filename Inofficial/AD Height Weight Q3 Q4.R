@@ -11,61 +11,6 @@ DameDemographicsAndAnswers <- read_csv("Data/processedData/DameDemographicsAndAn
 LinneDemographicsAndAnswers <- read_csv("Data/processedData/LinneDemographicsAndAnswers.csv")
 combinedCohorts <- read_csv("Data/processedData/combinedCohorts.csv")
 
-## ---------- FIRST TRY (UNIMPORTANT) -------
-# dame 
-## height - Q1
-heightDame <- DameDemographicsAndAnswers |> 
-  select(Mean_Answer_Q1, Mean_Answer_Q2, Height) |>
-  mutate(
-    heightAboveMean = if_else(
-      Height > mean(Height),
-      sprintf("Height above mean (%.2f)", mean(Height)), # Format with two decimals
-      sprintf("Height below mean (%.2f)", mean(Height))
-  )
-)
-
-ggplot(heightDame, aes(x = heightAboveMean, y = Mean_Answer_Q1)) +
-  geom_boxplot() +
-  scale_y_continuous(breaks = seq(1, 6, by = 1), limits = c(1, 6)) + 
-  labs(title = "Q1 Answer Distribution by Height Group",
-       x = "Height Group",
-       y = "Mean Q1 Answer") +
-  theme_minimal() +
-  theme(legend.position = "none")
-
-## height - Q2
-ggplot(heightDame, aes(x = heightAboveMean, y = Mean_Answer_Q2)) +
-  geom_boxplot() +
-  scale_y_continuous(breaks = seq(1, 6, by = 1), limits = c(1, 6)) + 
-  labs(title = "Q2 Answer Distribution by Height Group",
-       x = "Height Group",
-       y = "Mean Q2 Answer") +
-  theme_minimal() +
-  theme(legend.position = "none")
-
-## height - as.gender - Q1
-heightGenderDame <- DameDemographicsAndAnswers |> 
-  select(Mean_Answer_Q1, Mean_Answer_Q2, Height, Gender) |> 
-  group_by(Gender) |>  # Group by Gender
-  mutate(
-    genderMeanHeight = mean(Height, na.rm = TRUE), # Compute gender-specific mean height
-    heightAboveMean = if_else(
-      Height > genderMeanHeight,
-      sprintf("Height above gender mean (%.2f)", genderMeanHeight), # Format with two decimals
-      sprintf("Height below gender mean (%.2f)", genderMeanHeight)
-    )
-  ) |> 
-  ungroup()
-
-ggplot(heightGenderDame, aes(x = heightAboveMean, y = Mean_Answer_Q1, fill = Gender)) +
-  geom_boxplot() +
-  scale_y_continuous(breaks = seq(1, 6, by = 1), limits = c(1, 6)) + 
-  labs(title = "Q1 Answer Distribution by Height Group",
-       x = "Height Group",
-       y = "Mean Q1 Answer") +
-  theme_minimal()
-
-
 
 ## ------------- WRITE GENERAL FUNCTION -------------
 heightWeightSubgroup <- function(dataSet, heightWeight, answerQ1Q2, groupByVar = NA) {
@@ -119,7 +64,8 @@ plotHeightWeight <- function(heightWeightSubgroupDf) {
           colnames(heightWeightSubgroupDf)[1]
         ),
         x = sprintf("%s Group", colnames(heightWeightSubgroupDf)[1]),
-        y = sprintf("%s", colnames(heightWeightSubgroupDf)[2])
+        y = sprintf("%s", colnames(heightWeightSubgroupDf)[2]),
+        subtitle = deparse(substitute(heightWeightSubgroupDf))
       ) +
       theme_minimal()
   } else {
@@ -136,6 +82,7 @@ plotHeightWeight <- function(heightWeightSubgroupDf) {
           colnames(heightWeightSubgroupDf)[2],
           colnames(heightWeightSubgroupDf)[1]
         ),
+        subtitle = deparse(substitute(heightWeightSubgroupDf)),
         x = sprintf("%s Group", colnames(heightWeightSubgroupDf)[1]),
         y = sprintf("%s", colnames(heightWeightSubgroupDf)[2])
       ) +
@@ -144,6 +91,50 @@ plotHeightWeight <- function(heightWeightSubgroupDf) {
   
   return(resultPlot)
 }
+
+testplotHeightWeight <- function(heightWeightSubgroupDf) {
+  if (ncol(heightWeightSubgroupDf) == 4) {
+    resultPlot <- ggplot(heightWeightSubgroupDf, aes(
+      x = comparison, 
+      y = .data[[colnames(heightWeightSubgroupDf)[2]]]
+    )) +
+      geom_boxplot() +
+      scale_y_continuous(breaks = seq(1, 6, by = 1), limits = c(1, 6)) +
+      labs(
+        title = sprintf(
+          "%s Answer Distribution by %s Group",
+          colnames(heightWeightSubgroupDf)[2],
+          colnames(heightWeightSubgroupDf)[1]
+        ),
+        x = sprintf("%s Group", colnames(heightWeightSubgroupDf)[1]),
+        y = sprintf("%s", colnames(heightWeightSubgroupDf)[2]),
+        subtitle = deparse(substitute(heightWeightSubgroupDf))
+      ) +
+      theme_minimal()
+  } else {
+    resultPlot <- ggplot(heightWeightSubgroupDf, aes(
+      x = comparison, 
+      y = .data[[colnames(heightWeightSubgroupDf)[3]]],
+      fill = .data[[colnames(heightWeightSubgroupDf)[2]]]
+    )) +
+      geom_boxplot() +
+      scale_y_continuous(breaks = seq(1, 6, by = 1), limits = c(1, 6)) +
+      labs(
+        title = sprintf(
+          "%s Answer Distribution by %s Group",
+          colnames(heightWeightSubgroupDf)[2],
+          colnames(heightWeightSubgroupDf)[1]
+        ),
+        subtitle = deparse(substitute(heightWeightSubgroupDf)),
+        x = sprintf("%s Group", colnames(heightWeightSubgroupDf)[1]),
+        y = sprintf("%s", colnames(heightWeightSubgroupDf)[2])
+      ) +
+      theme_minimal()
+  }
+  
+  return(resultPlot)
+}
+plotHeightWeight(heightGenderDameQ1)
 
 ## -------------- ANALYSIS --------------
 ### ----- DAME ------
@@ -178,7 +169,7 @@ heightGroupDameQ1 <- heightWeightSubgroup(DameDemographicsAndAnswers, "Height", 
 plotHeightWeight(heightGroupDameQ1)
 
 heightGroupDameQ2 <- heightWeightSubgroup(DameDemographicsAndAnswers, "Height", "Mean_Answer_Q2", "Trainingsversion")
-plotHeightWeight(heightGroupDameQ2)
+plotHeightWeight(heightGroupDameQ2)  # THIS ONE SHOWS CLEAR DIFFERENCES IN HEIGHT WITHIN TRAININGSVERSION
 
 weightGroupDameQ1 <- heightWeightSubgroup(DameDemographicsAndAnswers, "Weight", "Mean_Answer_Q1", "Trainingsversion")
 plotHeightWeight(weightGroupDameQ1)
@@ -203,29 +194,29 @@ plotHeightWeight(weightLinneQ2)
 
 # group with gender
 heightGenderLinneQ1 <- heightWeightSubgroup(LinneDemographicsAndAnswers, "Height", "Mean_Answer_Q1", "Gender")
-plotHeightWeight(heightGenderLinneQ1)
+plotHeightWeight(heightGenderLinneQ1)  # THIS ONE SHOWS CLEAR DIFFERENCES IN HEIGHT WITHIN GENDER
 
 heightGenderLinneQ2 <- heightWeightSubgroup(LinneDemographicsAndAnswers, "Height", "Mean_Answer_Q2", "Gender")
-plotHeightWeight(heightGenderLinneQ2)
+plotHeightWeight(heightGenderLinneQ2)  # THIS ONE SHOWS CLEAR DIFFERENCES IN HEIGHT WITHIN GENDER
 
 weightGenderLinneQ1 <- heightWeightSubgroup(LinneDemographicsAndAnswers, "Weight", "Mean_Answer_Q1", "Gender")
-plotHeightWeight(weightGenderLinneQ1)
+plotHeightWeight(weightGenderLinneQ1)  # THIS ONE SHOWS CLEAR DIFFERENCES IN WEIGHT WITHIN GENDER
 
 weightGenderLinneQ2 <- heightWeightSubgroup(LinneDemographicsAndAnswers, "Weight", "Mean_Answer_Q2", "Gender")
 plotHeightWeight(weightGenderLinneQ2)
 
 # group with trainingsversion
 heightGroupLinneQ1 <- heightWeightSubgroup(LinneDemographicsAndAnswers, "Height", "Mean_Answer_Q1", "Trainingsversion")
-plotHeightWeight(heightGroupLinneQ1)
+plotHeightWeight(heightGroupLinneQ1) # THIS ONE SHOWS CLEAR DIFFERENCES IN HEIGHT WITHIN TRAININGSVERSION
 
 heightGroupLinneQ2 <- heightWeightSubgroup(LinneDemographicsAndAnswers, "Height", "Mean_Answer_Q2", "Trainingsversion")
-plotHeightWeight(heightGroupLinneQ2)
+plotHeightWeight(heightGroupLinneQ2) # THIS ONE SHOWS CLEAR DIFFERENCES IN HEIGHT WITHIN TRAININGSVERSION
 
 weightGroupLinneQ1 <- heightWeightSubgroup(LinneDemographicsAndAnswers, "Weight", "Mean_Answer_Q1", "Trainingsversion")
-plotHeightWeight(weightGroupLinneQ1)
+plotHeightWeight(weightGroupLinneQ1)  # THIS ONE SHOWS CLEAR DIFFERENCES IN WEIGHT WITHIN TRAININGSVERSION
 
 weightGroupLinneQ2 <- heightWeightSubgroup(LinneDemographicsAndAnswers, "Weight", "Mean_Answer_Q2", "Trainingsversion")
-plotHeightWeight(weightGroupLinneQ2)
+plotHeightWeight(weightGroupLinneQ2) # THIS ONE SHOWS CLEAR DIFFERENCES IN WEIGHT WITHIN TRAININGSVERSION
 
 ### ----- Combined ------
 # no group
@@ -268,7 +259,36 @@ weightGroupCombinedQ2 <- heightWeightSubgroup(combinedCohorts, "Weight", "Mean_A
 plotHeightWeight(weightGroupCombinedQ2)
 
 
+## -------- CONCLUSION - CHOOSING PLOT ----------
+# copy the plot shows clearly a different behaviour of a subgroup
+# plot again better:
 
+# group with trainingsversion
+heightGroupDameQ2 <- heightWeightSubgroup(DameDemographicsAndAnswers, "Height", "Mean_Answer_Q2", "Trainingsversion")
+plotHeightWeight(heightGroupDameQ2)  # THIS ONE SHOWS CLEAR DIFFERENCES IN HEIGHT WITHIN TRAININGSVERSION
+
+# group with gender
+heightGenderLinneQ1 <- heightWeightSubgroup(LinneDemographicsAndAnswers, "Height", "Mean_Answer_Q1", "Gender")
+plotHeightWeight(heightGenderLinneQ1)  # THIS ONE SHOWS CLEAR DIFFERENCES IN HEIGHT WITHIN GENDER
+
+heightGenderLinneQ2 <- heightWeightSubgroup(LinneDemographicsAndAnswers, "Height", "Mean_Answer_Q2", "Gender")
+plotHeightWeight(heightGenderLinneQ2)  # THIS ONE SHOWS CLEAR DIFFERENCES IN HEIGHT WITHIN GENDER
+
+weightGenderLinneQ1 <- heightWeightSubgroup(LinneDemographicsAndAnswers, "Weight", "Mean_Answer_Q1", "Gender")
+plotHeightWeight(weightGenderLinneQ1)  # THIS ONE SHOWS CLEAR DIFFERENCES IN WEIGHT WITHIN GENDER
+
+# group with trainingsversion
+heightGroupLinneQ1 <- heightWeightSubgroup(LinneDemographicsAndAnswers, "Height", "Mean_Answer_Q1", "Trainingsversion")
+plotHeightWeight(heightGroupLinneQ1) # THIS ONE SHOWS CLEAR DIFFERENCES IN HEIGHT WITHIN TRAININGSVERSION
+
+heightGroupLinneQ2 <- heightWeightSubgroup(LinneDemographicsAndAnswers, "Height", "Mean_Answer_Q2", "Trainingsversion")
+plotHeightWeight(heightGroupLinneQ2) # THIS ONE SHOWS CLEAR DIFFERENCES IN HEIGHT WITHIN TRAININGSVERSION
+
+weightGroupLinneQ1 <- heightWeightSubgroup(LinneDemographicsAndAnswers, "Weight", "Mean_Answer_Q1", "Trainingsversion")
+plotHeightWeight(weightGroupLinneQ1)  # THIS ONE SHOWS CLEAR DIFFERENCES IN WEIGHT WITHIN TRAININGSVERSION
+
+weightGroupLinneQ2 <- heightWeightSubgroup(LinneDemographicsAndAnswers, "Weight", "Mean_Answer_Q2", "Trainingsversion")
+plotHeightWeight(weightGroupLinneQ2) # THIS ONE SHOWS CLEAR DIFFERENCES IN WEIGHT WITHIN TRAININGSVERSION
 
 
 
