@@ -49,7 +49,7 @@ heightWeightSubgroup <- function(dataSet, heightWeight, answerQ1Q2, groupByVar =
 }
 
 ## ----- draw plot
-plotHeightWeight <- function(heightWeightSubgroupDf) {
+firstplotHeightWeight <- function(heightWeightSubgroupDf) {
   if (ncol(heightWeightSubgroupDf) == 4) {
     resultPlot <- ggplot(heightWeightSubgroupDf, aes(
       x = comparison, 
@@ -92,7 +92,7 @@ plotHeightWeight <- function(heightWeightSubgroupDf) {
   return(resultPlot)
 }
 
-testplotHeightWeight <- function(heightWeightSubgroupDf) {
+plotHeightWeight <- function(heightWeightSubgroupDf) {
   if (ncol(heightWeightSubgroupDf) == 4) {
     resultPlot <- ggplot(heightWeightSubgroupDf, aes(
       x = comparison, 
@@ -113,9 +113,9 @@ testplotHeightWeight <- function(heightWeightSubgroupDf) {
       theme_minimal()
   } else {
     resultPlot <- ggplot(heightWeightSubgroupDf, aes(
-      x = comparison, 
-      y = .data[[colnames(heightWeightSubgroupDf)[3]]],
-      fill = .data[[colnames(heightWeightSubgroupDf)[2]]]
+      x = .data[[colnames(heightWeightSubgroupDf)[3]]], 
+      y = .data[[colnames(heightWeightSubgroupDf)[2]]],
+      fill = comparison
     )) +
       geom_boxplot() +
       scale_y_continuous(breaks = seq(1, 6, by = 1), limits = c(1, 6)) +
@@ -134,7 +134,6 @@ testplotHeightWeight <- function(heightWeightSubgroupDf) {
   
   return(resultPlot)
 }
-plotHeightWeight(heightGenderDameQ1)
 
 ## -------------- ANALYSIS --------------
 ### ----- DAME ------
@@ -261,7 +260,6 @@ plotHeightWeight(weightGroupCombinedQ2)
 
 ## -------- CONCLUSION - CHOOSING PLOT ----------
 # copy the plot shows clearly a different behaviour of a subgroup
-# plot again better:
 
 # group with trainingsversion
 heightGroupDameQ2 <- heightWeightSubgroup(DameDemographicsAndAnswers, "Height", "Mean_Answer_Q2", "Trainingsversion")
