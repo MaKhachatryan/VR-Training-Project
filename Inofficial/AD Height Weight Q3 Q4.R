@@ -289,9 +289,18 @@ weightGroupLinneQ2 <- heightWeightSubgroup(LinneDemographicsAndAnswers, "Weight"
 plotHeightWeight(weightGroupLinneQ2) # THIS ONE SHOWS CLEAR DIFFERENCES IN WEIGHT WITHIN TRAININGSVERSION
 
 
+## ------- IDENTIFY SUBGROUP -----
+DameDemographicsAndAnswers |> select(Mean_Answer_Q1, Mean_Answer_Q2) |> 
+  ggplot(aes(x = Mean_Answer_Q1, y = Mean_Answer_Q2)) + geom_point()
 
+LinneDemographicsAndAnswers |> select(Mean_Answer_Q1, Mean_Answer_Q2) |> 
+  ggplot(aes(x = Mean_Answer_Q1, y = Mean_Answer_Q2)) + geom_point()
 
+combinedCohorts |> select(Mean_Answer_Q1, Mean_Answer_Q2) |> 
+  ggplot(aes(x = Mean_Answer_Q1, y = Mean_Answer_Q2)) + geom_point()
 
+table(heightWeightSubgroup(DameDemographicsAndAnswers, "Age", 
+                     "Mean_Answer_Q1", "Gender")$comparison)
 
 
 
