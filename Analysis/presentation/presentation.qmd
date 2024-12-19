@@ -15,7 +15,10 @@ editor: visual
 
 ## Outline
 
-1\. Overview about the VR-Project
+1\. Overview
+
+-   Overview about the VR-Project
+-   Overview about data analysis
 
 2\. Data analyse
 
@@ -24,12 +27,30 @@ editor: visual
 
 3\. Summary
 
-## Overview about the VR-Project
+## 1. Overview about the VR-Project
 
-Something something:
+### **General Information**
 
--   Content 1
--   Content 2
+- Title: Adapting Virtual Reality Training Applications by Dynamically Adjusting Visual Aspects  
+- Author: Fabio Genz, Dieter Kranzlmüller  
+
+### **Motivation**
+
+- Static training programs may not suit all users
+    - Too easy => boredom  
+    - Too difficult => anxiety  
+- Adaptive VR training systems can balance difficulty to maintain engagement and improve learning outcomes.
+
+## 1. Overview about the VR-Project
+
+### **Training scenario: **
+Users move, pick, and placing parcels using VR controllers in a VR warehouse with dynamic lighting and colour guidance.
+
+### **Adaptive System Features**
+
+- Use user behavior (head position, orientation) and performance (time, errors) for adjustments.
+- Adjustments: lighting intensity, object colour,…
+- Adjusts after each training round based on behaviour and performance changes.
 
 ## Analyse 1
 
