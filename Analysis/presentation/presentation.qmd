@@ -18,7 +18,7 @@ editor: visual
 1\. Overview
 
 -   Overview about the VR-Project
--   Overview about data analysis
+-   Overview about data analyse
 
 2\. Data analyse
 
@@ -44,7 +44,7 @@ editor: visual
 ## 1. Overview about the VR-Project
 
 ### **Training scenario: **
-Users move, pick, and placing parcels using VR controllers in a VR warehouse with dynamic lighting and colour guidance.
+Users move, pick, and place parcels using VR controllers in a VR warehouse with dynamic lighting and colour guidance.
 
 ### **Adaptive System Features**
 
