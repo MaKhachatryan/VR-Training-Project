@@ -31,31 +31,25 @@ editor: visual
 
 ### **General Information**
 
-- Title: Adapting Virtual Reality Training Applications by Dynamically Adjusting Visual Aspects  
-- Author: Fabio Genz, Dieter Kranzlmüller  
+-   Title: Adapting Virtual Reality Training Applications by Dynamically Adjusting Visual Aspects\
+-   Author: Fabio Genz, Dieter Kranzlmüller
 
 ### **Motivation**
 
-- Static training programs may not suit all users
-    - Too easy => boredom  
-    - Too difficult => anxiety  
-- Adaptive VR training systems can balance difficulty to maintain engagement and improve learning outcomes.
+-   Static training programs may not suit all users
+    -   Too easy =\> boredom
+    -   Too difficult =\> anxiety\
+-   Adaptive VR training systems can balance difficulty to maintain engagement and improve learning outcomes.
 
 ## 1. Overview about the VR-Project
 
-### **Training scenario: **
+### **Training scenario:**
+
 Users move, pick, and place parcels using VR controllers in a VR warehouse with dynamic lighting and colour guidance.
 
 ### **Adaptive System Features**
 
-- Use user behavior (head position, orientation) and performance (time, errors) for adjustments.
-- Adjustments: lighting intensity, object colour,…
-- Adjusts after each training round based on behaviour and performance changes.
+-   Use user behavior (head position, orientation) and performance (time, errors) for adjustments.
+-   Adjustments: lighting intensity, object colour,...
+-   Adjusts after each training round based on behaviour and performance changes.
 
-## Analyse 1
-
-A correlate with B: (insert plot or code, eg: plot(iris))
-
-```{r}
-plot(iris)
-```
