@@ -1,6 +1,6 @@
 #the code below uses the functions to create the data frames
 
-
+source("Script/utils/fixPMD.R")
 
 #EmotiBit Dame
 #path to the EmotiBit folder from DameDaten
@@ -70,7 +70,7 @@ print(clean_dame_data)
 
 
 
-#doing all the steps for Linne without comments cause i'm lazy :)
+#doing all the steps for Linne 
 
 #EmotiBit Linne
 emotiBit_linne_path <- "Data/rawData/PMD/LinneDaten/EmotiBit"
@@ -119,17 +119,17 @@ round_logs_linne <- cleanedData(selectColumnsByPatterns(roundLogs_Linne,
                                                         c("User_ID", "Answer_Q1", "Answer_Q2", "RMSSD", "SDNN")))
 
 #selecting only the first 9 rounds for Linne
-round_logs_linne <- round_logs_linne %>%
-  select(User_ID,
-         matches("_R[1-9]$")
-  )
+#round_logs_linne <- round_logs_linne %>%
+ # select(User_ID,
+         #matches("_R[1-9]$")
+  #)
 
 round_logs_linne <- pivotedData(round_logs_linne)
 
 #combining PMD data first and filtering only the first 9 rounds, cause the last two were test rounds
-clean_linne_data <- emotiBit_linne %>%
-  left_join(eyeTracking_linne, by = c("User_ID", "Round_number")) %>%
-  filter(Round_number <= 9)
+#clean_linne_data <- emotiBit_linne %>%
+ # left_join(eyeTracking_linne, by = c("User_ID", "Round_number")) %>%
+  #filter(Round_number <= 9)
 
 clean_linne_data <- round_logs_linne %>%
   left_join(clean_linne_data, by = c("User_ID", "Round_number"))

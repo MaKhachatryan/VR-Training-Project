@@ -1,3 +1,5 @@
+library(corrplot)
+
 #calculations for correlation
 # Select numeric columns (exclude Answer_Q1 and Answer_Q2 temporarily, also round number)
 measurement_columns <- dame_linne_combined %>%
@@ -38,7 +40,7 @@ print(correlation_per_round)
 
 
 
-
+################################################################################ why is this here? 
 
 # Reshape data to long format
 data_long <- correlation_per_round %>%

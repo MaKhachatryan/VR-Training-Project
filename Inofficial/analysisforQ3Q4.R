@@ -1,3 +1,8 @@
+library(ggplot2)
+library(viridis)
+library(dplyr)
+library(tidyr)
+source("Script/utils/pivotedData.R")
 #some analysis for question 3 and 4
 
 #taking this from round logs bc its only there
@@ -13,6 +18,7 @@ linne_user_demographics
 dame_user_demographics <- SimTLXAnswers_Dame[c("UserID", "Gender", "Age", "Weight", "Height", "Group")]
 
 dame_user_demographics
+
 
 # Boxplot for Ages
 ggplot() +
@@ -159,15 +165,15 @@ dame_idk <- clean_Dame_Data %>%
 dame_idk
 
 #boxplot with genders and their physical load
-ggplot(dame_idk, aes(x = Gender, y = Answer_Q2, fill = Gender)) +
+ggplot(combinedCohorts, aes(x = Trainingsversion, y = Mean_Answer_Q1, fill = Trainingsversion)) +
   geom_boxplot(alpha = 0.7, outlier.size = 2) +
   labs(
-    title = "Comparison of Physical Load Perception (Answer Q2) by Gender",
-    x = "Gender",
-    y = "Answer Q2"
+    title = "Comparison of Mental Load Perception (Answer Q1) by Training Group",
+    x = "Training Groups",
+    y = "Answer Q1",
   ) +
   theme_minimal() +
-  scale_fill_manual(values = c("F" = "pink", "M" = "blue")) +
+  scale_fill_viridis_d(option = "plasma") +
   theme(legend.position = "none")
 
 #line plot about the physical load and gender 
@@ -187,17 +193,42 @@ ggplot(dame_idk, aes(x = Round_number, y = Answer_Q2, color = Gender, group = Ge
 
 
 
-# Grouped Bar Plot, for gender, training type and answer q2
-ggplot(dame_idk, aes(x = Gender, y = Answer_Q2, fill = Group)) +
-  geom_bar(stat = "summary", fun = "mean", position = "dodge") +a
+# Grouped Bar Plot, for demographic meassurement and answer Q1 / Q2
+ggplot(DameDemographicsAndAnswers, aes(x = Trainingsversion, y = Mean_Answer_Q1, fill = Gender)) +
+  geom_bar(stat = "summary", fun = "mean", position = "dodge") +
 labs(
-  title = "Physical Load Perception (Answer Q2) by Gender and Training Type",
-  x = "Gender",
-  y = "Mean Answer Q2",
-  fill = "Training Type"
+  title = "Mental Load Perception (Answer Q1) by Gender and Training Type",
+  x = "Training Type",
+  y = "Mean Answer Q1",
+  fill = "Gender"
 ) +
   theme_minimal() +
-  scale_fill_manual(values = c("Adaptive" = "yellow", "NonAdaptive" = "green"))
+  scale_fill_viridis_d(option = "viridis")
 
 
 
+
+##Iris: for the tests between Group Q1 and Q2, can be used for other matches
+# Reshape the data to a long format
+long_data <- combinedCohorts %>%
+  pivot_longer(
+    cols = c(Mean_Answer_Q1, Mean_Answer_Q2), # Columns to pivot
+    names_to = "Question",                   # New column for the question
+    values_to = "Mean_Answer"                # New column for the values
+  )
+
+# Plot both Q1 and Q2
+ggplot(long_data, aes(x = Trainingsversion, y = Mean_Answer, fill = Trainingsversion)) +
+  geom_boxplot(alpha = 0.7, outlier.size = 2) +
+  facet_wrap(~ Question, labeller = as_labeller(c(
+    Mean_Answer_Q1 = "Q1 (Mental Load)",
+    Mean_Answer_Q2 = "Q2 (Physical Load)"
+  ))) +
+  labs(
+    title = "Mental and Physical Load Perception by Training Type",
+    x = "Training Type",
+    y = "Mean Answer",
+    fill = "Group"
+  ) +
+  theme_minimal() +
+  scale_fill_viridis_d(option = "viridis")

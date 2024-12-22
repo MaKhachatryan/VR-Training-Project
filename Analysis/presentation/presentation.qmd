@@ -15,41 +15,60 @@ editor: visual
 
 ## Outline
 
-1\. Overview
+::: incremental
+1.    Overview & Terminology
 
--   Overview about the VR-Project
--   Overview about data analyse
+2.    Data analysis
 
-2\. Data analyse
+        Relationship between percieved Stress and Physical Meassurements\
+        Relationship over the Rounds\
+        Subgroup Behavior\
+        Cohort Comparison
 
--   Sub-category 1
--   Sub-category 2
+3.    Summary and Discussion
+:::
 
-3\. Summary
+## Overview
 
-## 1. Overview about the VR-Project
+### 
 
-### **General Information**
+**VR-Training**: Adapting Virtual Reality Training Applications by Dynamically Adjusting Visual Aspects\
 
--   Title: Adapting Virtual Reality Training Applications by Dynamically Adjusting Visual Aspects\
--   Author: Fabio Genz, Dieter Kranzlmüller
+::: incremental
+-   **Survey**: Cross-sectional Study with Longitudinal Elements
 
-### **Motivation**
+-   2 Cohorts (Linne and Dame) 
+ 
+    --    21 Participants in Linne, 81 in Dame (with overlaps)
+ 
+    --    9 Rounds of Training for Dame and 11 for Linne
+    
+    --    Grouped into Adative and Non-Adaptive Training versions
+    
+    --    2 Rounds of Test per Cohort (Linne: VR, Dame: Real-world)
 
--   Static training programs may not suit all users
-    -   Too easy =\> boredom
-    -   Too difficult =\> anxiety\
--   Adaptive VR training systems can balance difficulty to maintain engagement and improve learning outcomes.
+-   **Timeframe**: 
+:::
 
-## 1. Overview about the VR-Project
+## Terminology
 
-### **Training scenario:**
+###
 
-Users move, pick, and place parcels using VR controllers in a VR warehouse with dynamic lighting and colour guidance.
+-   **Q1**: Percieved cognitive Load 
+-   **Q2**: Percieved physical Load
+-   
 
-### **Adaptive System Features**
 
--   Use user behavior (head position, orientation) and performance (time, errors) for adjustments.
--   Adjustments: lighting intensity, object colour,...
--   Adjusts after each training round based on behaviour and performance changes.
 
+## Outline
+
+[1. Overview & Terminology]{style="color:lightgray;"}
+
+2.  Data Analysis
+
+    Relationship between percieved Stress and Physical Meassurements\
+    [Relationship over the Rounds]{style="color:lightgray;"}\
+    [Subgroup Behavior]{style="color:lightgray;"}\
+    [Cohort Comparison]{style="color:lightgray;"}
+
+[3. Summary and Discussion]{style="color:lightgray;"}

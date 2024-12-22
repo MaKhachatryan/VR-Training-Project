@@ -20,3 +20,9 @@ html .reveal .slide-logo{
   width: auto !important;
   z-index: 2 !important;
 }
+
+
+/*Font size*/
+html .reveal .slides {
+  font-size: 0.8em;
+}
