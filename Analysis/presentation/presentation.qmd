@@ -1,5 +1,5 @@
 ---
-title: "Adapting Virtual Reality Training Applications"
+title: "VR-Training Project"
 subtitle: "by Fabio Genz and Dieter Kranzlmüller"
 author: "Arsine Chinaryan, Anh Hoang Minh Dang, Iris Dizdari, Margarita Khachatryan"
 institute: "Supervisor: Daniel Schlichting"
@@ -20,17 +20,16 @@ editor: visual
 
 2.    Data analysis
 
-        Relationship between percieved Stress and Physical Meassurements\
-        Relationship over the Rounds\
-        Subgroup Behavior\
-        Cohort Comparison
+        - Relationship between perceived Stress and Physical Measurements\
+        - Relationship over the rounds\
+        - Subgroup behavior\
+        - Cohort comparison
 
 3.    Summary and Discussion
 :::
 
 ## Overview
 
-### 
 
 **VR-Training**: Adapting Virtual Reality Training Applications by Dynamically Adjusting Visual Aspects\
 
@@ -52,12 +51,27 @@ editor: visual
 
 ## Terminology
 
-###
+### Stress indicators:
 
--   **Q1**: Percieved cognitive Load 
--   **Q2**: Percieved physical Load
--   
+-   **Answer Q1**: Perceived cognitive load ({1,2,3,4,5,6} with 1 very low and 6 very high)
+-   **Answer Q2**: Perceived physical load ({1,2,3,4,5,6} with 1 very low and 6 very high)
 
+## Terminology
+SORT AGAIN AND TAKE OUT WHAT IS UNNECESSARY
+
+### Physiological measurement data (PMD)
+
+-   **Heart rate (HR)**: Heart rate beats per minute (bpm)
+-   **IBI**: Interbeat interval (ms)
+-   **SDNN**: Standard deviation of the NN intervals
+-   **RMSSD**: Root mean square of successive differences
+-   **SCL**: Skin conductance level (µS (mikro Siemens))
+-   **SCR amplitude**: Amplitude/strength of the skin conductance response (µS/µmho (mikro Siemens/mikro Ohm))
+-   **SCR frequency**: Frequency of the skin conductance response
+-   **SCR_rising_time**: Rising time of the skin conductance response
+-   **Blink rate last minute**: Blink frequency per time unit
+-   **Saccade amplitude**: Degree of eye movement
+-   **Saccade velocity**: Speed of sudden eye movements
 
 
 ## Outline

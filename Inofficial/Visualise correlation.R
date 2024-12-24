@@ -2,6 +2,8 @@
 library(tidyr)
 library(dplyr)
 library(readr)
+library(ggplot2)
+library(stringr)
 correlationTable <- read_csv("Analysis/correlationTable.csv")
 
 # ----- CHANGE STRUCTURE -----
@@ -16,6 +18,49 @@ correlationQ2 <- pivot_longer(correlationTable, -1, names_to = "PMD",
 
 correlation <- pivot_longer(correlationTable, -1, names_to = "PMD",
                             values_to = "Correlation")
+
+# ----- CHOSEN PLOT FOR QUESTION 1 -----
+## Clean the variable names:
+correlationQ1$PMD <- str_replace_all(correlationQ1$PMD, "_", " ")
+correlationQ1$PMD <- str_replace_all(correlationQ1$PMD, "raw|Raw", "")
+correlationQ1$PMD <- str_replace_all(correlationQ1$PMD, "mean", "Mean")
+correlationQ2$PMD <- str_replace_all(correlationQ1$PMD, "_", " ")
+correlationQ2$PMD <- str_replace_all(correlationQ1$PMD, "raw|Raw", "")
+correlationQ2$PMD <- str_replace_all(correlationQ1$PMD, "mean", "Mean")
+
+## plot
+# Q1
+ggplot(correlationQ1, aes(x = reorder(PMD, Correlation, decreasing = TRUE), y = Correlation)) +
+  geom_bar(stat = "identity", position = "dodge", color = "black") +  # Bar chart
+  geom_hline(yintercept = 0, linetype = "dashed", color = "gray") +  # Baseline at zero
+  theme_minimal() +
+  labs(x = "Physical Measurements", 
+       y = "Correlation with Stress Measurement", 
+       title = "Correlation between Physical measurement and Stress measurement",
+       subtitle = "(PMD & Answer Q1)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Q2
+ggplot(correlationQ2, aes(x = reorder(PMD, Correlation, decreasing = TRUE), y = Correlation)) +
+  geom_bar(stat = "identity", position = "dodge", color = "black") +  # Bar chart
+  geom_hline(yintercept = 0, linetype = "dashed", color = "gray") +  # Baseline at zero
+  theme_minimal() +
+  labs(x = "Physical Measurements", 
+       y = "Correlation with Stress Measurement", 
+       title = "Correlation between Physical measurement and Physical load",
+       subtitle = "(PMD & Answer Q2)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+# --------------------------------------
+
+
+
+
+
+
+
+
+
+
 
 
 # ----- Test plot -----
@@ -109,5 +154,53 @@ ggplot(example_df, aes(x = Round, y = Correlation, color = PMD, group = PMD)) +
     axis.text.y = element_text(size = 8),
     plot.title = element_text(hjust = 0.5, size = 14),
     legend.position = "none"  # Remove legend since PMD is already in facets
+  )
+
+# Bar chart faceted by PMD
+ggplot(example_df, aes(x = Round, y = Correlation)) +
+  geom_bar(stat = "identity", position = "dodge", color = "black") +  # Bar chart with dodge positioning
+  facet_wrap(~ PMD, scales = "free_y", ncol = 3) +  # Facet by PMD with 3 columns
+  scale_x_continuous(breaks = 1:9) +  # Ensure x-axis shows fixed values 1 to 9
+  scale_fill_viridis_d(name = "Stress Question") +  # Use a distinctive color palette
+  theme_minimal() +
+  labs(
+    x = "Round Number",
+    y = "Correlation",
+    title = "Correlation Across Rounds by Physical Measurements"
+  ) +
+  theme(
+    strip.text = element_text(size = 10, face = "bold"),  # Style facet titles
+    panel.spacing = unit(1, "lines"),  # Increase spacing between panels
+    legend.position = "bottom",  # Place legend at the bottom
+    axis.text.x = element_text(size = 8),
+    axis.text.y = element_text(size = 8),
+    plot.title = element_text(hjust = 0.5, size = 14)
+  )
+
+
+library(ggplot2)
+
+library(ggplot2)
+
+# Plot each PMD as a separate facet
+ggplot(example_df, aes(x = Round, y = Correlation, group = Row_Name)) +
+  geom_line(size = 1) +  # Line plot
+  geom_point(size = 2) +  # Points for clarity
+  facet_wrap(~ PMD, scales = "free_y", ncol = 3) +  # Facet by PMD with 3 columns
+  scale_x_continuous(breaks = 1:9) +  # Ensure x-axis shows fixed values 1 to 9
+  scale_color_viridis_d(name = "Stress Question") +  # Use a distinctive color palette
+  theme_minimal() +
+  labs(
+    x = "Round Number",
+    y = "Correlation",
+    title = "Correlation Across Rounds by Physical Measurements"
+  ) +
+  theme(
+    strip.text = element_text(size = 10, face = "bold"),  # Style facet titles
+    panel.spacing = unit(1, "lines"),  # Increase spacing between panels
+    legend.position = "bottom",  # Place legend at the bottom
+    axis.text.x = element_text(size = 8),
+    axis.text.y = element_text(size = 8),
+    plot.title = element_text(hjust = 0.5, size = 14)
   )
 
