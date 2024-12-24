@@ -16,37 +16,36 @@ editor: visual
 ## Outline
 
 ::: incremental
-1.    Overview & Terminology
+1.  Overview & Terminology
 
-2.    Data analysis
+2.  Data analysis
 
-        - Relationship between perceived Stress and Physical Measurements\
-        - Relationship over the rounds\
-        - Subgroup behavior\
-        - Cohort comparison
+    -   Relationship between perceived Stress and Physical Measurements\
+    -   Relationship over the rounds\
+    -   Subgroup behavior\
+    -   Cohort comparison
 
-3.    Summary and Discussion
+3.  Summary and Discussion
 :::
 
 ## Overview
-
 
 **VR-Training**: Adapting Virtual Reality Training Applications by Dynamically Adjusting Visual Aspects\
 
 ::: incremental
 -   **Survey**: Cross-sectional Study with Longitudinal Elements
 
--   2 Cohorts (Linne and Dame) 
- 
-    --    21 Participants in Linne, 81 in Dame (with overlaps)
- 
-    --    9 Rounds of Training for Dame and 11 for Linne
-    
-    --    Grouped into Adative and Non-Adaptive Training versions
-    
-    --    2 Rounds of Test per Cohort (Linne: VR, Dame: Real-world)
+-   2 Cohorts (Linne and Dame)
 
--   **Timeframe**: 
+    -- 21 Participants in Linne, 81 in Dame (with overlaps)
+
+    -- 9 Rounds of Training for Dame and 11 for Linne
+
+    -- Grouped into Adative and Non-Adaptive Training versions
+
+    -- 2 Rounds of Test per Cohort (Linne: VR, Dame: Real-world)
+
+-   **Timeframe**:
 :::
 
 ## Terminology
@@ -57,6 +56,7 @@ editor: visual
 -   **Answer Q2**: Perceived physical load ({1,2,3,4,5,6} with 1 very low and 6 very high)
 
 ## Terminology
+
 SORT AGAIN AND TAKE OUT WHAT IS UNNECESSARY
 
 ### Physiological measurement data (PMD)
@@ -72,7 +72,6 @@ SORT AGAIN AND TAKE OUT WHAT IS UNNECESSARY
 -   **Blink rate last minute**: Blink frequency per time unit
 -   **Saccade amplitude**: Degree of eye movement
 -   **Saccade velocity**: Speed of sudden eye movements
-
 
 ## Outline
 
