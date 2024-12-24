@@ -8,9 +8,7 @@
 - Margarita Khachatryan: M.Khachatryan@campus.lmu.de
 
 ## General instruction
-This is the repository for VR-Training Project. This is the repository for the
-VR-Training Project. Please read these instructions carefully to ensure optimal 
-program performance before running the code.
+This is the repository for the VR-Training Project. Please read these instructions carefully to ensure optimal program performance before running the code.
 
 We use R version 4.3.2. Some of the packages in this project may require the 
 latest version of R, so please ensure it is installed before proceeding.
