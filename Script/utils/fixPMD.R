@@ -5,20 +5,17 @@
 #output: data frame
 readData <- function(file){
   
-  # Extract the user ID from the file name
-  file_name <- basename(file)  # Extract just the file name (without the path)
-  user_id <- strsplit(file_name, "_")[[1]][1]  # Split by "_" and take the first part
-  
   # Read the data
-  data <- read_delim(file, delim = ";", escape_double = FALSE, trim_ws = TRUE, show_col_types = FALSE)
+  data <- read_delim(
+    file, 
+    delim = ";", 
+    locale = locale(decimal_mark = ","),
+    escape_double = FALSE, 
+    trim_ws = TRUE, 
+    show_col_types = FALSE
+  )
   
-  # Clean and convert the 5th column
-  data <- data %>%
-    mutate(!!colnames(data)[5] := as.numeric(
-      str_replace_all(
-        str_replace_all(.data[[colnames(data)[5]]], ",", "."),  # Replace commas with periods
-        "[^0-9eE.-]", ""  # Remove other unwanted characters
-      )))
+  fifth_col_name <- colnames(data)[5]
   
   data <- data %>%
     select(User_ID, Round_number, colnames(data)[5])
@@ -69,11 +66,6 @@ combinedDataList <- function(df_list){
   
   combine <- bind_rows(df_list)
   
-  # Ensure all rounds (0 to 8) are present for each User_ID
-  combine <- combine %>%
-    group_by(User_ID) %>%
-    complete(Round_number = 0:8, fill = list(User_ID = NA)) %>%  # Fill missing rounds for each user with NA
-    ungroup()
   
   # Combine all PMD columns by Round_number and User_ID
   final_PMD <- combine %>%
