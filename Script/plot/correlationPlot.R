@@ -56,6 +56,6 @@ plotCorrelation <- function(correlationTable, stressIndicator) {
 
 
 dameQ1 <- plotCorrelation(correlationTableDame, "Answer_Q1")
-plotCorrelation(correlationTableDame, "Answer_Q2")
-plotCorrelation(correlationTableLinne, "Answer_Q1")
-plotCorrelation(correlationTableLinne, "Answer_Q2")
+dameQ2 <- plotCorrelation(correlationTableDame, "Answer_Q2")
+linneQ1 <- plotCorrelation(correlationTableLinne, "Answer_Q1")
+linneQ2 <- plotCorrelation(correlationTableLinne, "Answer_Q2")
