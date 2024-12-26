@@ -1,3 +1,4 @@
+source("../../environmentSetUp.R")
 # This function produces the visualization for the correlation table (demonstrate
 # the relationship between the stress indicators (Answer Q1: cognitive load, 
 # Answer Q2: physical load) and the physiological measurements (PMD)) of 
@@ -53,7 +54,8 @@ plotCorrelation <- function(correlationTable, stressIndicator) {
     theme(axis.text.x = element_text(angle = 45, hjust = 1))
 }
 
-plotCorrelation(correlationTableDame, "Answer_Q1")
-plotCorrelation(correlationTableDame, "Answer_Q2")
-plotCorrelation(correlationTableLinne, "Answer_Q1")
-plotCorrelation(correlationTableLinne, "Answer_Q2")
+
+dameQ1 <- plotCorrelation(correlationTableDame, "Answer_Q1")
+dameQ2 <- plotCorrelation(correlationTableDame, "Answer_Q2")
+linneQ1 <- plotCorrelation(correlationTableLinne, "Answer_Q1")
+linneQ2 <- plotCorrelation(correlationTableLinne, "Answer_Q2")

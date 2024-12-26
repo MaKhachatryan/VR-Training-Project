@@ -12,6 +12,10 @@ format:
     logo: "LMULogo.jpg"
 editor: visual
 ---
+```{r setup, include=FALSE}
+source("../../environmentSetUp.R")
+source("../../Script/plot/correlationPlot.R")
+```
 
 ## Outline
 
@@ -20,10 +24,12 @@ editor: visual
 
 2.  Data analysis
 
+
     -   Relationship between perceived Stress and Physical Measurements\
     -   Relationship over the rounds\
     -   Subgroup behavior\
     -   Cohort comparison
+
 
 3.  Summary and Discussion
 :::
@@ -79,9 +85,31 @@ SORT AGAIN AND TAKE OUT WHAT IS UNNECESSARY
 
 2.  Data Analysis
 
-    Relationship between percieved Stress and Physical Meassurements\
+    Relationship between Stress indicator and Physical Measurements\
     [Relationship over the Rounds]{style="color:lightgray;"}\
     [Subgroup Behavior]{style="color:lightgray;"}\
     [Cohort Comparison]{style="color:lightgray;"}
 
 [3. Summary and Discussion]{style="color:lightgray;"}
+
+
+## Relationship between Stress indicator and Physical Measurements
+
+```{r}
+dameQ1
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
