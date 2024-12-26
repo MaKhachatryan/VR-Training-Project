@@ -185,6 +185,7 @@ dame_user_demographics <- dame_user_demographics %>%
   filter(Group != "Control") %>%
   rename(Trainingsversion = Group)
 
+
 dame_demo_answers <- clean_dame_data %>%
   group_by(User_ID) %>%
   summarise(
@@ -203,10 +204,12 @@ dame_demo_answers <- clean_dame_data %>%
     Trainingsversion
   )
 
+
 # Round all numeric columns to 3 decimal places
 dame_demo_answers <- dame_demo_answers %>%
   mutate(across(where(is.numeric), ~ round(.x, 3)))
 dame_demo_answers
+
 
 write_csv(dame_demo_answers, "Data/processedData/DameDemographicsAndAnswers.csv")
 
@@ -262,6 +265,7 @@ write_csv(combined_demo_answers, "Data/processedData/combinedDemographicsAndAnsw
 #creating data frames with PMD, Demographics and Answers
 #with round numbers
 
+
 # Filter out the unwanted rows from combined_demo_answers
 filtered_demo_answers <- combined_demo_answers %>%
   filter(!User_ID %in% c("Mean_Answer_Q1", "Mean_Answer_Q2"))
@@ -278,16 +282,20 @@ write_csv(combined_pmd_demo_answers_by_rounds,
 
 ###########################
 #without rounds
+
 combined_pmd_demo_answers <- combined_pmd_demo_answers_by_rounds %>%
   group_by(User_ID) %>%  # Group by User_ID
-  summarise(across(where(is.numeric), ~ mean(.x, na.rm = TRUE))) %>%  # Calculate mean for numeric columns
+  summarise(
+    across(where(is.numeric) & !all_of("Round_number"), ~ mean(.x, na.rm = TRUE)),  # Mean for numeric columns
+    across(where(is.character), ~ first(.x))  # Retain first non-NA value for character columns
+  ) %>%
   ungroup()  # Remove grouping structure
 
 # Round all numeric columns to 3 decimal places
 combined_pmd_demo_answers <- combined_pmd_demo_answers %>%
   mutate(across(where(is.numeric), ~ round(.x, 3)))
 
-
+combined_pmd_demo_answers
 write_csv(combined_pmd_demo_answers,
           "Data/processedData/combinedPMDAndDemographicsAndAnswers.csv")
 
