@@ -1,6 +1,7 @@
 # Please always source this script first to set up the environment needed for 
 # this project.
 
+
 ## ----- Loading necessary packages -----
 packages <- c("tidyr",
               "dplyr",
