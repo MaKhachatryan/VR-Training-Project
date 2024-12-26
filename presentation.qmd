@@ -16,7 +16,7 @@ editor: visual
 ```{r setup, include=FALSE}
 #knitr::opts_chunk$set(echo = TRUE, error = TRUE)
 source("environmentSetUp.R")
-source("Script/plot/correlationPlot.R")
+source("Analysis/correlationPlot.R")
 ```
 
 ## Outline
