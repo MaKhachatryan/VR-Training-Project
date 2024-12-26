@@ -62,22 +62,28 @@ source("Analysis/correlationPlot.R")
 -   **Answer Q2**: Perceived physical load ({1,2,3,4,5,6} with 1 very low and 6 very high)
 
 ## Terminology
+### Physiological Measurement Data (PMD)
+::: {.columns}
 
-SORT AGAIN AND TAKE OUT WHAT IS UNNECESSARY
+::: {.column width="50%"}
 
-### Physiological measurement data (PMD)
+- **Heart rate (HR)**: Heart rate beats per minute (bpm)  
+- **IBI**: Interbeat interval (ms)  
+- **SDNN**: Standard deviation of the NN intervals  
+- **RMSSD**: Root mean square of successive differences  
+- **SCL**: Skin conductance level (µS (micro Siemens))  
+- **SCR frequency**: Frequency of the skin conductance response 
+:::
 
--   **Heart rate (HR)**: Heart rate beats per minute (bpm)
--   **IBI**: Interbeat interval (ms)
--   **SDNN**: Standard deviation of the NN intervals
--   **RMSSD**: Root mean square of successive differences
--   **SCL**: Skin conductance level (µS (mikro Siemens))
--   **SCR amplitude**: Amplitude/strength of the skin conductance response (µS/µmho (mikro Siemens/mikro Ohm))
--   **SCR frequency**: Frequency of the skin conductance response
--   **SCR_rising_time**: Rising time of the skin conductance response
--   **Blink rate last minute**: Blink frequency per time unit
--   **Saccade amplitude**: Degree of eye movement
--   **Saccade velocity**: Speed of sudden eye movements
+::: {.column width="50%"}
+- **SCR amplitude**: Amplitude/strength of the skin conductance response (µS/µmho (micro Siemens/micro Ohm))
+- **SCR_rising_time**: Rising time of the skin conductance response  
+- **Blink rate last minute**: Blink frequency per time unit  
+- **Saccade amplitude**: Degree of eye movement  
+- **Saccade velocity**: Speed of sudden eye movements  
+:::
+
+:::
 
 ## Outline
 
@@ -92,8 +98,30 @@ SORT AGAIN AND TAKE OUT WHAT IS UNNECESSARY
 
 [3. Summary and Discussion]{style="color:lightgray;"}
 
-## Relationship between Stress indicator and Physical Measurements
+## Relationship between Stress indicator and Physical Measurements {style="font-size: 26px;"}
 
 ```{r}
 dameQ1
 ```
+
+## Relationship between Stress indicator and Physical Measurements {style="font-size: 26px;"}
+```{r}
+dameQ2
+```
+
+## Relationship between Stress indicator and Physical Measurements {style="font-size: 26px;"}
+```{r}
+linneQ1
+```
+
+## Relationship between Stress indicator and Physical Measurements {style="font-size: 26px;"}
+```{r}
+linneQ2
+```
+
+
+
+
+
+
+
