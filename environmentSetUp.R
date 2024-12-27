@@ -25,4 +25,7 @@ for (ds in dataSet) {
   assign(var_name, read_csv(ds))
 }
 
-## ----- Sourcing all scripts -----
+## ----- Sourcing functions -----
+functionFolder <- "Script"
+scriptFiles <- list.files(path = functionFolder, pattern = "\\.R$", recursive = TRUE, full.names = TRUE)
+lapply(scriptFiles, source)
