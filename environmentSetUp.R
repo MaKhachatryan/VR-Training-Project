@@ -9,7 +9,8 @@ packages <- c("tidyr",
               "ggplot2",
               "knitr",
               "readr",
-              "ggthemes")
+              "ggthemes",
+              "readxl")
 
 for (pkg in packages) {
   if (!require(pkg, character.only = TRUE)) {
@@ -26,6 +27,6 @@ for (ds in dataSet) {
 }
 
 ## ----- Sourcing functions -----
-functionFolder <- "Script"
-scriptFiles <- list.files(path = functionFolder, pattern = "\\.R$", recursive = TRUE, full.names = TRUE)
-lapply(scriptFiles, source)
+#functionFolder <- "Script"
+#scriptFiles <- list.files(path = functionFolder, pattern = "\\.R$", recursive = TRUE, full.names = TRUE)
+#lapply(scriptFiles, source)

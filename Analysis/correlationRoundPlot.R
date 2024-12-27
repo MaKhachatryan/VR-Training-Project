@@ -51,6 +51,7 @@ plotCorrelationRound <- function(correlationTable, stressIndicator) {
   ggplot(correlationTable, aes(x = Round_number, y = correlation)) +
     geom_line(size = 1) + 
     geom_point(size = 2) +
+    geom_hline(yintercept = 0, linetype = "dashed", color = "darkgray") +
     facet_wrap(~ PMD, scales = "free_y", ncol = 3, strip.position = "top") +  
     scale_x_continuous(
       breaks = seq(min(correlationTable$Round_number), max(correlationTable$Round_number), 1),
@@ -61,15 +62,7 @@ plotCorrelationRound <- function(correlationTable, stressIndicator) {
       y = "Correlation",
       title = "Correlation over the rounds between PMD and stress indicators",
       subtitle = sprintf("%s (%s)", subtitleText, cohortName)
-    ) +
-    theme(
-      strip.text = element_text(size = 10, face = "bold"),  
-      panel.spacing = unit(1, "lines"),  
-      axis.text.x = element_text(size = 8),
-      axis.text.y = element_text(size = 8),
-      plot.title = element_text(hjust = 0.5, size = 14),
-      axis.title.x = element_text(vjust = -1)
-    )
+    ) 
 }
 
 ## Create plot with each stress indicator in each cohort
