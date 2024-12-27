@@ -54,7 +54,7 @@ plotCorrelation <- function(correlationTable, stressIndicator) {
     theme(axis.text.x = element_text(angle = 45, hjust = 1))
 }
 
-
+## Create plot with each stress indicator in each cohort
 dameQ1 <- plotCorrelation(correlationTableDame, "Answer_Q1")
 dameQ2 <- plotCorrelation(correlationTableDame, "Answer_Q2")
 linneQ1 <- plotCorrelation(correlationTableLinne, "Answer_Q1")

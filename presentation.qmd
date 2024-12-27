@@ -14,9 +14,9 @@ editor: visual
 ---
 
 ```{r setup, include=FALSE}
-#knitr::opts_chunk$set(echo = TRUE, error = TRUE)
 source("environmentSetUp.R")
 source("Analysis/correlationPlot.R")
+source("Analysis/correlationRoundPlot.R")
 ```
 
 ## Outline
@@ -92,7 +92,7 @@ source("Analysis/correlationPlot.R")
 2.  Data Analysis
 
     Relationship between Stress indicator and Physical Measurements\
-    [Relationship over the Rounds]{style="color:lightgray;"}\
+    [Relationship over the rounds]{style="color:lightgray;"}\
     [Subgroup Behavior]{style="color:lightgray;"}\
     [Cohort Comparison]{style="color:lightgray;"}
 
@@ -118,6 +118,47 @@ linneQ1
 ```{r}
 linneQ2
 ```
+
+## Outline
+
+[1. Overview & Terminology]{style="color:lightgray;"}
+
+2.  Data Analysis
+
+    [Relationship between Stress indicator and Physical Measurements]{style="color:lightgray;"}\
+    Relationship over the rounds\
+    [Subgroup Behavior]{style="color:lightgray;"}\
+    [Cohort Comparison]{style="color:lightgray;"}
+
+[3. Summary and Discussion]{style="color:lightgray;"}
+
+
+## Relationship over the rounds
+```{r}
+roundDameQ1
+```
+
+## Relationship over the rounds
+```{r}
+roundDameQ2
+```
+
+## Relationship over the rounds
+```{r}
+roundLinneQ1
+```
+
+## Relationship over the rounds
+```{r}
+roundLinneQ2
+```
+
+
+
+
+
+
+
 
 
 
