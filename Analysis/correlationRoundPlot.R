@@ -1,8 +1,8 @@
 source("environmentSetUp.R")
 # This function produces the plot to visualize how the relationship between 
-# the stress indicators (stressIndicator Q1: cognitive load, stressIndicator Q2: physical load)
+# the stress indicators (Answer Q1: cognitive load, Answer Q2: physical load)
 # and the physiological measurements (PMD)) of 2 cohorts (Dame and Linne) changes
-# in every round. There are 9 rounds in Dame and and 11 rounds in Linne
+# in every round. There are 9 rounds in total.
 #
 # Input:
 # 1. correlationTable: either correlationTableWithRoundsDame or correlationTableWithRoundsLinne
