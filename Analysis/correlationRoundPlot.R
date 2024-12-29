@@ -60,7 +60,8 @@ plotCorrelationRound <- function(correlationTable, stressIndicator) {
     labs(
       x = "Round Number",
       y = "Correlation",
-      title = "Correlation over the rounds between PMD and stress indicators",
+      title = "Correlation over the rounds between Physiological measurement
+      and Stress indicators",
       subtitle = sprintf("%s (%s)", subtitleText, cohortName)
     ) 
 }

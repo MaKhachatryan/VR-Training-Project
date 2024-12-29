@@ -52,7 +52,6 @@ source("Analysis/correlationRoundPlot.R")
 
     -- 2 rounds of test per cohort (Linne: VR, Dame: Real-world)
 
--   **Timeframe**:
 :::
 
 ## Terminology

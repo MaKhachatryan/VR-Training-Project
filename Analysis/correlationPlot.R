@@ -46,9 +46,9 @@ plotCorrelation <- function(correlationTable, stressIndicator) {
     geom_hline(yintercept = 0, linetype = "dashed", color = "gray") +
     theme_minimal() +
     labs(
-      x = "Physical Measurements",
-      y = "Correlation with Stress Measurement",
-      title = "Correlation between Physical measurement and Stress measurement",
+      x = "Physiological Measurements",
+      y = "Correlation",
+      title = "Correlation between Physiological measurements and Stress indicators",
       subtitle = sprintf("%s (%s)", subtitleText, cohortName)
     ) +
     theme(axis.text.x = element_text(angle = 45, hjust = 1))
