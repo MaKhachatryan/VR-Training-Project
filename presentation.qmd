@@ -44,7 +44,7 @@ source("Analysis/correlationRoundPlot.R")
 
 -   2 Cohorts (Linne and Dame)
 
-    -- 21 participants in Linne, 81 in Dame (with overlaps)
+    -- 20 participants in Linne, 80 participants in Dame
 
     -- 9 rounds of training for both cohorts
 
