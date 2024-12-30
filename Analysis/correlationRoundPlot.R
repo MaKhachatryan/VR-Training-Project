@@ -7,6 +7,8 @@ source("environmentSetUp.R")
 # Input:
 # 1. correlationTable: either correlationTableWithRoundsDame or correlationTableWithRoundsLinne
 # 2. stressIndicator: either "Q1" or "Q2"
+# Output: A line plot, facetted by PMD, showing how correlation between PMD and Stress 
+# indicators changes over the rounds
 
 
 # Create function to process and create the plot
@@ -71,3 +73,18 @@ roundDameQ1 <- plotCorrelationRound(correlationTableWithRoundsDame, "Q1")
 roundDameQ2 <- plotCorrelationRound(correlationTableWithRoundsDame, "Q2")
 roundLinneQ1 <- plotCorrelationRound(correlationTableWithRoundsLinne, "Q1") 
 roundLinneQ2 <- plotCorrelationRound(correlationTableWithRoundsLinne, "Q2")
+
+## Export plots into Result folder
+if (!all(file.exists(c("Result/roundDameQ1.png", "Result/roundDameQ2.png",
+                   "Result/roundLinneQ1.png", "Result/roundLinneQ2.png")))) {
+  ggsave("Result/roundDameQ1.png", roundDameQ1)
+  ggsave("Result/roundDameQ2.png", roundDameQ2)
+  ggsave("Result/roundLinneQ1.png", roundLinneQ1)
+  ggsave("Result/roundLinneQ2.png", roundLinneQ2)
+}
+
+
+
+
+
+

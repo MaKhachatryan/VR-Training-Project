@@ -27,6 +27,9 @@ for (ds in dataSet) {
 }
 
 ## ----- Sourcing functions -----
+source("Script/utils/fixPMD.R")
+source("Script/utils/cleanData.R")
+source("Script/utils/pivotedData.R")
 functionFolder <- "Script"
 scriptFiles <- list.files(path = functionFolder, pattern = "\\.R$", recursive = TRUE, full.names = TRUE)
 lapply(scriptFiles, source)
