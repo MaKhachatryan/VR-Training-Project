@@ -2,16 +2,17 @@
 #taking the round number from the column names "_Rx" and making a separate column for it
 #input: data frame
 #output: longer pivoted data frame
-pivotedData <- function(data){
+pivotedData <- function(data) {
   data_long <- data %>%
     pivot_longer(
-      cols = matches("_R[1-9]$"),  # Select Answer columns with _R1 to _R9
+      cols = matches("_R\\d+$"),  # Select columns ending with _R followed by digits
       names_to = c(".value", "Round_number"),
       names_pattern = "(.*)_R(\\d+)"  # Extract column prefix and round number
     ) %>%
-    mutate(Round_number = as.numeric(Round_number))# Ensure round numbers are numeric
+    mutate(Round_number = as.numeric(Round_number))  # Ensure round numbers are numeric
   return(data_long)
 }
+
 
 
 
