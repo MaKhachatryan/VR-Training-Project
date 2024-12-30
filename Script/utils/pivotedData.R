@@ -3,15 +3,25 @@
 #input: data frame
 #output: longer pivoted data frame
 pivotedData <- function(data) {
+  # First, select only the columns that have '_R1' to '_R9' (exclude _R10 and _R11 columns)
+  data <- data %>%
+    select(-matches("_R10$|_R11$"))  # Exclude columns ending in _R10 or _R11
+  
+  # Now, apply the pivot_longer on the remaining columns (those with _R1 to _R9)
   data_long <- data %>%
     pivot_longer(
-      cols = matches("_R\\d+$"),  # Select columns ending with _R followed by digits
+      cols = matches("_R[1-9]$"),  # Select columns ending with _R1 to _R9
       names_to = c(".value", "Round_number"),
       names_pattern = "(.*)_R(\\d+)"  # Extract column prefix and round number
     ) %>%
     mutate(Round_number = as.numeric(Round_number))  # Ensure round numbers are numeric
+  
+  # Return the transformed data
   return(data_long)
 }
+
+
+
 
 
 

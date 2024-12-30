@@ -1,6 +1,6 @@
 # Compute correlations and save to a specific folder
 #input: data frame, path for saving
-#output: .csv while
+#output: .csv file
 compute_and_save_correlation <- function(data, full_path) {
   # Select numeric columns (exclude Answer_Q1, Answer_Q2, and Round_number)
   measurement_columns <- data %>%
