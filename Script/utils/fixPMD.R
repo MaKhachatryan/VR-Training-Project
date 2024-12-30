@@ -71,7 +71,7 @@ combinedDataList <- function(df_list){
   final_PMD <- combine %>%
     group_by(User_ID, Round_number) %>%
     summarise(across(everything(), ~ na.omit(.x)[1], .names = "{.col}"), .groups = "drop") %>%
-    mutate(Round_number = Round_number + 1)  # Adjust Round_number to start from 1
-  
+    mutate(Round_number = Round_number + 1)  %>%  # Adjust Round_number to start from 1
+    filter(Round_number >= 1 & Round_number <= 9)  # Retain only rounds 1 to 9
   return(final_PMD)
 }

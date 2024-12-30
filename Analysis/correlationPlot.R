@@ -59,3 +59,12 @@ dameQ1 <- plotCorrelation(correlationTableDame, "Answer_Q1")
 dameQ2 <- plotCorrelation(correlationTableDame, "Answer_Q2")
 linneQ1 <- plotCorrelation(correlationTableLinne, "Answer_Q1")
 linneQ2 <- plotCorrelation(correlationTableLinne, "Answer_Q2")
+
+## Export plots into Result folder
+if (!all(file.exists(c("Result/dameQ1.png", "Result/dameQ2.png",
+                       "Result/linneQ1.png", "Result/linneQ2.png")))) {
+  ggsave("Result/dameQ1.png", dameQ1)
+  ggsave("Result/dameQ2.png", dameQ2)
+  ggsave("Result/linneQ1.png", linneQ1)
+  ggsave("Result/linneQ2.png", linneQ2)
+}
