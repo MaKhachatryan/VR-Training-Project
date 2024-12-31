@@ -10,7 +10,8 @@ packages <- c("tidyr",
               "knitr",
               "readr",
               "ggthemes",
-              "readxl")
+              "readxl",
+              "pheatmap")
 
 for (pkg in packages) {
   if (!require(pkg, character.only = TRUE)) {
