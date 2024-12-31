@@ -1,11 +1,4 @@
 #the code below uses the functions to create the data frames
-install.packages("readxl")
-library(readxl)
-
-
-source("Script/utils/fixPMD.R")
-source("Script/utils/pivotedData.R")
-source("Script/utils/cleanData.R")
 
 roundLogs_Dame <- read_excel("Data/rawData/roundLogs/roundLogs_Dame.xlsx")
 roundLogs_Linne <- read_delim("Data/rawData/roundLogs/roundLogs_Linne.csv", 
@@ -91,8 +84,6 @@ clean_dame_data <- clean_dame_data %>%
 
 
 
-
-
 #################################################################
 #doing all the steps for Linne 
 
@@ -137,7 +128,6 @@ eyeTracking_linne <- combinedDataList(eyeTracking_linne_data_list)
 
 
 
-
 #working with Round Logs Linne
 round_logs_linne <- cleanedData(selectColumnsByPatterns(roundLogs_Linne,
                                                         c("User_ID", "Answer_Q1", "Answer_Q2", "RMSSD", "SDNN")))
@@ -155,9 +145,8 @@ clean_linne_data <- clean_linne_data %>%
 
 
 
-
 #########################################################################
-#finally making a data frame with both Cohorts
+# Making a data frame with both Cohorts
 dame_linne_combined <- bind_rows(
   clean_linne_data, clean_dame_data
 )
@@ -166,7 +155,7 @@ dame_linne_combined <- bind_rows(
 # Round all numeric columns to 3 decimal places
 dame_linne_combined <- dame_linne_combined %>%
   mutate(across(where(is.numeric), ~ round(.x, 3)))
-
+print(dame_linne_combined, width = Inf)
 
 write_csv(dame_linne_combined, "Data/ProcessedData/combinedPMDAndRoundLogs.csv")
 
