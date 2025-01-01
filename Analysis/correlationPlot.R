@@ -42,7 +42,7 @@ plotCorrelation <- function(correlationTable, stressIndicator) {
   # Create the plot
   ggplot(correlationTable, aes(x = reorder(PMD, Correlation, decreasing = TRUE), 
                                y = Correlation)) +
-    geom_bar(stat = "identity", position = "dodge", color = "black") +
+    geom_bar(stat = "identity", position = "dodge", color = "black", alpha = 0.8) +
     geom_hline(yintercept = 0, linetype = "dashed", color = "gray") +
     theme_minimal() +
     labs(
