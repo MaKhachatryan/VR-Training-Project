@@ -70,6 +70,6 @@ if (!all(file.exists(c("Result/hrQ1TrainingMalesDame.jpeg", "Result/hrQ1Training
                        "Result/hrvQ1ByAgeDame.jpeg", "Result/hrvQ1ByAgeLinne.jpeg")))) {
   ggsave("Result/hrQ1TrainingMalesDame.jpeg", hrQ1TrainingMalesDame)
   ggsave("Result/hrQ1TrainingMalesLinne.jpeg", hrQ1TrainingMalesLinne)
-  ggsave("Result/hrvQ1ByAgeDame", hrvQ1ByAgeDame)
+  ggsave("Result/hrvQ1ByAgeDame.jpeg", hrvQ1ByAgeDame)
   ggsave("Result/hrvQ1ByAgeLinne.jpeg", hrvQ1ByAgeLinne)
 }
