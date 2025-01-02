@@ -1,8 +1,12 @@
+source("Script/utils/fixPMD.R")
+source("Script/utils/pivotedData.R")
+source("Script/utils/cleanData.R")
 #the code below uses the functions to create the data frames
 
 roundLogs_Dame <- read_excel("Data/rawData/roundLogs/roundLogs_Dame.xlsx")
 roundLogs_Linne <- read_delim("Data/rawData/roundLogs/roundLogs_Linne.csv", 
-                              delim = ";", escape_double = FALSE, trim_ws = TRUE)
+                              delim = ";", escape_double = FALSE, trim_ws = TRUE,
+                              locale = locale(decimal_mark = ","))
 SimTLXAnswers_Dame <- read_excel("Data/rawData/SimTLXAnswers_Dame.xlsx")
 userID_Linne <- read_delim("Data/rawData/userID_Linne.csv", 
                            delim = ";", escape_double = FALSE, trim_ws = TRUE)
@@ -106,7 +110,6 @@ for (file in emotiBit_linne_file_list) {
 emotiBit_linne <- combinedDataList(emotiBit_linne_data_list)
 
 
-
 #EyeTracking Linne
 eyeTracking_linne_path <- "Data/rawData/PMD/LinneDaten/Eye-Tracking"
 
@@ -155,7 +158,6 @@ dame_linne_combined <- bind_rows(
 # Round all numeric columns to 3 decimal places
 dame_linne_combined <- dame_linne_combined %>%
   mutate(across(where(is.numeric), ~ round(.x, 3)))
-print(dame_linne_combined, width = Inf)
 
 write_csv(dame_linne_combined, "Data/ProcessedData/combinedPMDAndRoundLogs.csv")
 
@@ -197,7 +199,6 @@ dame_demo_answers <- clean_dame_data %>%
 # Round all numeric columns to 3 decimal places
 dame_demo_answers <- dame_demo_answers %>%
   mutate(across(where(is.numeric), ~ round(.x, 3)))
-dame_demo_answers
 
 
 write_csv(dame_demo_answers, "Data/processedData/DameDemographicsAndAnswers.csv")
@@ -236,7 +237,7 @@ linne_demo_answers <- clean_linne_data %>%
 linne_demo_answers <- linne_demo_answers %>%
   mutate(across(where(is.numeric), ~ round(.x, 3)))
 
-linne_demo_answers
+
 
 write_csv(linne_demo_answers, "Data/processedData/LinneDemographicsAndAnswers.csv")
 
@@ -244,7 +245,9 @@ write_csv(linne_demo_answers, "Data/processedData/LinneDemographicsAndAnswers.cs
 
 ###############################################################################
 combined_demo_answers <- bind_rows(
-  linne_demo_answers, dame_demo_answers) 
+  linne_demo_answers %>% mutate(Cohort = "Linne"),
+  dame_demo_answers %>% mutate(Cohort = "Dame")
+) 
 
 
 write_csv(combined_demo_answers, "Data/processedData/combinedDemographicsAndAnswers.csv")
@@ -257,7 +260,7 @@ write_csv(combined_demo_answers, "Data/processedData/combinedDemographicsAndAnsw
 
 # Filter out the unwanted rows from combined_demo_answers
 filtered_demo_answers <- combined_demo_answers %>%
-  filter(!User_ID %in% c("Mean_Answer_Q1", "Mean_Answer_Q2"))
+  select(-Mean_Answer_Q1, -Mean_Answer_Q2)
 
 # Join the filtered data frame with dame_linne_combined by User_ID
 combined_pmd_demo_answers_by_rounds <- dame_linne_combined %>%
@@ -284,9 +287,63 @@ combined_pmd_demo_answers <- combined_pmd_demo_answers_by_rounds %>%
 combined_pmd_demo_answers <- combined_pmd_demo_answers %>%
   mutate(across(where(is.numeric), ~ round(.x, 3)))
 
-combined_pmd_demo_answers
+
 write_csv(combined_pmd_demo_answers,
           "Data/processedData/combinedPMDAndDemographicsAndAnswers.csv")
+
+
+#creating data frames with PMD, Demographics and Answers for both Cohorts separately 
+
+#-----------DAME----------#
+dame_pmd_demo_answers_by_rounds <- dame_demo_answers %>%
+  select(-Mean_Answer_Q1, -Mean_Answer_Q2) %>%
+  inner_join(clean_dame_data, by = "User_ID")
+
+dame_pmd_demo_answers <- dame_pmd_demo_answers_by_rounds %>%
+  group_by(User_ID) %>%  # Group by User_ID
+  summarise(
+    across(where(is.numeric) & !all_of("Round_number"), ~ mean(.x, na.rm = TRUE)),  # Mean for numeric columns
+    across(where(is.character), ~ first(.x))  # Retain first non-NA value for character columns
+  ) %>%
+  ungroup()  # Remove grouping structure
+
+# Round all numeric columns to 3 decimal places
+dame_pmd_demo_answers <- dame_pmd_demo_answers %>%
+  mutate(across(where(is.numeric), ~ round(.x, 3)))
+
+write_csv(dame_pmd_demo_answers,
+          "Data/processedData/DamePMDAndDemographicsAndAnswers.csv")
+
+
+#-----------LINNE----------#
+linne_pmd_demo_answers_by_rounds <- linne_demo_answers %>%
+  select(-Mean_Answer_Q1, -Mean_Answer_Q2) %>%
+  inner_join(clean_linne_data, by = "User_ID")
+
+linne_pmd_demo_answers <- linne_pmd_demo_answers_by_rounds %>%
+  group_by(User_ID) %>%  # Group by User_ID
+  summarise(
+    across(where(is.numeric) & !all_of("Round_number"), ~ mean(.x, na.rm = TRUE)),  # Mean for numeric columns
+    across(where(is.character), ~ first(.x))  # Retain first non-NA value for character columns
+  ) %>%
+  ungroup()  # Remove grouping structure
+
+# Round all numeric columns to 3 decimal places
+linne_pmd_demo_answers <- linne_pmd_demo_answers %>%
+  mutate(across(where(is.numeric), ~ round(.x, 3)))
+
+
+write_csv(linne_pmd_demo_answers,
+          "Data/processedData/LinnePMDAndDemographicsAndAnswers.csv")
+
+
+
+# making a combined data frame with this new created ones and adding a "Cohort" column
+# for further combined analysis
+combined_with_cohorts <- bind_rows(
+  linne_pmd_demo_answers %>% mutate(Cohort = "Linne"),
+  dame_pmd_demo_answers %>% mutate(Cohort = "Dame")
+) 
 
 
 
