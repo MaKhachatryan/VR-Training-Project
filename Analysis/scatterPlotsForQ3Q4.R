@@ -223,13 +223,13 @@ scatterPlotFunction(dame_linne_demo_pmd, "Weight", "mean_Saccade_velocity_raw", 
 
 
 ##############################HRV_and_PercievedStress###########################
-=======
+
 # Density plot for BMI by Training Version (faceted by Cohort)
 ggplot(combinedDataWithCohorts, aes(x = BMI, color = Trainingsversion, fill = Trainingsversion)) +
   geom_density(alpha = 0.4) +
   facet_wrap(~ Cohort) +
   labs(title = "BMI Density by Training Version and Cohort", x = "BMI", y = "Density") +
   theme_minimal()
->>>>>>> e3d200957105bcf1ebb0811632e1d40e329245b4
+
 
 hrvScatterPlotFunction(DamePMDAndDemographicsAndAnswers, "Age", "RMSSD", "Answer_Q1", "SDNN", "Dame")
