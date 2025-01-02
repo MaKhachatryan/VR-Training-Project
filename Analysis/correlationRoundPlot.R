@@ -50,7 +50,7 @@ plotCorrelationRound <- function(correlationTable, stressIndicator) {
   correlationTable$PMD <- str_replace_all(correlationTable$PMD, "corr", "")
   
   # Create plot
-  ggplot(correlationTable, aes(x = Round_number, y = correlation)) +
+  ggplot(correlationTable, aes(x = Round_number, y = correlation, col = PMD)) +
     geom_line(size = 1) + 
     geom_point(size = 2) +
     geom_hline(yintercept = 0, linetype = "dashed", color = "darkgray") +
@@ -65,7 +65,9 @@ plotCorrelationRound <- function(correlationTable, stressIndicator) {
       title = "Correlation over the rounds between Physiological measurement
       and Stress indicators",
       subtitle = sprintf("%s (%s)", subtitleText, cohortName)
-    ) 
+    ) + 
+    scale_color_viridis_d(option = "viridis") + 
+    theme(legend.position = "none")
 }
 
 ## Create plot with each stress indicator in each cohort
@@ -75,12 +77,12 @@ roundLinneQ1 <- plotCorrelationRound(correlationTableWithRoundsLinne, "Q1")
 roundLinneQ2 <- plotCorrelationRound(correlationTableWithRoundsLinne, "Q2")
 
 ## Export plots into Result folder
-if (!all(file.exists(c("Result/roundDameQ1.png", "Result/roundDameQ2.png",
-                   "Result/roundLinneQ1.png", "Result/roundLinneQ2.png")))) {
-  ggsave("Result/roundDameQ1.png", roundDameQ1)
-  ggsave("Result/roundDameQ2.png", roundDameQ2)
-  ggsave("Result/roundLinneQ1.png", roundLinneQ1)
-  ggsave("Result/roundLinneQ2.png", roundLinneQ2)
+if (!all(file.exists(c("Result/Q2/roundDameQ1.png", "Result/Q2/roundDameQ2.png",
+                   "Result/Q2/roundLinneQ1.png", "Result/Q2/roundLinneQ2.png")))) {
+  ggsave("Result/Q2/roundDameQ1.png", roundDameQ1)
+  ggsave("Result/Q2/roundDameQ2.png", roundDameQ2)
+  ggsave("Result/Q2/roundLinneQ1.png", roundLinneQ1)
+  ggsave("Result/Q2/roundLinneQ2.png", roundLinneQ2)
 }
 
 
