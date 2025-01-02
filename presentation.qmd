@@ -29,7 +29,7 @@ source("Analysis/subgroupPlot.R")
 
     -   Relationship between Stress indicators and Physiological Measurements\
     -   Relationship over the rounds\
-    -   Subgroups' behavior\
+    -   Subgroups and Outliers\
     -   Cohorts comparison: Similarities and Differences
 
 3.  Summary and Discussion
@@ -92,7 +92,7 @@ source("Analysis/subgroupPlot.R")
 
     Relationship between Stress indicators and Physiological Measurements\
     [Relationship over the rounds]{style="color:lightgray;"}\
-    [Subgroups' behavior]{style="color:lightgray;"}\
+    [Subgroups and Outliers]{style="color:lightgray;"}\
     [Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}
 
 [3. Summary and Discussion]{style="color:lightgray;"}
@@ -117,7 +117,7 @@ correlationLinne
 
     [Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
     Relationship over the rounds\
-    [Subgroups' behavior]{style="color:lightgray;"}\
+    [Subgroups and Outliers]{style="color:lightgray;"}\
     [Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}
 
 [3. Summary and Discussion]{style="color:lightgray;"}
@@ -154,7 +154,7 @@ roundLinneQ2
 
     [Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
     [Relationship over the rounds]{style="color:lightgray;"}\
-    Subgroups' behavior\
+    Subgroups and Outliers\
     [Cohorts comparison]{style="color:lightgray;"}
 
 [3. Summary and Discussion]{style="color:lightgray;"}
@@ -164,6 +164,7 @@ roundLinneQ2
 ```{r}
 hrvQ1ByAgeDame
 ```
+
 [-- All participants with high HRV values belong to the Adapted training version.]{style="font-size: 18px;"}
 
 ## Stress resilient groups

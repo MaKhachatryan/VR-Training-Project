@@ -40,12 +40,18 @@ hrvScatterPlotFunction <- function(data, col_x, col_y, col_group, col_size, coho
 #different behaviours between percieved stress and meassured heartrate
 hrVsQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort) {
   
-  data_males <- data %>%
+  data_males <- data.frame(data) %>%
     filter(Gender == "M")
   
-  ggplot(data_males, aes(x = !!sym(col_x), y = !!sym(col_y), color = !!sym(col_group))) +
+  ggplot(data_males, aes_string(x = col_x, y = col_y, color = col_group)) +
     geom_point(alpha = 0.7, size = 2.8) +
-    scale_color_viridis(option = "plasma", discrete = TRUE) +
+    #geom_text(
+      #aes(label = round((Weight / (Height / 100)^2), 1)), 
+      #color = "black",
+      #vjust = -1.5,
+      #size = 3
+    #) +
+    scale_color_viridis_d(option = "plasma") +
     theme_minimal() +
     labs(
       title = paste("Heart Rate vs Perceived Stress by Training Version in Males", "(", cohort, ")"),
@@ -56,21 +62,19 @@ hrVsQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort) {
 }
 
 
-
 # Call Plots for HRV and percievd Stress throughout Agegroups
 hrvQ1ByAgeDame <- hrvScatterPlotFunction(DamePMDAndDemographicsAndAnswers, "Age", "RMSSD", "Answer_Q1", "SDNN", "Dame")
 hrvQ1ByAgeLinne <- hrvScatterPlotFunction(LinnePMDAndDemographicsAndAnswers, "Age", "RMSSD", "Answer_Q1", "SDNN", "Linne")
 # Call Plots for HR and percievd Stress in Males for Training versions
 hrQ1TrainingMalesDame <- hrVsQ1ScatterPlotFunction(DamePMDAndDemographicsAndAnswers, "Answer_Q1", "mean_HR", "Trainingsversion", "Dame")
 hrQ1TrainingMalesLinne <- hrVsQ1ScatterPlotFunction(LinnePMDAndDemographicsAndAnswers, "Answer_Q1", "mean_HR", "Trainingsversion", "Linne")
-hrQ1TrainingMalesCombined <- hrVsQ1ScatterPlotFunction(combinedPMDAndDemographicsAndAnswers, "Answer_Q1", "mean_HR", "Trainingsversion", "combined")
 
 
 ## Export plots into Result folder
 if (!all(file.exists(c("Result/hrQ1TrainingMalesDame.jpeg", "Result/hrQ1TrainingMalesLinne.jpeg",
                        "Result/hrvQ1ByAgeDame.jpeg", "Result/hrvQ1ByAgeLinne.jpeg")))) {
-  ggsave("Result/hrQ1TrainingMalesDame.jpeg", hrQ1TrainingMalesDame)
-  ggsave("Result/hrQ1TrainingMalesLinne.jpeg", hrQ1TrainingMalesLinne)
-  ggsave("Result/hrvQ1ByAgeDame.jpeg", hrvQ1ByAgeDame)
-  ggsave("Result/hrvQ1ByAgeLinne.jpeg", hrvQ1ByAgeLinne)
+  ggsave("Result/Q3/hrQ1TrainingMalesDame.jpeg", hrQ1TrainingMalesDame)
+  ggsave("Result/Q3/hrQ1TrainingMalesLinne.jpeg", hrQ1TrainingMalesLinne)
+  ggsave("Result/Q3/hrvQ1ByAgeDame.jpeg", hrvQ1ByAgeDame)
+  ggsave("Result/Q3/hrvQ1ByAgeLinne.jpeg", hrvQ1ByAgeLinne)
 }
