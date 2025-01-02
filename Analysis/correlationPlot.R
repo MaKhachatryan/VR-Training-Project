@@ -38,7 +38,7 @@ plotCorrelation <- function(correlationTable, min.corr) {
   ggplot(correlationTable, aes(
     x = reorder(PMD, Correlation, decreasing = TRUE), 
     y = Correlation, 
-    fill = row_name  # Map stress indicator to fill
+    fill = row_name 
   )) +
     geom_bar(stat = "identity", position = "dodge", color = "black", alpha = 0.8) +
     geom_hline(yintercept = 0, linetype = "dashed", color = "gray") +
@@ -52,10 +52,10 @@ plotCorrelation <- function(correlationTable, min.corr) {
     theme(strip.text = element_text(size = 16)) +
     scale_fill_manual(
       values = c(
-        "Answer_Q1" = "#1f78b4",  # Blue for Cognitive Load
-        "Answer_Q2" = "#33a02c"   # Green for Physical Load
+        "Answer_Q1" = "#1f78b4",
+        "Answer_Q2" = "#33a02c" 
       ),
-      guide = "none"  # Remove the legend
+      guide = "none" 
     ) + 
     scale_x_discrete(labels = label_wrap(12)) +
     facet_wrap(~row_name, scales = "free_x", labeller = as_labeller(c(

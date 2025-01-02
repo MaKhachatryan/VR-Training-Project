@@ -100,25 +100,13 @@ source("Analysis/subgroupPlot.R")
 ## Relationship between Stress indicator and Physical Measurements {style="font-size: 26px;"}
 
 ```{r}
-dameQ1
+correlationDame
 ```
 
 ## Relationship between Stress indicator and Physical Measurements {style="font-size: 26px;"}
 
 ```{r}
-dameQ2
-```
-
-## Relationship between Stress indicator and Physical Measurements {style="font-size: 26px;"}
-
-```{r}
-linneQ1
-```
-
-## Relationship between Stress indicator and Physical Measurements {style="font-size: 26px;"}
-
-```{r}
-linneQ2
+correlationLinne
 ```
 
 ## Outline
