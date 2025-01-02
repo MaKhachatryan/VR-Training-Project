@@ -12,12 +12,9 @@ packages <- c("tidyr",
               "ggthemes",
               "readxl",
               "pheatmap",
-<<<<<<< HEAD
-              "viridis")
-=======
+              "viridis",
               "patchwork",
               "scales")
->>>>>>> e3d200957105bcf1ebb0811632e1d40e329245b4
 
 for (pkg in packages) {
   if (!require(pkg, character.only = TRUE)) {
