@@ -164,7 +164,7 @@ roundLinneQ2
 ```{r}
 hrvQ1ByAgeDame
 ```
--- All participants with high HRV values belong to the Adapted training version.
+[-- All participants with high HRV values belong to the Adapted training version.]{style="font-size: 18px;"}
 
 ## Stress resilient groups
 
