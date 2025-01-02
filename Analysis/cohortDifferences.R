@@ -12,7 +12,7 @@ source("Script/utils/calculateBMI.R")
 combined_with_cohorts <- calculateBMI(combined_with_cohorts)
 
 ## Violin plot for Age by Training Version (faceted by Cohort)
-ageVariability <- ggplot(combined_with_cohorts, aes(x = Trainingsversion, y = Age, fill = Trainingsversion)) +
+ageVariability <- ggplot(combined_demo_with_cohorts, aes(x = Trainingsversion, y = Age, fill = Trainingsversion)) +
   geom_violin(trim = FALSE, alpha = 0.5) +
   stat_summary(fun = mean, geom = "point", shape = 18, size = 3, color = "black") +
   facet_wrap(~ Cohort, scales = "free_x") +

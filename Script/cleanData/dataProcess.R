@@ -173,7 +173,6 @@ dame_user_demographics <- SimTLXAnswers_Dame[c("UserID", "Gender", "Age", "Weigh
 
 dame_user_demographics <- na.omit(dame_user_demographics[, c("UserID", "Age", "Height", "Weight", "Gender", "Group")])
 dame_user_demographics <- dame_user_demographics %>%
-  filter(Group != "Control") %>%
   rename(Trainingsversion = Group)
 
 
@@ -184,6 +183,7 @@ dame_demo_answers <- clean_dame_data %>%
     Mean_Answer_Q2 = mean(Answer_Q2, na.rm = TRUE)
   ) %>%
   inner_join(dame_user_demographics, by = c("User_ID" = "UserID")) %>%
+  filter(Trainingsversion != "Control") %>%
   select(
     User_ID,
     Mean_Answer_Q1,
@@ -345,5 +345,10 @@ combined_with_cohorts <- bind_rows(
   dame_pmd_demo_answers %>% mutate(Cohort = "Dame")
 ) 
 
+combined_demo_with_cohorts <-bind_rows(
+  linne_user_demographics %>% mutate(Cohort = "Linne"),
+  dame_user_demographics %>% mutate(Cohort = "Dame")
+) 
+View(combined_demo_with_cohorts)
 
 
