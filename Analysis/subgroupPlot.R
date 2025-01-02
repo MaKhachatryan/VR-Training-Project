@@ -38,7 +38,7 @@ hrvScatterPlotFunction <- function(data, col_x, col_y, col_group, col_size, coho
 
 # Call Plots for HRV and percievd Stress throughout Agegroups
 hrvQ1ByAgeDame <- hrvScatterPlotFunction(DamePMDAndDemographicsAndAnswers, "Age", "RMSSD", "Answer_Q1", "SDNN", "Dame")
-hrvQ1ByAgeLinne <- hrvScatterPlotFunction(LinnePMDAndDemographicsAndAnswers, "Age", "RMSSD", "Answer_Q1", "SDNN", "Dame")
+hrvQ1ByAgeLinne <- hrvScatterPlotFunction(LinnePMDAndDemographicsAndAnswers, "Age", "RMSSD", "Answer_Q1", "SDNN", "Linne")
 
 
 # Function to create scatter plot Males in both training versions, to show 
