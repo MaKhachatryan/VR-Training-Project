@@ -17,7 +17,7 @@ editor: visual
 source("environmentSetUp.R")
 source("Analysis/correlationPlot.R")
 source("Analysis/correlationRoundPlot.R")
-source("Script/createScatterPlot.R")
+source("Analysis/subgroupPlot.R")
 ```
 
 ## Outline
