@@ -2,17 +2,13 @@
 #plots for cohort differences
 #plots are official, but anything that has to do with sourcing still needs
 #to be changed a bit, i had a problem with sourceing the environment set up
-
-source("Script/cleanData/dataProcess.R")
-source("Script/utils/calculateBMI.R")
-
+source("environmentSetUp.R")
 
 ##---------plots for question 4-----------##
 ##---------cohort comparison--------------##
-combined_with_cohorts <- calculateBMI(combined_with_cohorts)
 
 ## Violin plot for Age by Training Version (faceted by Cohort)
-ageVariability <- ggplot(combined_demo_with_cohorts, aes(x = Trainingsversion, y = Age, fill = Trainingsversion)) +
+ageVariability <- ggplot(combinedDemoWithCohorts, aes(x = Trainingsversion, y = Age, fill = Trainingsversion)) +
   geom_violin(trim = FALSE, alpha = 0.5) +
   stat_summary(fun = mean, geom = "point", shape = 18, size = 3, color = "black") +
   facet_wrap(~ Cohort, scales = "free_x") +
@@ -27,7 +23,7 @@ ageVariability <- ggplot(combined_demo_with_cohorts, aes(x = Trainingsversion, y
 
 
 ## Filter data to exclude "Control" group
-filtered_combined_data <- combined_with_cohorts %>%
+filtered_combined_data <- combinedDataWithCohorts %>%
   filter(!(Trainingsversion == "Control" & Cohort == "Dame"))
 
 # Faceted bar chart for gender distribution
@@ -50,7 +46,7 @@ genderDistribution <- ggplot(filtered_combined_data, aes(x = Trainingsversion, f
 
 #---comparing the age group 20-30 between cohorts---#
 # Filter data for 20–30 age range
-combined_data_20_30 <- combined_with_cohorts %>% filter(Age >= 20 & Age <= 30)
+combined_data_20_30 <- combinedDataWithCohorts %>% filter(Age >= 20 & Age <= 30)
 
 
 # Density plot for BMI

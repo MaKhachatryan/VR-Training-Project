@@ -1,13 +1,11 @@
-source("Script/utils/createScatterPlot.R")
-source("Script/utils/calculateBMI.R")
-source("Script/cleanData/dataProcess.R")
+source("environmentSetUp.R")
 
 
 
 
 ##-----using BMI and making plots-------##
 
-combined_pmd_demo_answers <- calculateBMI(combined_pmd_demo_answers)
+combined_pmd_demo_answers <- calculateBMI(combinedPMDAndDemographicsAndAnswers)
 
 combined_pmd_demo_answers <- combined_pmd_demo_answers[!is.na(combined_pmd_demo_answers$BMI) 
                                                        & !is.nan(combined_pmd_demo_answers$BMI), ]
@@ -53,7 +51,7 @@ scatterPlotFunction(combined_pmd_demo_answers, "BMI", "mean_Saccade_velocity_raw
 
 
 #######################for Linne###########################################
-
+linne_pmd_demo_answers <- calculateBMI(LinnePMDAndDemographicsAndAnswers)
 
 scatterPlotFunction(linne_pmd_demo_answers, "BMI", "Answer_Q1", "Gender")
 
@@ -84,7 +82,7 @@ scatterPlotFunction(linne_pmd_demo_answers, "BMI", "SDNN", "Gender")
 
 
 ###############################for dame#################################
-
+dame_pmd_demo_answers <- calculateBMI(DamePMDAndDemographicsAndAnswers)
 
 
 scatterPlotFunction(dame_pmd_demo_answers, "BMI", "mean_HR", "Trainingsversion")
@@ -119,27 +117,27 @@ scatterPlotFunction(dame_pmd_demo_answers, "BMI", "SDNN", "Gender")
 ###--------density plots----------##
 
 # Density plot for BMI
-ggplot(combined_with_cohorts, aes(x = BMI, color = Cohort, fill = Cohort)) +
+ggplot(combinedDataWithCohorts, aes(x = BMI, color = Cohort, fill = Cohort)) +
   geom_density(alpha = 0.4) +
   labs(title = "BMI Density by Cohort", x = "BMI", y = "Density") +
   theme_minimal()
 
 # Density plot for Age
-ggplot(combined_with_cohorts, aes(x = Age, color = Cohort, fill = Cohort)) +
+ggplot(combinedDataWithCohorts, aes(x = Age, color = Cohort, fill = Cohort)) +
   geom_density(alpha = 0.4) +
   labs(title = "Age Density by Cohort", x = "Age", y = "Density") +
   theme_minimal()
 
 
 # Combined plot for BMI
-ggplot(combined_with_cohorts, aes(x = BMI, fill = Cohort)) +
+ggplot(combinedDataWithCohorts, aes(x = BMI, fill = Cohort)) +
   geom_density(alpha = 0.4, color = NA) +
   geom_boxplot(aes(x = BMI, group = Cohort), width = 0.2, position = position_dodge(0.8), color = "black") +
   labs(title = "BMI Distribution with Boxplot Overlay", x = "BMI", y = "Density") +
   theme_minimal()
 
 # Combined plot for Age
-ggplot(combined_with_cohorts, aes(x = Age, fill = Cohort)) +
+ggplot(combinedDataWithCohorts, aes(x = Age, fill = Cohort)) +
   geom_density(alpha = 0.4, color = NA) +
   geom_boxplot(aes(x = Age, group = Cohort), width = 0.2, position = position_dodge(0.8), color = "black") +
   labs(title = "Age Distribution with Boxplot Overlay", x = "Age", y = "Density") +
@@ -147,7 +145,7 @@ ggplot(combined_with_cohorts, aes(x = Age, fill = Cohort)) +
 
 
 # Density plot for BMI by Training Version (faceted by Cohort)
-ggplot(combined_with_cohorts, aes(x = BMI, color = Trainingsversion, fill = Trainingsversion)) +
+ggplot(combinedDataWithCohorts, aes(x = BMI, color = Trainingsversion, fill = Trainingsversion)) +
   geom_density(alpha = 0.4) +
   facet_wrap(~ Cohort) +
   labs(title = "BMI Density by Training Version and Cohort", x = "BMI", y = "Density") +

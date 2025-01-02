@@ -1,6 +1,4 @@
-source("Script/utils/fixPMD.R")
-source("Script/utils/pivotedData.R")
-source("Script/utils/cleanData.R")
+source("environmentSetUp.R")
 #the code below uses the functions to create the data frames
 
 roundLogs_Dame <- read_excel("Data/rawData/roundLogs/roundLogs_Dame.xlsx")
@@ -11,7 +9,6 @@ SimTLXAnswers_Dame <- read_excel("Data/rawData/SimTLXAnswers_Dame.xlsx")
 userID_Linne <- read_delim("Data/rawData/userID_Linne.csv", 
                            delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
-combinedCohorts <- read_csv("Data/processedData/combinedDemographicsAndAnswers.csv")
 
 
 ##################################################################
@@ -245,8 +242,8 @@ write_csv(linne_demo_answers, "Data/processedData/LinneDemographicsAndAnswers.cs
 
 ###############################################################################
 combined_demo_answers <- bind_rows(
-  linne_demo_answers %>% mutate(Cohort = "Linne"),
-  dame_demo_answers %>% mutate(Cohort = "Dame")
+  linne_demo_answers,
+  dame_demo_answers 
 ) 
 
 
@@ -344,11 +341,16 @@ combined_with_cohorts <- bind_rows(
   linne_pmd_demo_answers %>% mutate(Cohort = "Linne"),
   dame_pmd_demo_answers %>% mutate(Cohort = "Dame")
 ) 
+combined_with_cohorts <- calculateBMI(combined_with_cohorts)
 
-combined_demo_with_cohorts <-bind_rows(
+write_csv(combined_with_cohorts,
+          "Data/processedData/combinedDataWithCohorts.csv")
+
+combined_demo_with_cohorts <- bind_rows(
   linne_user_demographics %>% mutate(Cohort = "Linne"),
   dame_user_demographics %>% mutate(Cohort = "Dame")
 ) 
-View(combined_demo_with_cohorts)
+combined_demo_with_cohorts <- calculateBMI(combined_demo_with_cohorts)
 
-
+write_csv(combined_demo_with_cohorts,
+          "Data/processedData/combinedDemoWithCohorts.csv")
