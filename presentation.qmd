@@ -186,7 +186,6 @@ hrQ1TrainingMalesLinne
 hrQ1TrainingMalesDame
 ```
 
-
 ## Outline
 
 [1. Overview & Terminology]{style="color:lightgray;"}
@@ -195,20 +194,18 @@ hrQ1TrainingMalesDame
 
     [Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
     [Relationship over the rounds]{style="color:lightgray;"}\
-    [Subgroups' behavior]{style="color:lightgray;"}
-    Cohorts comparison
+    [Subgroups' behavior]{style="color:lightgray;"} Cohorts comparison
 
 [3. Summary and Discussion]{style="color:lightgray;"}
 
 ## Subgroups'behaviour
+
 ```{r}
 ageVariability + genderDistribution
 ```
 
-
 ## Subgroups'behaviour
+
 ```{r}
 BMI
 ```
-
-
