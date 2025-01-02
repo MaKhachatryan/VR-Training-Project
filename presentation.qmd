@@ -199,25 +199,25 @@ hrQ1TrainingMalesDame
 
 [3. Summary and Discussion]{style="color:lightgray;"}
 
-## Subgroups'behaviour
+## Subgroups' behaviour
 
 ```{r}
 ageVariability + genderDistribution
 ```
 
-## Subgroups'behaviour
+## Subgroups' behaviour
 
 ```{r}
 BMI
 ```
 
-## Subgroups'behaviour
+## Subgroups' behaviour
 
 ```{r}
 RMSSD + SDNN
 ```
 
-## Subgroups'behaviour
+## Subgroups' behaviour
 
 ```{r}
 eyeMesuerements + heatmaps
