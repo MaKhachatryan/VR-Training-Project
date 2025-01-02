@@ -194,7 +194,8 @@ hrQ1TrainingMalesDame
 
     [Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
     [Relationship over the rounds]{style="color:lightgray;"}\
-    [Subgroups' behavior]{style="color:lightgray;"} Cohorts comparison
+    [Subgroups' behavior]{style="color:lightgray;"}\
+    Cohorts comparison
 
 [3. Summary and Discussion]{style="color:lightgray;"}
 
