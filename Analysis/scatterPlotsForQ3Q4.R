@@ -167,5 +167,6 @@ scatterPlotFunction(dame_linne_demo_pmd, "Weight", "mean_Saccade_velocity_raw", 
 
 
 
-################################################################################
+##############################HRV_and_PercievedStress###########################
 
+hrvScatterPlotFunction(DamePMDAndDemographicsAndAnswers, "Age", "RMSSD", "Answer_Q1", "SDNN", "Dame")
