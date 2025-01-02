@@ -210,3 +210,16 @@ ageVariability + genderDistribution
 ```{r}
 BMI
 ```
+
+## Subgroups'behaviour
+
+```{r}
+RMSSD + SDNN
+```
+
+## Subgroups'behaviour
+
+```{r}
+eyeMesuerements + heatmaps
+```
+
