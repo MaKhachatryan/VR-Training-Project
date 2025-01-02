@@ -42,7 +42,7 @@ plotCorrelation <- function(correlationTable, stressIndicator) {
   # Create the plot
   ggplot(correlationTable, aes(x = reorder(PMD, Correlation, decreasing = TRUE), 
                                y = Correlation)) +
-    geom_bar(stat = "identity", position = "dodge", color = "black") +
+    geom_bar(stat = "identity", position = "dodge", color = "black", alpha = 0.8) +
     geom_hline(yintercept = 0, linetype = "dashed", color = "gray") +
     theme_minimal() +
     labs(
@@ -68,3 +68,60 @@ if (!all(file.exists(c("Result/dameQ1.png", "Result/dameQ2.png",
   ggsave("Result/linneQ1.png", linneQ1)
   ggsave("Result/linneQ2.png", linneQ2)
 }
+
+
+######################
+testplotCorrelation <- function(correlationTable) {
+  
+  # Determine the cohort name based on the input table
+  cohortName <- ifelse(
+    deparse(substitute(correlationTable)) == "correlationTableDame",
+    "Dame",
+    "Linne"
+  )
+  
+  # Transform the correlation table
+  correlationTable <- correlationTable %>%
+    pivot_longer(cols = -row_name, names_to = "PMD", values_to = "Correlation") %>%
+    filter(abs(as.numeric(Correlation)) >= 0.1) %>%
+    mutate(
+      Correlation = as.numeric(Correlation),
+      PMD = str_replace_all(PMD, "_", " "),
+      PMD = str_replace_all(PMD, "raw|Raw", ""),
+      PMD = str_replace_all(PMD, "mean", "Mean")
+    )
+  
+  # Create the plot with different colors for each stress indicator
+  ggplot(correlationTable, aes(
+    x = reorder(PMD, Correlation, decreasing = TRUE), 
+    y = Correlation, 
+    fill = row_name  # Map stress indicator to fill
+  )) +
+    geom_bar(stat = "identity", position = "dodge", color = "black", alpha = 0.8) +
+    geom_hline(yintercept = 0, linetype = "dashed", color = "gray") +
+    theme_minimal() +
+    labs(
+      x = "Physiological Measurements",
+      y = "Correlation",
+      title = "Correlation between Physiological measurements and Stress indicators",
+      subtitle = sprintf("Cohort: %s", cohortName)
+    ) +
+    theme(strip.text = element_text(size = 16)) +
+    scale_fill_manual(
+      values = c(
+        "Answer_Q1" = "#1f78b4",  # Blue for Cognitive Load
+        "Answer_Q2" = "#33a02c"   # Green for Physical Load
+      ),
+      guide = "none"  # Remove the legend
+    ) + 
+    scale_x_discrete(labels = label_wrap(12)) +
+    facet_wrap(~row_name, scales = "free_x", labeller = as_labeller(c(
+      "Answer_Q1" = "Cognitive Load",
+      "Answer_Q2" = "Physical Load"
+    )))
+}
+
+
+testplotCorrelation(correlationTableDame)
+testplotCorrelation(correlationTableLinne)
+

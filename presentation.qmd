@@ -30,7 +30,7 @@ source("Script/utils/createScatterPlot.R")
     -   Relationship between Stress indicators and Physiological Measurements\
     -   Relationship over the rounds\
     -   Subgroups' behavior\
-    -   Cohorts comparison
+    -   Cohorts comparison: Similarities and Differences
 
 3.  Summary and Discussion
 :::
@@ -49,9 +49,9 @@ source("Script/utils/createScatterPlot.R")
 
     -- 9 rounds of training for both cohorts
 
-    -- Grouped into Adative and Non-Adaptive training versions
-
     -- 2 rounds of test per cohort (Linne: VR, Dame: Real-world)
+
+    -- 3 groups of training versions: Adaptive, Non-Adaptive, Control
 :::
 
 ## Terminology
@@ -93,7 +93,7 @@ source("Script/utils/createScatterPlot.R")
     Relationship between Stress indicators and Physiological Measurements\
     [Relationship over the rounds]{style="color:lightgray;"}\
     [Subgroups' behavior]{style="color:lightgray;"}\
-    [Cohorts comparison]{style="color:lightgray;"}
+    [Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}
 
 [3. Summary and Discussion]{style="color:lightgray;"}
 
@@ -130,7 +130,7 @@ linneQ2
     [Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
     Relationship over the rounds\
     [Subgroups' behavior]{style="color:lightgray;"}\
-    [Cohorts comparison]{style="color:lightgray;"}
+    [Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}
 
 [3. Summary and Discussion]{style="color:lightgray;"}
 

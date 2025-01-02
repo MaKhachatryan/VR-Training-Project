@@ -12,7 +12,12 @@ packages <- c("tidyr",
               "ggthemes",
               "readxl",
               "pheatmap",
+<<<<<<< HEAD
               "viridis")
+=======
+              "patchwork",
+              "scales")
+>>>>>>> e3d200957105bcf1ebb0811632e1d40e329245b4
 
 for (pkg in packages) {
   if (!require(pkg, character.only = TRUE)) {
@@ -29,9 +34,9 @@ for (ds in dataSet) {
 }
 
 ## ----- Sourcing functions -----
-source("Script/utils/fixPMD.R")
-source("Script/utils/cleanData.R")
-source("Script/utils/pivotedData.R")
+source("Script/fixPMD.R")
+source("Script/cleanData.R")
+source("Script/pivotedData.R")
 functionFolder <- "Script"
 scriptFiles <- list.files(path = functionFolder, pattern = "\\.R$", recursive = TRUE, full.names = TRUE)
 lapply(scriptFiles, source)
