@@ -42,7 +42,7 @@ hrVsQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort) {
   
   data_males <- data.frame(data) %>%
     filter(Gender == "M")
-  
+ 
   ggplot(data_males, aes_string(x = col_x, y = col_y, color = col_group)) +
     geom_point(alpha = 0.7, size = 2.8) +
     #geom_text(
@@ -65,14 +65,16 @@ hrVsQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort) {
 # Call Plots for HRV and percievd Stress throughout Agegroups
 hrvQ1ByAgeDame <- hrvScatterPlotFunction(DamePMDAndDemographicsAndAnswers, "Age", "RMSSD", "Answer_Q1", "SDNN", "Dame")
 hrvQ1ByAgeLinne <- hrvScatterPlotFunction(LinnePMDAndDemographicsAndAnswers, "Age", "RMSSD", "Answer_Q1", "SDNN", "Linne")
+hrvQ1ByAgeCombined <- hrvScatterPlotFunction(combinedPMDAndDemographicsAndAnswers, "Age", "RMSSD", "Answer_Q1", "SDNN", "combined")
+
 # Call Plots for HR and percievd Stress in Males for Training versions
 hrQ1TrainingMalesDame <- hrVsQ1ScatterPlotFunction(DamePMDAndDemographicsAndAnswers, "Answer_Q1", "mean_HR", "Trainingsversion", "Dame")
 hrQ1TrainingMalesLinne <- hrVsQ1ScatterPlotFunction(LinnePMDAndDemographicsAndAnswers, "Answer_Q1", "mean_HR", "Trainingsversion", "Linne")
-
+hrQ1TrainingMalesCombined <- hrVsQ1ScatterPlotFunction(combinedPMDAndDemographicsAndAnswers, "Answer_Q1", "mean_HR", "Trainingsversion", "combined")
 
 ## Export plots into Result folder
-if (!all(file.exists(c("Result/hrQ1TrainingMalesDame.jpeg", "Result/hrQ1TrainingMalesLinne.jpeg",
-                       "Result/hrvQ1ByAgeDame.jpeg", "Result/hrvQ1ByAgeLinne.jpeg")))) {
+if (!all(file.exists(c("Result/Q3/hrQ1TrainingMalesDame.jpeg", "Result/Q3/hrQ1TrainingMalesLinne.jpeg",
+                       "Result/Q3/hrvQ1ByAgeDame.jpeg", "Result/Q3/hrvQ1ByAgeLinne.jpeg")))) {
   ggsave("Result/Q3/hrQ1TrainingMalesDame.jpeg", hrQ1TrainingMalesDame)
   ggsave("Result/Q3/hrQ1TrainingMalesLinne.jpeg", hrQ1TrainingMalesLinne)
   ggsave("Result/Q3/hrvQ1ByAgeDame.jpeg", hrvQ1ByAgeDame)
