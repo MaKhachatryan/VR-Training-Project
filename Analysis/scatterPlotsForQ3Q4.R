@@ -144,10 +144,92 @@ ggplot(combinedDataWithCohorts, aes(x = Age, fill = Cohort)) +
   theme_minimal()
 
 
+<<<<<<< HEAD
+
+
+
+
+################################### mean_SCR_rise_time_raw #####################
+
+scatterPlotFunction(dame_linne_demo_pmd, "Age", "mean_SCR_rise_time_raw", "Gender")
+scatterPlotFunction(dame_linne_demo_pmd, "Height", "mean_SCR_rise_time_raw", "Gender")
+scatterPlotFunction(dame_linne_demo_pmd, "Weight", "mean_SCR_rise_time_raw", "Gender")
+
+
+scatterPlotFunction(dame_linne_demo_pmd, "Age", "mean_SCR_rise_time_raw", "Trainingsversion")
+scatterPlotFunction(dame_linne_demo_pmd, "Height", "mean_SCR_rise_time_raw", "Trainingsversion")
+scatterPlotFunction(dame_linne_demo_pmd, "Weight", "mean_SCR_rise_time_raw", "Trainingsversion")
+
+
+
+################################################################################
+
+
+
+
+
+############################### mean_Blink_rate_last_minute ####################
+
+scatterPlotFunction(dame_linne_demo_pmd, "Age", "mean_Blink_rate_last_minute", "Gender")
+scatterPlotFunction(dame_linne_demo_pmd, "Height", "mean_Blink_rate_last_minute", "Gender")
+scatterPlotFunction(dame_linne_demo_pmd, "Weight", "mean_Blink_rate_last_minute", "Gender")
+
+
+scatterPlotFunction(dame_linne_demo_pmd, "Age", "mean_Blink_rate_last_minute", "Trainingsversion")
+scatterPlotFunction(dame_linne_demo_pmd, "Height", "mean_Blink_rate_last_minute", "Trainingsversion")
+scatterPlotFunction(dame_linne_demo_pmd, "Weight", "mean_Blink_rate_last_minute", "Trainingsversion")
+
+
+################################################################################
+
+
+
+
+
+
+
+
+###################################### mean_Saccade_amplitude_raw ##############
+
+scatterPlotFunction(dame_linne_demo_pmd, "Age", "mean_Saccade_amplitude_raw", "Gender")
+scatterPlotFunction(dame_linne_demo_pmd, "Height", "mean_Saccade_amplitude_raw", "Gender")
+scatterPlotFunction(dame_linne_demo_pmd, "Weight", "mean_Saccade_amplitude_raw", "Gender")
+
+
+scatterPlotFunction(dame_linne_demo_pmd, "Age", "mean_Saccade_amplitude_raw", "Trainingsversion")
+scatterPlotFunction(dame_linne_demo_pmd, "Height", "mean_Saccade_amplitude_raw", "Trainingsversion")
+scatterPlotFunction(dame_linne_demo_pmd, "Weight", "mean_Saccade_amplitude_raw", "Trainingsversion")
+
+
+
+################################################################################
+
+
+
+
+
+
+######################### mean_Saccade_velocity_raw ############################
+
+scatterPlotFunction(dame_linne_demo_pmd, "Age", "mean_Saccade_velocity_raw", "Gender")
+scatterPlotFunction(dame_linne_demo_pmd, "Height", "mean_Saccade_velocity_raw", "Gender")
+scatterPlotFunction(dame_linne_demo_pmd, "Weight", "mean_Saccade_velocity_raw", "Gender")
+
+
+scatterPlotFunction(dame_linne_demo_pmd, "Age", "mean_Saccade_velocity_raw", "Trainingsversion")
+scatterPlotFunction(dame_linne_demo_pmd, "Height", "mean_Saccade_velocity_raw", "Trainingsversion")
+scatterPlotFunction(dame_linne_demo_pmd, "Weight", "mean_Saccade_velocity_raw", "Trainingsversion")
+
+
+
+##############################HRV_and_PercievedStress###########################
+=======
 # Density plot for BMI by Training Version (faceted by Cohort)
 ggplot(combinedDataWithCohorts, aes(x = BMI, color = Trainingsversion, fill = Trainingsversion)) +
   geom_density(alpha = 0.4) +
   facet_wrap(~ Cohort) +
   labs(title = "BMI Density by Training Version and Cohort", x = "BMI", y = "Density") +
   theme_minimal()
+>>>>>>> e3d200957105bcf1ebb0811632e1d40e329245b4
 
+hrvScatterPlotFunction(DamePMDAndDemographicsAndAnswers, "Age", "RMSSD", "Answer_Q1", "SDNN", "Dame")

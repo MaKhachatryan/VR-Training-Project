@@ -1,43 +1,42 @@
 source("environmentSetUp.R")
 
 
-#correlation matrices for Dame and Linne cleaned files, using demographic and stress data
+#correlation matrices for Dame and Linne cleaned files, using demographic data,
+#physiological measurements and stress data
 #input: dataframe
 #output: dataframe, heatmap
 
-#Split data by Subgroup
-grouped_data <- split(combinedPMDAndDemographicsAndAnswers, combinedPMDAndDemographicsAndAnswers$Trainingsversion)
+# Select only numerical data from the dataset
+numeric_data <- select_if(LinnePMDAndDemographicsAndAnswers, is.numeric)
 
-#Compute correlation matrices for each group
-cor_matrices <- lapply(grouped_data, function(group) {
-  numeric_data <- select_if(group, is.numeric)
-  round(cor(numeric_data, use = "complete.obs"), 2)
-})
+# Compute the correlation matrix
+cor_matrix <- round(cor(numeric_data, use = "complete.obs"), 2)
 
-# Create heatmaps for each correlation matrix
-for (group_name in names(cor_matrices)) {
-  cor_matrix <- cor_matrices[[group_name]]
   
   # Create the heatmap
   pheatmap(cor_matrix, 
            color = colorRampPalette(c("blue", "white", "red"))(50),
-           display_numbers = TRUE,
-           main = paste("Heatmap for Group:", group_name))
-}
+           display_numbers = TRUE)
+
 
 
 
 ### Checking agegroups for both training versions
 
+# Split by training
+grouped_data <- split(LinnePMDAndDemographicsAndAnswers,
+                                           LinnePMDAndDemographicsAndAnswers$Gender)
+  
 # Define age group bins
-ageSubgroupsForEachTraining <- combinedPMDAndDemographicsAndAnswers %>%
+ageSubgroupsForEachTraining <- DamePMDAndDemographicsAndAnswers %>%
   mutate(AgeGroup = cut(Age, breaks = c(-Inf, 20, 30, 40, Inf), 
                         labels = c("<20", "20-30", "30-40", "40+")))
 
-# Split data by Trainingsversion (adaptive/non-adaptive) and AgeGroup
-grouped_data <- split(ageSubgroupsForEachTraining, 
+# Split data into demographic subgroups
+grouped_data <- split(LinnePMDAndDemographicsAndAnswers, 
                       list(ageSubgroupsForEachTraining$Trainingsversion, 
-                           ageSubgroupsForEachTraining$AgeGroup), 
+                           
+                           ageSubgroupsForEachTraining$Gender), 
                       drop = TRUE)
 
 # Function to clean correlation matrix
@@ -73,64 +72,53 @@ for (group_name in names(cor_matrices)) {
   }
 }
 
-# Filter for 40+ age group and split by training version
-group_40plus <- ageSubgroupsForEachTraining %>%
-  filter(AgeGroup == "40+") %>%
-  split(.$Trainingsversion)
-
-# For each training version in 40+ group
-for (version in names(group_40plus)) {
-  numeric_data <- select_if(group_40plus[[version]], is.numeric)
-  print(paste("Training Version:", version))
-  print(numeric_data)
-}
 
 
+### Dividing the training version groups into BMI subgroups
 
-### Dividing the training version groups inot BMI subgroups
+DamePMDAndDemographicsAndAnswers$BMI <- calculateBMI(DamePMDAndDemographicsAndAnswers)
 
-combinedPMDAndDemographicsAndAnswers <- calculateBMI(combinedPMDAndDemographicsAndAnswers)
+# Filter for BMI ranges
+filtered_data <- DamePMDAndDemographicsAndAnswers %>%
+  filter(Age <= 26 ) %>%
+  select(mean_HR, SDNN, RMSSD, Answer_Q1, Answer_Q2)
 
-# Define BMI categories
-bmiSubgroups <- combinedPMDAndDemographicsAndAnswers %>%
-  mutate(BMICategory = cut(BMI, 
-                           breaks = c(-Inf, 18.4, 25, Inf), 
-                           labels = c("<18.4", "18.4-25", "25+"), 
-                           include.lowest = TRUE))
-
-# Split data by Trainingsversion and BMICategory
-grouped_data <- split(bmiSubgroups, 
-                      list(bmiSubgroups$Trainingsversion, 
-                           bmiSubgroups$BMICategory), 
-                      drop = TRUE)
-
-# Function to clean correlation matrix
-clean_correlation_matrix <- function(cor_matrix) {
-  cor_matrix[is.na(cor_matrix) | is.nan(cor_matrix) | is.infinite(cor_matrix)] <- 0
-  return(cor_matrix)
-}
-
-# Compute correlation matrices for each subgroup
-cor_matrices <- lapply(grouped_data, function(group) {
-  numeric_data <- select_if(group, is.numeric)
-  if (nrow(numeric_data) > 1) { # Ensure enough data for correlation
-    cor_matrix <- round(cor(numeric_data, use = "complete.obs"), 2)
-    clean_correlation_matrix(cor_matrix)
-  } else {
-    NULL
-  }
-})
-
-# Create heatmaps for each correlation matrix
-for (group_name in names(cor_matrices)) {
-  cor_matrix <- cor_matrices[[group_name]]
+View(filtered_data)
+# Check if there is enough data for correlation
+if (nrow(filtered_data) > 1) {
+  # Compute the correlation matrix
+  cor_matrix <- round(cor(filtered_data, use = "complete.obs"), 2)
   
-  if (!is.null(cor_matrix)) {
-    pheatmap(cor_matrix, 
-             color = colorRampPalette(c("blue", "white", "red"))(50),
-             display_numbers = TRUE,
-             main = paste("Heatmap for Group:", group_name),
-             cluster_rows = FALSE,  # Optional: Disable clustering
-             cluster_cols = FALSE)
-  }
+  # Create a heatmap of the correlation matrix
+  pheatmap(cor_matrix,
+           color = colorRampPalette(c("blue", "white", "red"))(50),
+           display_numbers = TRUE,
+           main = "Correlation Matrix")
+} else {
+  message("Not enough data to calculate correlations.")
 }
+
+
+# Create a plot with BMI on the x-axis, stress (Q1) on the y-axis, and lines/dots for HR and SCR-amplitude
+ggplot(DamePMDAndDemographicsAndAnswers, aes(x = BMI)) +
+  # HR points
+  geom_point(aes(y = Q1, color = "HR"), size = 3, alpha = 0.7) +
+  # SCR-amplitude points
+  geom_point(aes(y = Q1, color = "SCR-amplitude"), size = 3, alpha = 0.7) +
+  # HR line
+  geom_line(aes(y = HR, color = "HR"), size = 1) +
+  # SCR-amplitude line
+  geom_line(aes(y = SCR_amp, color = "SCR-amplitude"), size = 1) +
+  labs(
+    title = "Stress vs. BMI with HR and SCR-amplitude",
+    x = "BMI",
+    y = "Stress Level (Q1)",
+    color = "Metric"
+  ) +
+  scale_color_manual(values = c("HR" = "blue", "SCR-amplitude" = "red")) +
+  theme_minimal() +
+  theme(
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10),
+    plot.title = element_text(hjust = 0.5, size = 14)
+  )

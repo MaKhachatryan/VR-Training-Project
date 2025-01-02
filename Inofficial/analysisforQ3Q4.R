@@ -232,3 +232,56 @@ ggplot(long_data, aes(x = Trainingsversion, y = Mean_Answer, fill = Trainingsver
   ) +
   theme_minimal() +
   scale_fill_viridis_d(option = "viridis")
+
+
+#####Scatterplots for the different Subgroup Combinations###################
+
+ggplot(DamePMDAndDemographicsAndAnswers, 
+       aes(x = mean_HR, 
+           y = mean_SCL_Raw, 
+           color = Answer_Q1)) +
+  geom_point(alpha = 0.7) +  
+  scale_color_viridis(name = "Stress level (Q1)") + 
+  theme_minimal() +
+  labs(
+    title = "Cognitive Load vs. Heart Rate",
+    x = "Heart Rate (mean_HR)",
+    y = "Skin Conductivity (mean_SCL_Raw)"
+  ) +
+  theme(
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10),
+    plot.title = element_text(hjust = 0.5, size = 14)
+  )
+
+
+
+# Scatter plot for BMI and percieved / meassured stress 
+ggplot(bmiSubgroups, aes(x = mean_HR, y = mean_SCR_amplitude_raw, color = Answer_Q1)) +
+  geom_point(alpha = 0.7) +
+  scale_color_viridis(option = "plasma", name = "Stress Level (Q1)") +
+  facet_wrap(~ BMICategory) +
+  theme_minimal() +
+  labs(
+    title = "Relationship Between Perceived Stress, Heart Rate, and SCR Amplitude ",
+    x = "Heart Rate (mean_HR)",
+    y = "Saccade Amplitude"
+  ) +
+  theme(
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10),
+    plot.title = element_text(hjust = 0.5, size = 14)
+  )
+
+
+
+# Create a boxplot for Q1 by BMI Category to show distributions and outliers
+ggplot(data, aes(x = BMI_Category, y = Answer_Q1, fill = BMI_Category)) +
+  geom_boxplot(outlier.colour = "red", outlier.size = 2) +  # Highlight outliers in red
+  theme_minimal() +
+  labs(
+    title = "Perceived Stress Level (Q1) by BMI Category",
+    x = "BMI Category",
+    y = "Perceived Stress Level (Q1)"
+  ) +
+  scale_fill_manual(values = c("Underweight" = "lightblue", "Normal Weight" = "green", "Overweight" = "red"))

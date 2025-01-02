@@ -17,6 +17,7 @@ editor: visual
 source("environmentSetUp.R")
 source("Analysis/correlationPlot.R")
 source("Analysis/correlationRoundPlot.R")
+source("Script/utils/createScatterPlot.R")
 ```
 
 ## Outline
@@ -155,4 +156,41 @@ roundLinneQ1
 
 ```{r}
 roundLinneQ2
+```
+
+## Outline
+
+[1. Overview & Terminology]{style="color:lightgray;"}
+
+2.  Data Analysis
+
+    [Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
+    [Relationship over the rounds]{style="color:lightgray;"}\
+    Subgroups' behavior\
+    [Cohorts comparison]{style="color:lightgray;"}
+
+[3. Summary and Discussion]{style="color:lightgray;"}
+
+## Stress resilient groups
+
+```{r}
+hrvQ1ByAgeDame
+```
+
+## Stress resilient groups
+
+```{r}
+hrvQ1ByAgeLinne
+```
+
+## Stress resilient groups
+
+```{r}
+hrQ1TrainingMalesLinne
+```
+
+## Stress resilient groups
+
+```{r}
+hrQ1TrainingMalesDame
 ```
