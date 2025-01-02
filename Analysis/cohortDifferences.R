@@ -116,7 +116,10 @@ facet_cor_data <- cor_data %>%
 #heatmap
 heatmaps <- ggplot(facet_cor_data, aes(x = Var1, y = Var2, fill = Freq)) +
   geom_tile() +
-  scale_fill_gradient2(low = "#E7A4B7", mid = "#F0F0F0", high = "#7BB274", midpoint = 0) +
+  scale_fill_gradient2(low = "#4575B4",  # Blue for negative correlations
+                       mid = "#F0F0F0",  # Light gray for neutral correlations
+                       high = "#D73027", # Red-orange for positive correlations
+                       midpoint = 0) +
   facet_wrap(~ Cohort) +
   labs(title = "Faceted Correlation Heatmap by Cohort",
        x = "Metric", y = "Metric", fill = "Correlation") +
