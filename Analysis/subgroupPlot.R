@@ -36,11 +36,6 @@ hrvScatterPlotFunction <- function(data, col_x, col_y, col_group, col_size, coho
     )
 }
 
-# Call Plots for HRV and percievd Stress throughout Agegroups
-hrvQ1ByAgeDame <- hrvScatterPlotFunction(DamePMDAndDemographicsAndAnswers, "Age", "RMSSD", "Answer_Q1", "SDNN", "Dame")
-hrvQ1ByAgeLinne <- hrvScatterPlotFunction(LinnePMDAndDemographicsAndAnswers, "Age", "RMSSD", "Answer_Q1", "SDNN", "Dame")
-
-
 # Function to create scatter plot Males in both training versions, to show 
 #different behaviours between percieved stress and meassured heartrate
 hrVsQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort) {
@@ -60,6 +55,21 @@ hrVsQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort) {
     )
 }
 
+
+
+# Call Plots for HRV and percievd Stress throughout Agegroups
+hrvQ1ByAgeDame <- hrvScatterPlotFunction(DamePMDAndDemographicsAndAnswers, "Age", "RMSSD", "Answer_Q1", "SDNN", "Dame")
+hrvQ1ByAgeLinne <- hrvScatterPlotFunction(LinnePMDAndDemographicsAndAnswers, "Age", "RMSSD", "Answer_Q1", "SDNN", "Linne")
 # Call Plots for HR and percievd Stress in Males for Training versions
 hrQ1TrainingMalesDame <- hrVsQ1ScatterPlotFunction(DamePMDAndDemographicsAndAnswers, "Answer_Q1", "mean_HR", "Trainingsversion", "Dame")
 hrQ1TrainingMalesLinne <- hrVsQ1ScatterPlotFunction(LinnePMDAndDemographicsAndAnswers, "Answer_Q1", "mean_HR", "Trainingsversion", "Linne")
+
+
+## Export plots into Result folder
+if (!all(file.exists(c("Result/hrQ1TrainingMalesDame.jpeg", "Result/hrQ1TrainingMalesLinne.jpeg",
+                       "Result/hrvQ1ByAgeDame.jpeg", "Result/hrvQ1ByAgeLinne.jpeg")))) {
+  ggsave("Result/hrQ1TrainingMalesDame.jpeg", hrQ1TrainingMalesDame)
+  ggsave("Result/hrQ1TrainingMalesLinne.jpeg", hrQ1TrainingMalesLinne)
+  ggsave("Result/hrvQ1ByAgeDame", hrvQ1ByAgeDame)
+  ggsave("Result/hrvQ1ByAgeLinne.jpeg", hrvQ1ByAgeLinne)
+}
