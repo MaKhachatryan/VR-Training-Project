@@ -43,7 +43,7 @@ genderDistribution <- ggplot(filtered_combined_data, aes(x = Trainingsversion, f
   ) +
   theme_minimal()+
   theme(
-    strip.text = element_text(size = 14, face = "bold") # Adjust size and style of facet labels
+    strip.text = element_text(size = 14, face = "bold") 
   )
 
 
@@ -86,7 +86,10 @@ eyeMesuerements <- ggplot(combined_data_20_30, aes(x = mean_Saccade_amplitude_ra
   facet_wrap(~ Cohort) +
   labs(title = "Saccade Amplitude vs Velocity by Cohort and Training Version",
        x = "Saccade Amplitude (Raw)", y = "Saccade Velocity (Raw)") +
-  theme_minimal()
+  theme_minimal()+
+  theme(
+    strip.text = element_text(size = 14, face = "bold") 
+    )
 
 
 
@@ -140,14 +143,20 @@ RMSSD <- ggplot(combined_data_20_30, aes(x = Trainingsversion, y = RMSSD, fill =
   geom_boxplot(outlier.color = "red", outlier.shape = 16) +
   facet_wrap(~ Cohort) +
   labs(title = "RMSSD by Training Version and Cohort", x = "Training Version", y = "RMSSD (ms)") +
-  theme_minimal()
+  theme_minimal()+
+  theme(
+    strip.text = element_text(size = 14, face = "bold") 
+  )
 
 # Boxplot for SDNN by Cohort and Training Version
 SDNN <- ggplot(combined_data_20_30, aes(x = Trainingsversion, y = SDNN, fill = Cohort)) +
   geom_boxplot(outlier.color = "red", outlier.shape = 16) +
   facet_wrap(~ Cohort) +
   labs(title = "SDNN by Training Version and Cohort", x = "Training Version", y = "SDNN (ms)") +
-  theme_minimal()
+  theme_minimal()+
+  theme(
+    strip.text = element_text(size = 14, face = "bold") 
+  )
 
 
 ## Export plots into Result folder
