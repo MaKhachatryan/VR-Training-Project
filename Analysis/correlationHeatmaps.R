@@ -76,14 +76,14 @@ for (group_name in names(cor_matrices)) {
 
 ### Dividing the training version groups into BMI subgroups
 
-DamePMDAndDemographicsAndAnswers$BMI <- calculateBMI(DamePMDAndDemographicsAndAnswers)
+DamePMDAndDemographicsAndAnswers <- calculateBMI(DamePMDAndDemographicsAndAnswers)
 
 # Filter for BMI ranges
 filtered_data <- DamePMDAndDemographicsAndAnswers %>%
   filter(Age <= 26 ) %>%
   select(mean_HR, SDNN, RMSSD, Answer_Q1, Answer_Q2)
 
-View(filtered_data)
+
 # Check if there is enough data for correlation
 if (nrow(filtered_data) > 1) {
   # Compute the correlation matrix
@@ -102,13 +102,13 @@ if (nrow(filtered_data) > 1) {
 # Create a plot with BMI on the x-axis, stress (Q1) on the y-axis, and lines/dots for HR and SCR-amplitude
 ggplot(DamePMDAndDemographicsAndAnswers, aes(x = BMI)) +
   # HR points
-  geom_point(aes(y = Q1, color = "HR"), size = 3, alpha = 0.7) +
+  geom_point(aes(y = Answer_Q1, color = "HR"), size = 3, alpha = 0.7) +
   # SCR-amplitude points
-  geom_point(aes(y = Q1, color = "SCR-amplitude"), size = 3, alpha = 0.7) +
+  geom_point(aes(y = Answer_Q1, color = "SCR-amplitude"), size = 3, alpha = 0.7) +
   # HR line
-  geom_line(aes(y = HR, color = "HR"), size = 1) +
+  geom_line(aes(y = mean_HR, color = "HR"), size = 1) +
   # SCR-amplitude line
-  geom_line(aes(y = SCR_amp, color = "SCR-amplitude"), size = 1) +
+  geom_line(aes(y = mean_SCR_amplitude_raw, color = "SCR-amplitude"), size = 1) +
   labs(
     title = "Stress vs. BMI with HR and SCR-amplitude",
     x = "BMI",

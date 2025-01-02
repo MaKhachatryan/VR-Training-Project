@@ -18,6 +18,7 @@ source("environmentSetUp.R")
 source("Analysis/correlationPlot.R")
 source("Analysis/correlationRoundPlot.R")
 source("Analysis/subgroupPlot.R")
+source("Analysis/cohortDifferences.R")
 ```
 
 ## Outline
@@ -184,3 +185,41 @@ hrQ1TrainingMalesLinne
 ```{r}
 hrQ1TrainingMalesDame
 ```
+
+## Outline
+
+[1. Overview & Terminology]{style="color:lightgray;"}
+
+2.  Data Analysis
+
+    [Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
+    [Relationship over the rounds]{style="color:lightgray;"}\
+    [Subgroups' behavior]{style="color:lightgray;"}\
+    Cohorts comparison
+
+[3. Summary and Discussion]{style="color:lightgray;"}
+
+## Subgroups' behaviour
+
+```{r}
+ageVariability + genderDistribution
+```
+
+## Subgroups' behaviour
+
+```{r}
+BMI
+```
+
+## Subgroups' behaviour
+
+```{r}
+RMSSD + SDNN
+```
+
+## Subgroups' behaviour
+
+```{r}
+eyeMesuerements + heatmaps
+```
+

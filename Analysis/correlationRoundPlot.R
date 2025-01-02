@@ -25,7 +25,8 @@ plotCorrelationRound <- function(correlationTable, stressIndicator) {
   subtitleText <- ifelse(
     stressIndicator == "Q1",
     "PMD & Cognitive Load",
-    "PMD & Physical Load")
+    "PMD & Physical Load"
+  )
   
   # Change the structure of the data frame
   correlationTable <- correlationTable %>%
@@ -48,22 +49,32 @@ plotCorrelationRound <- function(correlationTable, stressIndicator) {
   correlationTable$PMD <- str_replace_all(correlationTable$PMD, "Q1", "")
   correlationTable$PMD <- str_replace_all(correlationTable$PMD, "Q2", "")
   correlationTable$PMD <- str_replace_all(correlationTable$PMD, "corr", "")
+  correlationTable$PMD <- str_trim(correlationTable$PMD)
+  
+  # Define the desired PMD order for facets
+  desiredOrder <- c(
+    "Mean HR", "RMSSD", "SDNN", "Mean IBI",  # Heart measurements
+    "Mean SCL", "Mean SCR amplitude", "Mean SCR frequency", "Mean SCR rise time",  # Skin measurements
+    "Mean Blink rate last minute", "Mean Saccade amplitude", "Mean Saccade velocity"  # Blink/Saccade measurements
+  )
+  
+  # Reorder PMDs for facet order
+  correlationTable$PMD <- factor(correlationTable$PMD, levels = desiredOrder)
   
   # Create plot
   ggplot(correlationTable, aes(x = Round_number, y = correlation, col = PMD)) +
     geom_line(size = 1) + 
     geom_point(size = 2) +
     geom_hline(yintercept = 0, linetype = "dashed", color = "darkgray") +
-    facet_wrap(~ PMD, scales = "free_y", ncol = 3, strip.position = "top") +  
+    facet_wrap(~ PMD, scales = "free_y", ncol = 4, strip.position = "top") +  
     scale_x_continuous(
-      breaks = seq(min(correlationTable$Round_number), max(correlationTable$Round_number), 1),
+      breaks = seq(min(correlationTable$Round_number), max(correlationTable$Round_number), 1)
     ) +  
     theme_minimal() +
     labs(
       x = "Round Number",
       y = "Correlation",
-      title = "Correlation over the rounds between Physiological measurement
-      and Stress indicators",
+      title = "Correlation over the rounds between Physiological measurement and Stress indicators",
       subtitle = sprintf("%s (%s)", subtitleText, cohortName)
     ) + 
     scale_color_viridis_d(option = "viridis") + 
@@ -78,15 +89,12 @@ roundLinneQ2 <- plotCorrelationRound(correlationTableWithRoundsLinne, "Q2")
 
 ## Export plots into Result folder
 if (!all(file.exists(c("Result/Q2/roundDameQ1.png", "Result/Q2/roundDameQ2.png",
-                   "Result/Q2/roundLinneQ1.png", "Result/Q2/roundLinneQ2.png")))) {
+                       "Result/Q2/roundLinneQ1.png", "Result/Q2/roundLinneQ2.png")))) {
   ggsave("Result/Q2/roundDameQ1.png", roundDameQ1)
   ggsave("Result/Q2/roundDameQ2.png", roundDameQ2)
   ggsave("Result/Q2/roundLinneQ1.png", roundLinneQ1)
   ggsave("Result/Q2/roundLinneQ2.png", roundLinneQ2)
 }
-
-
-
 
 
 
