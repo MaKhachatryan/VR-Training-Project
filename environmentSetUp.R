@@ -12,7 +12,8 @@ packages <- c("tidyr",
               "ggthemes",
               "readxl",
               "pheatmap",
-              "patchwork")
+              "patchwork",
+              "scales")
 
 for (pkg in packages) {
   if (!require(pkg, character.only = TRUE)) {
