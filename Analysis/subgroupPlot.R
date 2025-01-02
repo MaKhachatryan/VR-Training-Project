@@ -63,6 +63,7 @@ hrvQ1ByAgeLinne <- hrvScatterPlotFunction(LinnePMDAndDemographicsAndAnswers, "Ag
 # Call Plots for HR and percievd Stress in Males for Training versions
 hrQ1TrainingMalesDame <- hrVsQ1ScatterPlotFunction(DamePMDAndDemographicsAndAnswers, "Answer_Q1", "mean_HR", "Trainingsversion", "Dame")
 hrQ1TrainingMalesLinne <- hrVsQ1ScatterPlotFunction(LinnePMDAndDemographicsAndAnswers, "Answer_Q1", "mean_HR", "Trainingsversion", "Linne")
+hrQ1TrainingMalesCombined <- hrVsQ1ScatterPlotFunction(combinedPMDAndDemographicsAndAnswers, "Answer_Q1", "mean_HR", "Trainingsversion", "combined")
 
 
 ## Export plots into Result folder
