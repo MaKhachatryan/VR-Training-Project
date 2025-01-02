@@ -199,25 +199,25 @@ hrQ1TrainingMalesDame
 
 [3. Summary and Discussion]{style="color:lightgray;"}
 
-## Subgroups' behaviour
+## Cohort comparison
 
 ```{r}
 ageVariability + genderDistribution
 ```
 
-## Subgroups' behaviour
+## Cohort comparison
 
 ```{r}
 BMI
 ```
 
-## Subgroups' behaviour
+## Cohort comparison
 
 ```{r}
 RMSSD + SDNN
 ```
 
-## Subgroups' behaviour
+## Cohort comparison
 
 ```{r}
 eyeMesuerements + heatmaps
