@@ -223,9 +223,4 @@ AnswerQ1 + AnswerQ2
 RMSSD + SDNN
 ```
 
-## Cohort comparison
-
-```{r}
-eyeMesuerements + heatmaps
-```
 
