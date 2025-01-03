@@ -214,6 +214,12 @@ BMI
 ## Cohort comparison
 
 ```{r}
+AnswerQ1 + AnswerQ2
+```
+
+## Cohort comparison
+
+```{r}
 RMSSD + SDNN
 ```
 
