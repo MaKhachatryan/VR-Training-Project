@@ -168,11 +168,6 @@ hrvQ1ByAgeDame
 
 [-- All participants with high HRV values belong to the Adapted training version.]{style="font-size: 18px;"}
 
-## Stress resilient groups
-
-```{r}
-hrvQ1ByAgeLinne
-```
 
 ## Stress resilient groups
 
