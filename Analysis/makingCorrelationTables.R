@@ -1,8 +1,10 @@
+source("environmentSetUp.R")
+
 #using the computeAndSaveCorrelation for making correlation tables
-compute_and_save_correlation(clean_dame_data, "Data/processedData/correlationTableDame.csv")
-compute_and_save_correlation(clean_linne_data, "Data/processedData/correlationTableLinne.csv")
+computeAndSaveCorrelation(clean_dame_data, "Data/processedData/correlationTableDame.csv")
+computeAndSaveCorrelation(clean_linne_data, "Data/processedData/correlationTableLinne.csv")
 
-
+computeAndSaveCorrelation(combinedPMDAndRoundLogs, "Data/processedData/correlationTableCombined.csv")
 
 # List of measurement columns (excluding Round_number, Answer_Q1, and Answer_Q2)
 measurement_columns <- dame_linne_combined %>%
@@ -27,7 +29,6 @@ correlation_table_with_rounds <- dame_linne_combined %>%
   ungroup()
 
 write_csv(correlation_table_with_rounds, "Data/processedData/correlationTableWithRounds.csv")
-
 
 
 
@@ -77,3 +78,24 @@ correlation_table_with_rounds_linne <- correlation_table_with_rounds_linne %>%
 
 write_csv(correlation_table_with_rounds_linne, "Data/processedData/correlationTableWithRoundsLinne.csv")
 
+
+####################################
+# Calculate correlations for each round COMBINED COHORTS
+correlation_table_with_rounds_combined <- combinedPMDAndRoundLogs %>%
+  group_by(Round_number) %>%
+  summarise(
+    across(
+      all_of(measurement_columns), 
+      list(
+        Q1_corr = ~ cor(.x, Answer_Q1, method = "spearman", use = "complete.obs"),
+        Q2_corr = ~ cor(.x, Answer_Q2, method = "spearman", use = "complete.obs")
+      ),
+      .names = "{.col}_{.fn}"
+    )
+  ) %>%
+  ungroup()
+
+correlation_table_with_rounds_combined <- correlation_table_with_rounds_combined %>%
+  mutate(across(where(is.numeric), ~ round(.x, 3)))
+
+write_csv(correlation_table_with_rounds_combined, "Data/processedData/correlationTableWithRoundsCombined.csv")
