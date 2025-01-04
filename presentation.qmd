@@ -1,15 +1,13 @@
 ---
 title: "VR-Training Project"
-subtitle: "by Fabio Genz and Dieter Kranzlmüller"
 author: "Arsine Chinaryan, Anh Hoang Minh Dang, Iris Dizdari, Margarita Khachatryan"
-institute: "Supervisor: Daniel Schlichting"
+institute: "Dr. Fabian Scheipl, Dr. Sabine Hoffmann, Daniel Schlichting"
 date: "2024-2-13"
 format: 
   revealjs:
     css: customstyle.css
     embed-resources: true
-    slide-number: true
-    logo: "LMULogo.jpg"
+    slide-number: c
 editor: visual
 ---
 
@@ -23,8 +21,8 @@ source("Analysis/cohortDifferences.R")
 
 ## Outline
 
-::: incremental
-1.  Overview & Terminology
+::: incremental 
+1. Overview & Terminology
 
 2.  Data analysis
 
@@ -36,54 +34,34 @@ source("Analysis/cohortDifferences.R")
 3.  Summary and Discussion
 :::
 
-## Overview
+## Overview of the VR Project
 
-**VR-Training**: Adapting Virtual Reality Training Applications by Dynamically Adjusting Visual Aspects\
-**Author**: Fabio Genz and Dieter Kranzlmüller
+**VR-Training**: Adapting Virtual Reality Training Applications by Dynamically Adjusting Visual Aspects
 
-::: incremental
--   **Survey**: Cross-sectional study with longitudinal elements
+**Motivation:**\
+- Static training doesn't fit everyone: Too easy → boredom, Too hard → anxiety\
+- Adaptive VR training balances difficulty to improve outcomes.
 
--   2 Cohorts (Linne and Dame)
+**Scenario:**\
+- Users move and place parcels in a VR warehouse using controllers.\
+- Visual cues: dynamic lighting and color guidance.
 
-    -- 20 participants in Linne, 80 participants in Dame
-
-    -- 9 rounds of training for both cohorts
-
-    -- 2 rounds of test per cohort (Linne: VR, Dame: Real-world)
-
-    -- 3 groups of training versions: Adaptive, Non-Adaptive, Control
-:::
+**Adaptive Features:**\
+- Tracks user behavior (head movement) and performance (time, errors).\
+- Adjusts lighting, object colors, etc., after each training round.
 
 ## Terminology
 
 ### Stress indicators:
 
--   **Answer Q1**: Perceived cognitive load (1 to 6 with 1 very low and 6 very high)
--   **Answer Q2**: Perceived physical load (1 to 6 with 1 very low and 6 very high)
-
-## Terminology
+-   Perceived cognitive load (1 to 6 with 1 very low and 6 very high)
+-   Perceived physical load (1 to 6 with 1 very low and 6 very high)
 
 ### Physiological Measurement Data (PMD)
 
-::: columns
-::: {.column width="50%"}
--   **Heart rate (HR)**: Heart rate beats per minute (bpm)\
--   **IBI**: Interbeat interval (ms)\
--   **SDNN**: Standard deviation of the NN intervals\
--   **RMSSD**: Root mean square of successive differences\
--   **SCL**: Skin conductance level (µS (micro Siemens))\
--   **SCR frequency**: Frequency of the skin conductance response
-:::
-
-::: {.column width="50%"}
--   **SCR amplitude**: Amplitude/strength of the skin conductance response (µS/µmho (micro Siemens/micro Ohm))
--   **SCR rising time**: Rising time of the skin conductance response\
--   **Blink rate last minute**: Blink frequency per minute\
--   **Saccade amplitude**: Degree of eye movement\
--   **Saccade velocity**: Speed of sudden eye movements\
-:::
-:::
+-   **Heart measurements:** Heart rate (HR), SDNN, RMSSD
+-   **Skin conductance response (SCR) measurements:** Skin conductance level (SCL), SCR frequency, SCR amplitude, SCR rising time
+-   **Eye tracking measurements:** Blink rate per minute, Saccade amplitude, Saccade velocity
 
 ## Outline
 
@@ -168,7 +146,6 @@ hrvQ1ByAgeDame
 
 [-- All participants with high HRV values belong to the Adapted training version.]{style="font-size: 18px;"}
 
-
 ## Stress resilient groups
 
 ```{r}
@@ -217,5 +194,3 @@ AnswerQ1 + AnswerQ2
 ```{r}
 RMSSD + SDNN
 ```
-
-
