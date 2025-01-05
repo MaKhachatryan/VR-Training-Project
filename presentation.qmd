@@ -23,19 +23,32 @@ source("Analysis/cohortDifferences.R")
 
 **1. Overview & Terminology**
 
-  -   VR-Project\
-  -   Description of data sets\
-  -   Terminology\
-  -   Analytical questions
+-   VR-Project\
+-   Description of data sets\
+-   Terminology\
+-   Analytical questions
 
 **2. Data Analysis**
 
-  -   Cohorts comparison: Similarities and Differences\
-  -   Relationship between Stress indicators and Physiological Measurements\
-  -   Relationship over the rounds\
-  -   Subgroups and Outliers
+-   Cohorts comparison: Similarities and Differences\
+-   Relationship between Stress indicators and Physiological Measurements\
+-   Relationship over the rounds\
+-   Subgroups and Outliers
 
 **3. Summary**
+
+## Outline
+
+**1. Overview & Terminology**
+
+-   VR-Project\
+-   Description of data sets\
+-   Terminology\
+-   Analytical questions
+
+[**2. Data Analysis**]{style="color:lightgray;"}\
+
+[**3. Summary**]{style="color:lightgray;"}\
 
 ## Overview of the VR Project
 
@@ -84,3 +97,103 @@ source("Analysis/cohortDifferences.R")
 2.  Are there subgroups within the test subjects that stand out from the rest?
 3.  How are the stress indicators and the physiological measurements related?
 4.  Does this correlation change over the rounds?
+
+## Outline
+
+[**1. Overview & Terminology**]{style="color:lightgray;"}\
+
+**2. Data Analysis**
+
+-   Cohorts comparison: Similarities and Differences\
+[-   Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
+[-   Relationship over the rounds]{style="color:lightgray;"}\
+[-   Subgroups and Outliers]{style="color:lightgray;"}
+
+[**3. Summary**]{style="color:lightgray;"}
+
+## Cohorts comparison
+something something
+
+## Analytical questions
+
+**1.  Are there differences between the 2 data cohorts, Linne and Dame?**
+
+Answer something something
+
+
+## Outline
+
+[**1. Overview & Terminology**]{style="color:lightgray;"}\
+
+**2. Data Analysis**
+
+[-   Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}\
+-   Relationship between Stress indicators and Physiological Measurements]\
+[-   Relationship over the rounds]{style="color:lightgray;"}\
+[-   Subgroups and Outliers]{style="color:lightgray;"}
+
+[**3. Summary**]{style="color:lightgray;"}
+
+## Relationship between Stress indicators and Physiological Measurements
+```{r}
+correlation
+```
+
+## Analytical questions
+**2.  Are there subgroups within the test subjects that stand out from the rest?**
+
+Answer something something
+
+
+## Outline
+
+[**1. Overview & Terminology**]{style="color:lightgray;"}\
+
+**2. Data Analysis**
+
+[-   Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}\
+[-   Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
+-   Relationship over the rounds\
+[-   Subgroups and Outliers]{style="color:lightgray;"}
+
+[**3. Summary**]{style="color:lightgray;"}
+
+## Relationship over the rounds
+something something
+
+## Analytical questions
+**3.  How are the stress indicators and the physiological measurements related?**
+
+Answer something something
+
+## Outline
+
+[**1. Overview & Terminology**]{style="color:lightgray;"}\
+
+**2. Data Analysis**
+
+[-   Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}\
+[-   Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
+[-   Relationship over the rounds]{style="color:lightgray;"}\
+-   Subgroups and Outliers
+
+[**3. Summary**]{style="color:lightgray;"}
+
+## Subgroups and Outliers
+something something
+
+## Analytical questions
+**4.  Does this correlation change over the rounds?**
+
+Answer something something
+
+## Outline
+
+[**1. Overview & Terminology**]{style="color:lightgray;"}\
+
+[**2. Data Analysis**]{style="color:lightgray;"}
+
+**3. Summary**
+
+## Summary
+something something
