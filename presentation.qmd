@@ -24,16 +24,16 @@ source("Analysis/cohortDifferences.R")
 **1. Overview & Terminology**
 
   -   VR-Project\
-  -   Data sets\
+  -   Description of data sets\
   -   Terminology\
-  -   Analysis questions
+  -   Analytical questions
 
 **2. Data Analysis**
 
   -   Cohorts comparison: Similarities and Differences\
-  -   Subgroups and Outliers\
   -   Relationship between Stress indicators and Physiological Measurements\
-  -   Relationship over the rounds
+  -   Relationship over the rounds\
+  -   Subgroups and Outliers
 
 **3. Summary**
 
@@ -53,7 +53,7 @@ source("Analysis/cohortDifferences.R")
 - Tracks user behavior (head movement) and performance (time, errors).\
 - Adjusts lighting, object colors, etc., after each training round.
 
-## Data sets
+## Description of data sets
 
 -   **Survey**: Cross-sectional study with longitudinal elements
 -   **2 Cohorts: Linne and Dame**
@@ -78,7 +78,7 @@ source("Analysis/cohortDifferences.R")
 -   **Skin conductance response (SCR) measurements:** Skin conductance level (SCL), SCR frequency, SCR amplitude, SCR rising time
 -   **Eye tracking measurements:** Blink rate per minute, Saccade amplitude, Saccade velocity
 
-## Analysis questions
+## Analytical questions
 
 1.  Are there differences between the 2 data cohorts, Linne and Dame?
 2.  Are there subgroups within the test subjects that stand out from the rest?
