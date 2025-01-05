@@ -94,9 +94,9 @@ source("Analysis/cohortDifferences.R")
 ## Analytical questions
 
 1.  Are there differences between the 2 data cohorts, Linne and Dame?
-2.  Are there subgroups within the test subjects that stand out from the rest?
-3.  How are the stress indicators and the physiological measurements related?
-4.  Does this correlation change over the rounds?
+2.  How are the stress indicators and the physiological measurements related?
+3.  Does this correlation change over the rounds?
+4.  Are there subgroups within the test subjects that stand out from the rest?
 
 ## Outline
 
@@ -128,7 +128,7 @@ Answer something something
 **2. Data Analysis**
 
 [-   Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}\
--   Relationship between Stress indicators and Physiological Measurements]\
+-   Relationship between Stress indicators and Physiological Measurements\
 [-   Relationship over the rounds]{style="color:lightgray;"}\
 [-   Subgroups and Outliers]{style="color:lightgray;"}
 
@@ -140,9 +140,13 @@ correlation
 ```
 
 ## Analytical questions
-**2.  Are there subgroups within the test subjects that stand out from the rest?**
+**2.  How are the stress indicators and the physiological measurements related?**
 
-Answer something something
+-   Positive correlation: Blink rate
+-   Negative correlation: Saccade velocity
+
+⇒   Values of the correlation vary from -0.15 to 0.1, indicating very weak relationship
+between the stress indicators and the physiological measurements
 
 
 ## Outline
@@ -162,7 +166,7 @@ Answer something something
 something something
 
 ## Analytical questions
-**3.  How are the stress indicators and the physiological measurements related?**
+**3.  Does this correlation change over the rounds?**
 
 Answer something something
 
@@ -183,7 +187,7 @@ Answer something something
 something something
 
 ## Analytical questions
-**4.  Does this correlation change over the rounds?**
+**4.  Are there subgroups within the test subjects that stand out from the rest?**
 
 Answer something something
 

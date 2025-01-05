@@ -2,12 +2,12 @@ source("environmentSetUp.R")
 # This function produces the visualization for the correlation table (demonstrate
 # the relationship between the stress indicators (Answer Q1: cognitive load, 
 # Answer Q2: physical load) and the physiological measurements (PMD)) of 
-# 2 cohorts (Dame and Linne). 
+# the combined data between 2 cohorts.
 # It will also filter out the PMDs, if their correlation values are too low
 #
 # Input: 
-# 1. correlationTable: either correlationTableDame or correlationTableLinne
-# 2. min.corr: minimum of the absolute values of the correlation
+# 1. correlationTable: correlationTableCombined
+# 2. minCorr: minimum of the absolute values of the correlation
 #
 # Output: a bar chart shows the correlation between the stress indicators
 # and the physiological measurements (PMD)
