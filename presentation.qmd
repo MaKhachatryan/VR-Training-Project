@@ -21,18 +21,21 @@ source("Analysis/cohortDifferences.R")
 
 ## Outline
 
-::: incremental 
-1. Overview & Terminology
+**1. Overview & Terminology**
 
-2.  Data analysis
+  -   VR-Project\
+  -   Data sets\
+  -   Terminology\
+  -   Analysis questions
 
-    -   Relationship between Stress indicators and Physiological Measurements\
-    -   Relationship over the rounds\
-    -   Subgroups and Outliers\
-    -   Cohorts comparison: Similarities and Differences
+**2. Data Analysis**
 
-3.  Summary and Discussion
-:::
+  -   Cohorts comparison: Similarities and Differences\
+  -   Subgroups and Outliers\
+  -   Relationship between Stress indicators and Physiological Measurements\
+  -   Relationship over the rounds
+
+**3. Summary**
 
 ## Overview of the VR Project
 
@@ -50,12 +53,24 @@ source("Analysis/cohortDifferences.R")
 - Tracks user behavior (head movement) and performance (time, errors).\
 - Adjusts lighting, object colors, etc., after each training round.
 
+## Data sets
+
+-   **Survey**: Cross-sectional study with longitudinal elements
+-   **2 Cohorts: Linne and Dame**
+    -   20 participants in Linne, 80 participants in Dame
+    -   9 rounds of training
+    -   3 groups of training versions: Adaptive, Non-Adaptive, Control
+-   **Analyzed data:**
+    -   Demographic data: Gender, Age, Weight, Height
+    -   Stress indicators
+    -   Physiological measurement data (PMD)
+
 ## Terminology
 
 ### Stress indicators:
 
--   Perceived cognitive load (1 to 6 with 1 very low and 6 very high)
--   Perceived physical load (1 to 6 with 1 very low and 6 very high)
+-   Cognitive load (1 to 6 with 1 very low and 6 very high)
+-   Physical load (1 to 6 with 1 very low and 6 very high)
 
 ### Physiological Measurement Data (PMD)
 
@@ -63,134 +78,9 @@ source("Analysis/cohortDifferences.R")
 -   **Skin conductance response (SCR) measurements:** Skin conductance level (SCL), SCR frequency, SCR amplitude, SCR rising time
 -   **Eye tracking measurements:** Blink rate per minute, Saccade amplitude, Saccade velocity
 
-## Outline
+## Analysis questions
 
-[1. Overview & Terminology]{style="color:lightgray;"}
-
-2.  Data Analysis
-
-    Relationship between Stress indicators and Physiological Measurements\
-    [Relationship over the rounds]{style="color:lightgray;"}\
-    [Subgroups and Outliers]{style="color:lightgray;"}\
-    [Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}
-
-[3. Summary and Discussion]{style="color:lightgray;"}
-
-## Relationship between Stress indicator and Physical Measurements {style="font-size: 26px;"}
-
-```{r}
-correlationDame
-```
-
-## Relationship between Stress indicator and Physical Measurements {style="font-size: 26px;"}
-
-```{r}
-correlationLinne
-```
-
-## Outline
-
-[1. Overview & Terminology]{style="color:lightgray;"}
-
-2.  Data Analysis
-
-    [Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
-    Relationship over the rounds\
-    [Subgroups and Outliers]{style="color:lightgray;"}\
-    [Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}
-
-[3. Summary and Discussion]{style="color:lightgray;"}
-
-## Relationship over the rounds
-
-```{r}
-roundDameQ1
-```
-
-## Relationship over the rounds
-
-```{r}
-roundDameQ2
-```
-
-## Relationship over the rounds
-
-```{r}
-roundLinneQ1
-```
-
-## Relationship over the rounds
-
-```{r}
-roundLinneQ2
-```
-
-## Outline
-
-[1. Overview & Terminology]{style="color:lightgray;"}
-
-2.  Data Analysis
-
-    [Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
-    [Relationship over the rounds]{style="color:lightgray;"}\
-    Subgroups and Outliers\
-    [Cohorts comparison]{style="color:lightgray;"}
-
-[3. Summary and Discussion]{style="color:lightgray;"}
-
-## Stress resilient groups
-
-```{r}
-hrvQ1ByAgeDame
-```
-
-[-- All participants with high HRV values belong to the Adapted training version.]{style="font-size: 18px;"}
-
-## Stress resilient groups
-
-```{r}
-hrQ1TrainingMalesLinne
-```
-
-## Stress resilient groups
-
-```{r}
-hrQ1TrainingMalesDame
-```
-
-## Outline
-
-[1. Overview & Terminology]{style="color:lightgray;"}
-
-2.  Data Analysis
-
-    [Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
-    [Relationship over the rounds]{style="color:lightgray;"}\
-    [Subgroups' behavior]{style="color:lightgray;"}\
-    Cohorts comparison
-
-[3. Summary and Discussion]{style="color:lightgray;"}
-
-## Cohort comparison
-
-```{r}
-ageVariability + genderDistribution
-```
-
-## Cohort comparison
-
-```{r}
-BMI
-```
-
-## Cohort comparison
-
-```{r}
-AnswerQ1 + AnswerQ2
-```
-
-## Cohort comparison
-
-```{r}
-RMSSD + SDNN
-```
+1.  Are there differences between the 2 data cohorts, Linne and Dame?
+2.  Are there subgroups within the test subjects that stand out from the rest?
+3.  How are the stress indicators and the physiological measurements related?
+4.  Does this correlation change over the rounds?
