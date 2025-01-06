@@ -51,7 +51,7 @@ hrVsQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort) {
       #vjust = -1.5,
       #size = 3
     #) +
-    scale_color_viridis_d(option = "plasma") +
+    scale_color_viridis_d(option = "viridis") +
     theme_minimal() +
     labs(
       title = paste("Heart Rate vs Perceived Stress by Training Version in Males", "(", cohort, ")"),

@@ -1,15 +1,13 @@
 ---
 title: "VR-Training Project"
-subtitle: "by Fabio Genz and Dieter Kranzlmüller"
 author: "Arsine Chinaryan, Anh Hoang Minh Dang, Iris Dizdari, Margarita Khachatryan"
-institute: "Supervisor: Daniel Schlichting"
+institute: "Dr. Fabian Scheipl, Dr. Sabine Hoffmann, Daniel Schlichting"
 date: "2024-2-13"
 format: 
   revealjs:
     css: customstyle.css
     embed-resources: true
-    slide-number: true
-    logo: "LMULogo.jpg"
+    slide-number: c
 editor: visual
 ---
 
@@ -23,203 +21,183 @@ source("Analysis/cohortDifferences.R")
 
 ## Outline
 
-::: incremental
-1.  Overview & Terminology
+**1. Overview & Terminology**
 
-2.  Data analysis
+-   VR-Project\
+-   Description of data sets\
+-   Terminology\
+-   Analytical questions
 
-    -   Relationship between Stress indicators and Physiological Measurements\
-    -   Relationship over the rounds\
-    -   Subgroups and Outliers\
-    -   Cohorts comparison: Similarities and Differences
+**2. Data Analysis**
 
-3.  Summary and Discussion
-:::
+-   Cohorts comparison: Similarities and Differences\
+-   Relationship between Stress indicators and Physiological Measurements\
+-   Relationship over the rounds\
+-   Subgroups and Outliers
 
-## Overview
+**3. Summary**
 
-**VR-Training**: Adapting Virtual Reality Training Applications by Dynamically Adjusting Visual Aspects\
-**Author**: Fabio Genz and Dieter Kranzlmüller
+## Outline
 
-::: incremental
+**1. Overview & Terminology**
+
+-   VR-Project\
+-   Description of data sets\
+-   Terminology\
+-   Analytical questions
+
+[**2. Data Analysis**]{style="color:lightgray;"}\
+
+[**3. Summary**]{style="color:lightgray;"}\
+
+## Overview of the VR Project
+
+**VR-Training**: Adapting Virtual Reality Training Applications by Dynamically Adjusting Visual Aspects
+
+**Motivation:**\
+- Static training doesn't fit everyone: Too easy → boredom, Too hard → anxiety\
+- Adaptive VR training balances difficulty to improve outcomes.
+
+**Scenario:**\
+- Users move and place parcels in a VR warehouse using controllers.\
+- Visual cues: dynamic lighting and color guidance.
+
+**Adaptive Features:**\
+- Tracks user behavior (head movement) and performance (time, errors).\
+- Adjusts lighting, object colors, etc., after each training round.
+
+## Description of data sets
+
 -   **Survey**: Cross-sectional study with longitudinal elements
-
--   2 Cohorts (Linne and Dame)
-
-    -- 20 participants in Linne, 80 participants in Dame
-
-    -- 9 rounds of training for both cohorts
-
-    -- 2 rounds of test per cohort (Linne: VR, Dame: Real-world)
-
-    -- 3 groups of training versions: Adaptive, Non-Adaptive, Control
-:::
+-   **2 Cohorts: Linne and Dame**
+    -   20 participants in Linne, 80 participants in Dame
+    -   9 rounds of training
+    -   3 groups of training versions: Adaptive, Non-Adaptive, Control
+-   **Analyzed data:**
+    -   Demographic data: Gender, Age, Weight, Height
+    -   Stress indicators
+    -   Physiological measurement data (PMD)
 
 ## Terminology
 
 ### Stress indicators:
 
--   **Answer Q1**: Perceived cognitive load (1 to 6 with 1 very low and 6 very high)
--   **Answer Q2**: Perceived physical load (1 to 6 with 1 very low and 6 very high)
-
-## Terminology
+-   Cognitive load (1 to 6 with 1 very low and 6 very high)
+-   Physical load (1 to 6 with 1 very low and 6 very high)
 
 ### Physiological Measurement Data (PMD)
 
-::: columns
-::: {.column width="50%"}
--   **Heart rate (HR)**: Heart rate beats per minute (bpm)\
--   **IBI**: Interbeat interval (ms)\
--   **SDNN**: Standard deviation of the NN intervals\
--   **RMSSD**: Root mean square of successive differences\
--   **SCL**: Skin conductance level (µS (micro Siemens))\
--   **SCR frequency**: Frequency of the skin conductance response
-:::
+-   **Heart measurements:** Heart rate (HR), SDNN, RMSSD
+-   **Skin conductance response (SCR) measurements:** Skin conductance level (SCL), SCR frequency, SCR amplitude, SCR rising time
+-   **Eye tracking measurements:** Blink rate per minute, Saccade amplitude, Saccade velocity
 
-::: {.column width="50%"}
--   **SCR amplitude**: Amplitude/strength of the skin conductance response (µS/µmho (micro Siemens/micro Ohm))
--   **SCR rising time**: Rising time of the skin conductance response\
--   **Blink rate last minute**: Blink frequency per minute\
--   **Saccade amplitude**: Degree of eye movement\
--   **Saccade velocity**: Speed of sudden eye movements\
-:::
-:::
+## Analytical questions
+
+1.  Are there differences between the 2 data cohorts, Linne and Dame?
+2.  How are the stress indicators and the physiological measurements related?
+3.  Does this correlation change over the rounds?
+4.  Are there subgroups within the test subjects that stand out from the rest?
 
 ## Outline
 
-[1. Overview & Terminology]{style="color:lightgray;"}
+[**1. Overview & Terminology**]{style="color:lightgray;"}\
 
-2.  Data Analysis
+**2. Data Analysis**
 
-    Relationship between Stress indicators and Physiological Measurements\
-    [Relationship over the rounds]{style="color:lightgray;"}\
-    [Subgroups and Outliers]{style="color:lightgray;"}\
-    [Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}
+-   Cohorts comparison: Similarities and Differences\
+[-   Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
+[-   Relationship over the rounds]{style="color:lightgray;"}\
+[-   Subgroups and Outliers]{style="color:lightgray;"}
 
-[3. Summary and Discussion]{style="color:lightgray;"}
+[**3. Summary**]{style="color:lightgray;"}
 
-## Relationship between Stress indicator and Physical Measurements {style="font-size: 26px;"}
+## Cohorts comparison
+something something
 
-```{r}
-correlationDame
-```
+## Analytical questions
 
-## Relationship between Stress indicator and Physical Measurements {style="font-size: 26px;"}
+**1.  Are there differences between the 2 data cohorts, Linne and Dame?**
 
-```{r}
-correlationLinne
-```
+Answer something something
+
 
 ## Outline
 
-[1. Overview & Terminology]{style="color:lightgray;"}
+[**1. Overview & Terminology**]{style="color:lightgray;"}\
 
-2.  Data Analysis
+**2. Data Analysis**
 
-    [Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
-    Relationship over the rounds\
-    [Subgroups and Outliers]{style="color:lightgray;"}\
-    [Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}
+[-   Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}\
+-   Relationship between Stress indicators and Physiological Measurements\
+[-   Relationship over the rounds]{style="color:lightgray;"}\
+[-   Subgroups and Outliers]{style="color:lightgray;"}
 
-[3. Summary and Discussion]{style="color:lightgray;"}
+[**3. Summary**]{style="color:lightgray;"}
 
-## Relationship over the rounds
-
+## Relationship between Stress indicators and Physiological Measurements
 ```{r}
-roundDameQ1
+correlation
 ```
 
-## Relationship over the rounds
+## Analytical questions
+**2.  How are the stress indicators and the physiological measurements related?**
 
-```{r}
-roundDameQ2
-```
+-   Positive correlation: Blink rate
+-   Negative correlation: Saccade velocity
 
-## Relationship over the rounds
+⇒   Values of the correlation vary from -0.15 to 0.1, indicating very weak relationship
+between the stress indicators and the physiological measurements
 
-```{r}
-roundLinneQ1
-```
-
-## Relationship over the rounds
-
-```{r}
-roundLinneQ2
-```
 
 ## Outline
 
-[1. Overview & Terminology]{style="color:lightgray;"}
+[**1. Overview & Terminology**]{style="color:lightgray;"}\
 
-2.  Data Analysis
+**2. Data Analysis**
 
-    [Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
-    [Relationship over the rounds]{style="color:lightgray;"}\
-    Subgroups and Outliers\
-    [Cohorts comparison]{style="color:lightgray;"}
+[-   Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}\
+[-   Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
+-   Relationship over the rounds\
+[-   Subgroups and Outliers]{style="color:lightgray;"}
 
-[3. Summary and Discussion]{style="color:lightgray;"}
+[**3. Summary**]{style="color:lightgray;"}
 
-## Stress resilient groups
+## Relationship over the rounds
+something something
 
-```{r}
-hrvQ1ByAgeDame
-```
+## Analytical questions
+**3.  Does this correlation change over the rounds?**
 
-[-- All participants with high HRV values belong to the Adapted training version.]{style="font-size: 18px;"}
-
-## Stress resilient groups
-
-```{r}
-hrvQ1ByAgeLinne
-```
-
-## Stress resilient groups
-
-```{r}
-hrQ1TrainingMalesLinne
-```
-
-## Stress resilient groups
-
-```{r}
-hrQ1TrainingMalesDame
-```
+Answer something something
 
 ## Outline
 
-[1. Overview & Terminology]{style="color:lightgray;"}
+[**1. Overview & Terminology**]{style="color:lightgray;"}\
 
-2.  Data Analysis
+**2. Data Analysis**
 
-    [Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
-    [Relationship over the rounds]{style="color:lightgray;"}\
-    [Subgroups' behavior]{style="color:lightgray;"}\
-    Cohorts comparison
+[-   Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}\
+[-   Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
+[-   Relationship over the rounds]{style="color:lightgray;"}\
+-   Subgroups and Outliers
 
-[3. Summary and Discussion]{style="color:lightgray;"}
+[**3. Summary**]{style="color:lightgray;"}
 
-## Cohort comparison
+## Subgroups and Outliers
+something something
 
-```{r}
-ageVariability + genderDistribution
-```
+## Analytical questions
+**4.  Are there subgroups within the test subjects that stand out from the rest?**
 
-## Cohort comparison
+Answer something something
 
-```{r}
-BMI
-```
+## Outline
 
-## Cohort comparison
+[**1. Overview & Terminology**]{style="color:lightgray;"}\
 
-```{r}
-RMSSD + SDNN
-```
+[**2. Data Analysis**]{style="color:lightgray;"}
 
-## Cohort comparison
+**3. Summary**
 
-```{r}
-eyeMesuerements + heatmaps
-```
-
+## Summary
+something something

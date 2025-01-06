@@ -2,43 +2,36 @@ source("environmentSetUp.R")
 # This function produces the visualization for the correlation table (demonstrate
 # the relationship between the stress indicators (Answer Q1: cognitive load, 
 # Answer Q2: physical load) and the physiological measurements (PMD)) of 
-# 2 cohorts (Dame and Linne). 
+# the combined data between 2 cohorts.
 # It will also filter out the PMDs, if their correlation values are too low
 #
 # Input: 
-# 1. correlationTable: either correlationTableDame or correlationTableLinne
-# 2. min.corr: minimum of the absolute values of the correlation
+# 1. correlationTable: correlationTableCombined
+# 2. minCorr: minimum of the absolute values of the correlation
 #
 # Output: a bar chart shows the correlation between the stress indicators
 # and the physiological measurements (PMD)
 
 
-# Create function to process data and create the plot
-plotCorrelation <- function(correlationTable, min.corr) {
+# Create function
+plotCorrelation <- function(correlationTable, minCorr) {
   
-  # Determine the cohort name based on the input table
-  cohortName <- ifelse(
-    deparse(substitute(correlationTable)) == "correlationTableDame",
-    "Dame",
-    "Linne"
-  )
-  
-  # Transform the correlation table
+  # Change the structure of the data frame
   correlationTable <- correlationTable %>%
-    pivot_longer(cols = -row_name, names_to = "PMD", values_to = "Correlation") %>%
-    filter(abs(as.numeric(Correlation)) >= min.corr) %>%
+    pivot_longer(cols = -row_name, names_to = "pmd", values_to = "correlation") %>%
+    filter(abs(as.numeric(correlation)) >= minCorr) %>%
     mutate(
-      Correlation = as.numeric(Correlation),
-      PMD = str_replace_all(PMD, "_", " "),
-      PMD = str_replace_all(PMD, "raw|Raw", ""),
-      PMD = str_replace_all(PMD, "mean", "Mean")
+      correlation = as.numeric(correlation),
+      pmd = str_replace_all(pmd, "_", " "),
+      pmd = str_replace_all(pmd, "raw|Raw", ""),
+      pmd = str_replace_all(pmd, "mean", "")
     )
   
-  # Create the plot with different colors for each stress indicator
+  # Create the plot with faceting for different stress indicators
   ggplot(correlationTable, aes(
-    x = reorder(PMD, Correlation, decreasing = TRUE), 
-    y = Correlation, 
-    fill = row_name 
+    x = reorder(pmd, correlation, decreasing = TRUE), 
+    y = correlation, 
+    fill = row_name
   )) +
     geom_bar(stat = "identity", position = "dodge", color = "black", alpha = 0.8) +
     geom_hline(yintercept = 0, linetype = "dashed", color = "gray") +
@@ -46,35 +39,28 @@ plotCorrelation <- function(correlationTable, min.corr) {
     labs(
       x = "Physiological Measurements",
       y = "Correlation",
-      title = "Correlation between Physiological measurements and Stress indicators",
-      subtitle = sprintf("Cohort: %s", cohortName)
+      title = "Correlation between Physiological Measurements and Stress Indicators"
     ) +
     theme(strip.text = element_text(size = 16)) +
     scale_fill_manual(
       values = c(
-        "Answer_Q1" = "#1f78b4",
-        "Answer_Q2" = "#33a02c" 
+        "Cognitive Load" = "#1f78b4",
+        "Physical Load" = "#33a02c" 
       ),
-      guide = "none" 
-    ) + 
+      guide = "none"
+    ) +
     scale_x_discrete(labels = label_wrap(12)) +
-    facet_wrap(~row_name, scales = "free_x", labeller = as_labeller(c(
-      "Answer_Q1" = "Cognitive Load",
-      "Answer_Q2" = "Physical Load"
-    )))
+    facet_wrap(~row_name, scales = "free_x")
 }
 
 
-# Create the plot with 2 cohorts and 0.09 as a minimum value for the correlation
-correlationDame <- plotCorrelation(correlationTableDame, 0.09)
-correlationLinne <- plotCorrelation(correlationTableLinne, 0.09)
+# Create the plot with a modified minimum value for the correlation
+correlation <- plotCorrelation(correlationTableCombined, 0.1)
 
 
 # ## Export plots into Result folder
-if (!all(file.exists(c("Result/Q1/correlationDame.png",
-                       "Result//Q1/correlationLinne.png")))) {
-  ggsave("Result/Q1/correlationDame.png", correlationDame)
-  ggsave("Result/Q1/correlationLinne.png", correlationLinne)
+if (!file.exists("Result/Q1/correlation.png")) {
+  ggsave("Result/Q1/correlation.png", correlation)
 }
 
 
