@@ -3,98 +3,120 @@ source("environmentSetUp.R")
 # the stress indicators (Answer Q1: cognitive load, Answer Q2: physical load)
 # and the physiological measurements (PMD)) of 2 cohorts (Dame and Linne) changes
 # in every round. There are 9 rounds in total.
-#
+
+
+# Heart Measurements
+heartMeasurements <- c("Mean HR", "RMSSD", "SDNN")
+heartColor <- "#66c2a5"  # Single color for all heart measurements
+
+# Skin Measurements
+skinMeasurements <- c("Mean SCL", "Mean SCR amplitude", "Mean SCR frequency", "Mean SCR rise time")
+skinColor <-"#fc8d62" # Single color for all measurements
+
+# Blink/Saccade Measurements
+blinkSaccadeMeasurements <- c("Mean Blink rate last minute", "Mean Saccade amplitude", "Mean Saccade velocity")
+blinkSaccadeColor <- "#7570b3"  # Single color for all blink/saccade measurements
+
+
+# Function to preprocess data for a given measurement type and question
 # Input:
-# 1. correlationTable: either correlationTableWithRoundsDame or correlationTableWithRoundsLinne
-# 2. stressIndicator: either "Q1" or "Q2"
-# Output: A line plot, facetted by PMD, showing how correlation between PMD and Stress 
-# indicators changes over the rounds
-
-
-# Create function to process and create the plot
-plotCorrelationRound <- function(correlationTable, stressIndicator) {
-  
-  # Determine the subtitle based on the cohort
-  cohortName <- ifelse(
-    deparse(substitute(correlationTable)) == "correlationTableWithRoundsDame",
-    "Dame",
-    "Linne"
-  )
-  
-  # Determine the subtitle based on the stress indicator
-  subtitleText <- ifelse(
-    stressIndicator == "Q1",
-    "PMD & Cognitive Load",
-    "PMD & Physical Load"
-  )
-  
-  # Change the structure of the data frame
-  correlationTable <- correlationTable %>%
+# data: correlationTableWithRoundsCombined
+# question: either "Q1" or "Q2"
+# measurements: Heart, Skin or Blink/Saccade measurements
+# Output: pivoted data
+prepareData <- function(data, question, measurements) {
+  data %>%
     mutate(Round_number = as.numeric(Round_number)) %>%
     pivot_longer(
       cols = -Round_number, 
       names_to = "PMD", 
       values_to = "correlation"
     ) %>%
-    filter(grepl(paste0("_", stressIndicator, "_"), PMD))  # Filter by stressIndicator Q1 or Q2
-  
-  # Ensure correlation is numeric
-  correlationTable <- correlationTable %>%
-    mutate(correlation = as.numeric(correlation))
-  
-  # Clean the variable names
-  correlationTable$PMD <- str_replace_all(correlationTable$PMD, "_", " ")
-  correlationTable$PMD <- str_replace_all(correlationTable$PMD, "raw|Raw", "")
-  correlationTable$PMD <- str_replace_all(correlationTable$PMD, "mean", "Mean")
-  correlationTable$PMD <- str_replace_all(correlationTable$PMD, "Q1", "")
-  correlationTable$PMD <- str_replace_all(correlationTable$PMD, "Q2", "")
-  correlationTable$PMD <- str_replace_all(correlationTable$PMD, "corr", "")
-  correlationTable$PMD <- str_trim(correlationTable$PMD)
-  
-  # Define the desired PMD order for facets
-  desiredOrder <- c(
-    "Mean HR", "RMSSD", "SDNN", "Mean IBI",  # Heart measurements
-    "Mean SCL", "Mean SCR amplitude", "Mean SCR frequency", "Mean SCR rise time",  # Skin measurements
-    "Mean Blink rate last minute", "Mean Saccade amplitude", "Mean Saccade velocity"  # Blink/Saccade measurements
-  )
-  
-  # Reorder PMDs for facet order
-  correlationTable$PMD <- factor(correlationTable$PMD, levels = desiredOrder)
-  
-  # Create plot
-  ggplot(correlationTable, aes(x = Round_number, y = correlation, col = PMD)) +
-    geom_line(size = 1) + 
+    filter(grepl(paste0("_", question, "_"), PMD)) %>%
+    mutate(correlation = as.numeric(correlation)) %>%
+    mutate(PMD = str_replace_all(PMD, "_", " ")) %>%
+    mutate(PMD = str_replace_all(PMD, "raw|Raw", "")) %>%
+    mutate(PMD = str_replace_all(PMD, "mean", "Mean")) %>%
+    mutate(PMD = str_replace_all(PMD, question, "")) %>%
+    mutate(PMD = str_replace_all(PMD, "corr", "")) %>%
+    mutate(PMD = str_trim(PMD)) %>%
+    filter(PMD %in% measurements)
+}
+
+# Function to create a plot for a given measurement type
+# Input:
+# data: pivoted data
+# measurements: Heart, Skin or Blink/Saccade m
+# x_label: x axis label
+# y_label: y axis label
+# color: Heart, Skin or Blink/Saccade color
+# Output: plot
+createPlot <- function(data, measurements, color, x_label = NULL, y_label = NULL) {
+  ggplot(data, aes(x = Round_number, y = correlation, col = PMD)) +
+    geom_line(size = 1) +
     geom_point(size = 2) +
     geom_hline(yintercept = 0, linetype = "dashed", color = "darkgray") +
-    facet_wrap(~ PMD, scales = "free_y", ncol = 4, strip.position = "top") +  
-    scale_x_continuous(
-      breaks = seq(min(correlationTable$Round_number), max(correlationTable$Round_number), 1)
-    ) +  
+    scale_x_continuous(breaks = seq(min(data$Round_number), max(data$Round_number), 1)) +
+    scale_color_manual(values = rep(color, length(measurements))) +
+    facet_wrap(~ PMD, scales = "free_y", nrow = 1) +
     theme_minimal() +
-    labs(
-      x = "Round Number",
-      y = "Correlation",
-      title = "Correlation over the rounds between Physiological measurement and Stress indicators",
-      subtitle = sprintf("%s (%s)", subtitleText, cohortName)
-    ) + 
-    scale_color_viridis_d(option = "viridis") + 
-    theme(legend.position = "none")
+    labs(x = x_label, y = y_label) +
+    theme(
+      legend.position = "none",
+      axis.text.x = element_text(size = 8),
+      axis.text.y = element_text(size = 10),
+      axis.title.x = if (!is.null(x_label)) element_text(size = 12, face = "bold") else element_blank(),
+      axis.title.y = if (!is.null(y_label)) element_text(size = 12, face = "bold") else element_blank(),
+      strip.text.x = element_text(size = 10, face = "bold")
+    )
 }
 
-## Create plot with each stress indicator in each cohort
-roundDameQ1 <- plotCorrelationRound(correlationTableWithRoundsDame, "Q1")
-roundDameQ2 <- plotCorrelationRound(correlationTableWithRoundsDame, "Q2")
-roundLinneQ1 <- plotCorrelationRound(correlationTableWithRoundsLinne, "Q1") 
-roundLinneQ2 <- plotCorrelationRound(correlationTableWithRoundsLinne, "Q2")
-
-## Export plots into Result folder
-if (!all(file.exists(c("Result/Q2/roundDameQ1.png", "Result/Q2/roundDameQ2.png",
-                       "Result/Q2/roundLinneQ1.png", "Result/Q2/roundLinneQ2.png")))) {
-  ggsave("Result/Q2/roundDameQ1.png", roundDameQ1)
-  ggsave("Result/Q2/roundDameQ2.png", roundDameQ2)
-  ggsave("Result/Q2/roundLinneQ1.png", roundLinneQ1)
-  ggsave("Result/Q2/roundLinneQ2.png", roundLinneQ2)
+# Generate plots for Q1 and Q2
+# Input:
+# question: either "Q1" or "Q2"
+# title: plot title
+# subtitle: plot subtitle
+# Output: combined plot
+generateCombinedPlot <- function(question, title, subtitle) {
+  heartData <- prepareData(correlationTableWithRoundsCombined, question, heartMeasurements)
+  skinData <- prepareData(correlationTableWithRoundsCombined, question, skinMeasurements)
+  blinkSaccadeData <- prepareData(correlationTableWithRoundsCombined, question, blinkSaccadeMeasurements)
+  
+  heartPlot <- createPlot(heartData, heartMeasurements, heartColor)
+  skinPlot <- createPlot(skinData, skinMeasurements, skinColor, y_label = "Correlation")
+  blinkSaccadePlot <- createPlot(blinkSaccadeData, blinkSaccadeMeasurements, blinkSaccadeColor, x_label = "Round Number")
+  
+  (heartPlot / skinPlot / blinkSaccadePlot) +
+    plot_annotation(
+      title = title,
+      subtitle = subtitle,
+      theme = theme(
+        plot.title = element_text(size = 16, face = "bold", hjust = 0),
+        plot.subtitle = element_text(size = 14, face = "plain", hjust = 0)
+      )
+    )
 }
 
+# Generate Q1 and Q2 plots
+roundCombinedQ1 <- generateCombinedPlot(
+  "Q1",
+  "Correlation over the rounds between Physiological measurement and Stress indicators",
+  "PMD & Cognitive Load"
+)
 
+roundCombinedQ2 <- generateCombinedPlot(
+  "Q2",
+  "Correlation over the rounds between Physiological measurement and Stress indicators",
+  "PMD & Physical Load"
+)
 
+# Display the plots
+roundCombinedQ1
+roundCombinedQ2
+
+# Export the plots
+if (!all(file.exists(c("Result/Q2/roundCombinedQ1.png", "Result/Q2/roundCombinedQ2.png")))) {
+  ggsave("Result/Q2/roundCombinedQ1.png", roundCombinedQ1, width = 12, height = 7, dpi = 300)
+  ggsave("Result/Q2/roundCombinedQ2.png", roundCombinedQ2, width = 12, height = 7, dpi = 300)
+  
+}
