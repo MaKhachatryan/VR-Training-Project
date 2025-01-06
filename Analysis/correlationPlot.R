@@ -44,8 +44,8 @@ plotCorrelation <- function(correlationTable, minCorr) {
     theme(strip.text = element_text(size = 16)) +
     scale_fill_manual(
       values = c(
-        "Cognitive Load" = "#1f78b4",
-        "Physical Load" = "#33a02c" 
+        "Cognitive Load" = "#C39BD3",
+        "Physical Load" = "#FFE066" 
       ),
       guide = "none"
     ) +
