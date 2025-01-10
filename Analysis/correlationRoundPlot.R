@@ -56,7 +56,8 @@ createPlot <- function(data, measurements, color, x_label = NULL, y_label = NULL
     geom_line(size = 1) +
     geom_point(size = 2) +
     geom_hline(yintercept = 0, linetype = "dashed", color = "darkgray") +
-    scale_x_continuous(breaks = seq(min(data$Round_number), max(data$Round_number), 1)) +
+    scale_x_continuous(breaks = seq(min(data$Round_number), max(data$Round_number), 1)) + 
+    scale_y_continuous(limits = c(-0.4, 0.4)) +  # Set y-axis limits
     scale_color_manual(values = rep(color, length(measurements))) +
     facet_wrap(~ PMD, scales = "free_y", nrow = 1) +
     theme_minimal() +
