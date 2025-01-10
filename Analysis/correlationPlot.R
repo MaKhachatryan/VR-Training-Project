@@ -2,12 +2,12 @@ source("environmentSetUp.R")
 # This function produces the visualization for the correlation table (demonstrate
 # the relationship between the stress indicators (Answer Q1: cognitive load, 
 # Answer Q2: physical load) and the physiological measurements (PMD)) of 
-# 2 cohorts (Dame and Linne). 
+# the combined data between 2 cohorts.
 # It will also filter out the PMDs, if their correlation values are too low
 #
 # Input: 
-# 1. correlationTable: either correlationTableDame or correlationTableLinne
-# 2. min.corr: minimum of the absolute values of the correlation
+# 1. correlationTable: correlationTableCombined
+# 2. minCorr: minimum of the absolute values of the correlation
 #
 # Output: a bar chart shows the correlation between the stress indicators
 # and the physiological measurements (PMD)
@@ -44,8 +44,8 @@ plotCorrelation <- function(correlationTable, minCorr) {
     theme(strip.text = element_text(size = 16)) +
     scale_fill_manual(
       values = c(
-        "Cognitive Load" = "#1f78b4",
-        "Physical Load" = "#33a02c" 
+        "Cognitive Load" = "#C39BD3",
+        "Physical Load" = "#FFE066" 
       ),
       guide = "none"
     ) +
