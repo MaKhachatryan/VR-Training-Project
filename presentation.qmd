@@ -183,13 +183,27 @@ Answer something something
 
 [**3. Summary**]{style="color:lightgray;"}
 
-## Subgroups and Outliers
-something something
+## Stress Resiliant Sugroups 
+```{r}
+hrvQ1ByAgeCombined
+```
+<span style="font-size:18px;">The plot shows that as cognitive load increases, RMSSD decreases, with high HRV defined as RMSSD values above the 0.9 quantile, indicating lower autonomic flexibility under stress.</span>
+
+
+## Stress Resiliant Sugroups
+```{r}
+hrQ1TrainingGenderDame
+```
+
+## Stress Resiliant Sugroups
+```{r}
+hrQ1TrainingMalesLinne
+```
+
 
 ## Analytical questions
 **4.  Are there subgroups within the test subjects that stand out from the rest?**
 
-Answer something something
 
 ## Outline
 
@@ -201,3 +215,14 @@ Answer something something
 
 ## Summary
 something something
+
+
+## Appendix
+```{r}
+hrQ1TrainingFemalesLinne
+```
+## Appendix
+```{r}
+hrQ1TrainingLinne
+```
+

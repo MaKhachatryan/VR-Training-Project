@@ -285,3 +285,36 @@ ggplot(data, aes(x = BMI_Category, y = Answer_Q1, fill = BMI_Category)) +
     y = "Perceived Stress Level (Q1)"
   ) +
   scale_fill_manual(values = c("Underweight" = "lightblue", "Normal Weight" = "green", "Overweight" = "red"))
+
+
+###################################Apendix##################################
+
+bmiQ1byAgegroup <- function(data, x_axis, y_axis, grouping) {
+  
+  # Convert specified columns to symbols for tidy evaluation
+  stress_sym <- sym(x_axis)
+  demo_sym <- sym(y_axis)
+  group_sym <- sym(grouping)
+  
+  # Define age groups
+  data <- data %>%
+    mutate(AgeGroup = cut(!!group_sym,
+                          breaks = c(-Inf, 20, 30, 40, 50, 60, Inf),
+                          labels = c("<=20", "21-30", "31-40", "41-50", "51-60", "61+"),
+                          right = FALSE))
+  
+  # Create scatter plot with faceting by age group
+  ggplot(data, aes(x = !!stress_sym, y = !!demo_sym)) +
+    geom_point(alpha = 0.7, size = 2.5) +
+    facet_wrap(~ AgeGroup, scales = "free") +
+    theme_minimal() +
+    labs(
+      title = "Stress vs BMI Faceted by Age Group",
+      x = "Indicated Stress",
+      y = "BMI"
+    )
+}
+
+bmiQ1byAge <- bmiQ1byAgegroup(DamePMDAndDemographicsAndAnswers, "Answer_Q1", "BMI", "Age")
+
+
