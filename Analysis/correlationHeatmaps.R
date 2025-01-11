@@ -6,53 +6,63 @@ source("environmentSetUp.R")
 #input: dataframe
 #output: dataframe, heatmap
 
-# Select only numerical data from the dataset
-numeric_data <- select_if(LinnePMDAndDemographicsAndAnswers, is.numeric)
-
-# Compute the correlation matrix
-cor_matrix <- round(cor(numeric_data, use = "complete.obs"), 2)
-
-  
-  # Create the heatmap
-  pheatmap(cor_matrix, 
-           color = colorRampPalette(c("blue", "white", "red"))(50),
-           display_numbers = TRUE)
 
 
+# Add the BMI column
+combinedPMDAndDemographicsAndAnswers <- calculateBMI(combinedPMDAndDemographicsAndAnswers)
+DamePMDAndDemographicsAndAnswers <- calculateBMI(DamePMDAndDemographicsAndAnswers)
+LinnePMDAndDemographicsAndAnswers <- calculateBMI(LinnePMDAndDemographicsAndAnswers)
+
+# Split by training
+grouped_data <- split(combinedPMDAndDemographicsAndAnswers,
+                      combinedPMDAndDemographicsAndAnswers$Trainingsversion)
+
+# Function to select numeric columns from a data frame
+select_numeric_columns <- function(df) {
+  df %>% select(where(is.numeric))
+}
+
+# Apply the function to each data frame in the list
+numeric_data_list <- lapply(grouped_data, select_numeric_columns)
+
+# Compute the correlation matrix for each subset
+cor_matrices <- lapply(numeric_data_list, function(df) {
+  cor(df, use = "complete.obs")
+})
+
+# Create heatmaps for each correlation matrix
+for (name in names(cor_matrices)) {
+  pheatmap(
+    cor_matrices[[name]],
+    color = colorRampPalette(c("blue", "white", "red"))(50),
+    display_numbers = TRUE,
+    main = paste("Correlation Matrix for Training Version:", name)
+  )
+}
 
 
 ### Checking agegroups for both training versions
-
-# Split by training
-grouped_data <- split(LinnePMDAndDemographicsAndAnswers,
-                                           LinnePMDAndDemographicsAndAnswers$Gender)
-  
-# Define age group bins
-ageSubgroupsForEachTraining <- DamePMDAndDemographicsAndAnswers %>%
-  mutate(AgeGroup = cut(Age, breaks = c(-Inf, 20, 30, 40, Inf), 
-                        labels = c("<20", "20-30", "30-40", "40+")))
-
-# Split data into demographic subgroups
-grouped_data <- split(LinnePMDAndDemographicsAndAnswers, 
-                      list(ageSubgroupsForEachTraining$Trainingsversion, 
-                           
-                           ageSubgroupsForEachTraining$Gender), 
-                      drop = TRUE)
-
-# Function to clean correlation matrix
+ 
+# Clean correlation matrix
 clean_correlation_matrix <- function(cor_matrix) {
   cor_matrix[is.na(cor_matrix) | is.nan(cor_matrix) | is.infinite(cor_matrix)] <- 0
   return(cor_matrix)
 }
 
-# Modify the correlation calculation to handle single-row groups
+# Split age subgroups into a list of data frames
+ageSubgroups <- DamePMDAndDemographicsAndAnswers %>%
+  mutate(AgeGroup = cut(Age, breaks = c(-Inf, 20, 30, 40, Inf), 
+                        labels = c("15-30", "31-45", "45+"))) %>%
+  group_by(AgeGroup) %>%
+  group_split()
+
+# Compute correlation matrices
 cor_matrices <- lapply(grouped_data, function(group) {
-  numeric_data <- select_if(group, is.numeric)
+  numeric_data <- select(group, where(is.numeric))
   if (nrow(numeric_data) > 1) {
-    cor_matrix <- round(cor(numeric_data), 2)
+    cor_matrix <- round(cor(scale(numeric_data)), 2)
     clean_correlation_matrix(cor_matrix)
   } else if (nrow(numeric_data) == 1) {
-    # Create a matrix of 1's for single-row groups
     matrix(1, 
            nrow = ncol(numeric_data), 
            ncol = ncol(numeric_data), 
@@ -61,10 +71,12 @@ cor_matrices <- lapply(grouped_data, function(group) {
     NULL
   }
 })
-# Create heatmaps for each correlation matrix
-for (group_name in names(cor_matrices)) {
-  cor_matrix <- cor_matrices[[group_name]]
-  if (!is.null(cor_matrix) && nrow(grouped_data[[group_name]]) > 1) {
+
+# Create heatmaps
+for (i in seq_along(cor_matrices)) {
+  cor_matrix <- cor_matrices[[i]]
+  group_name <- levels(DamePMDAndDemographicsAndAnswers$AgeGroup)[i]
+  if (!is.null(cor_matrix)) {
     pheatmap(cor_matrix, 
              color = colorRampPalette(c("blue", "white", "red"))(50),
              display_numbers = TRUE,
@@ -75,8 +87,6 @@ for (group_name in names(cor_matrices)) {
 
 
 ### Dividing the training version groups into BMI subgroups
-
-DamePMDAndDemographicsAndAnswers <- calculateBMI(DamePMDAndDemographicsAndAnswers)
 
 # Filter for BMI ranges
 filtered_data <- DamePMDAndDemographicsAndAnswers %>%
