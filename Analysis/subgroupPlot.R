@@ -107,7 +107,7 @@ hrQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort, gende
       geom_smooth(
         data = adaptive_data,
         aes_string(x = col_x, y = col_y),
-        method = "lm", 
+        method = "loess", 
         color = "#F8C471",
         linetype = "dashed",
         se = FALSE 
@@ -120,7 +120,7 @@ hrQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort, gende
       geom_vline(
       xintercept = 4,
       color = "black",
-      linetype = "dotted",
+      linetype = "dashed",
       size = 1
       ) 
   }
