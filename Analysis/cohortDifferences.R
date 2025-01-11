@@ -32,7 +32,7 @@ genderDistribution <- ggplot(filtered_combined_data, aes(x = Trainingsversion, f
   facet_wrap(~ Cohort) +
   scale_fill_manual(values = c("M" = "#7FB3D5", "F" = "#F1948A")) +  # Same colors as violin plot
   labs(
-    title = "Gender Distribution by Training Version and Cohort",
+    title = "Gender Proportions by Training Version and Cohort",
     x = "Training Version",
     y = "Proportion",
     fill = "Gender"
