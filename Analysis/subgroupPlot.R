@@ -29,9 +29,10 @@ hrvScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort) {
   
   # Create the plot with discrete colors (similar shades of blue)
   ggplot(data, aes(x = !!sym(col_x), y = !!sym(col_y), color = !!sym(col_group))) +
-    geom_point(alpha = 0.7, size = 2.8) +
-    scale_color_manual(values = c("<20" = "#E69F00", "21-30" = "#56B4E9", "31-40" = "#009E73", 
-                                  "41-50" = "#F0E442", "51+" = "#D22E00")) +  # Shades of blue
+    geom_point(alpha = 0.8, size = 2.8) +
+    #scale_color_manual(values = c("<20" = "#E69F00", "21-30" = "#E68E69", "31-40" = "#E09F99", 
+                                  #"41-50" = "#F99F99", "51+" = "#D22E00")) +  # Shades of blue
+    scale_color_viridis_d(option = "cividis", name = "Age Group") + 
     labs(
       title = paste("High HRV Subgroup", "(", cohort, ")"),
       x = "Cognitive Load",
@@ -80,7 +81,7 @@ hrQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort, gende
   }
 
   plot <- ggplot(data, aes_string(x = col_x, y = col_y, color = col_group)) +
-    geom_point(alpha = 0.7, size = 2.8) +
+    geom_point(alpha = 0.8, size = 2.8) +
     theme_minimal() +
     labs(
       title = plot_title,
