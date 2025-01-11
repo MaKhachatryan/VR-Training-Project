@@ -1,6 +1,6 @@
 ---
 title: "VR-Training Project"
-subtitle: "Grundlegendes Praxisprojekt - ws24/25"
+subtitle: "Grundlegendes Praxisprojekt - WS 24/25"
 author: "Arsine Chinaryan, Anh Hoang Minh Dang, Iris Dizdari, Margarita Khachatryan"
 institute: "Dr. Fabian Scheipl, Dr. Sabine Hoffmann, Daniel Schlichting"
 date: "2024-2-13"
