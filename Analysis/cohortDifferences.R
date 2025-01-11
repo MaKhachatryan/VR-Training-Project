@@ -10,7 +10,7 @@ source("environmentSetUp.R")
 
 ## Boxplot for Age by Training Version (faceted by Cohort)
 ageVariability <- ggplot(combinedDemoWithCohorts, aes(x = Trainingsversion, y = Age, fill = Trainingsversion)) +
-  geom_boxplot(alpha = 0.5) +  
+  geom_boxplot(alpha = 0.8) +  
   facet_wrap(~ Cohort, scales = "free_x") +
   scale_y_continuous(breaks = seq(0, 60, by = 10)) +
   labs(title = "Age Variability by Training Version and Cohort", x = "Training Version", y = "Age") +
@@ -28,7 +28,7 @@ filtered_combined_data <- combinedDataWithCohorts %>%
 
 # Faceted bar chart for gender distribution
 genderDistribution <- ggplot(filtered_combined_data, aes(x = Trainingsversion, fill = Gender)) +
-  geom_bar(position = "fill", color = "black") +  # Use "fill" for proportional bars
+  geom_bar(position = "fill", color = "black", alpha = 0.8) +  # Use "fill" for proportional bars
   facet_wrap(~ Cohort) +
   scale_fill_manual(values = c("M" = "#7FB3D5", "F" = "#F1948A")) +  # Same colors as violin plot
   labs(
@@ -49,7 +49,7 @@ genderDistribution <- ggplot(filtered_combined_data, aes(x = Trainingsversion, f
 
 # Density plot for BMI
 BMI <- ggplot(combinedDataWithCohorts, aes(x = BMI, color = Cohort, fill = Cohort)) +
-  geom_density(alpha = 0.4) +
+  geom_density(alpha = 0.6) +
   labs(title = "BMI Density", x = "BMI", y = "Density") +
   theme_minimal()
 
@@ -95,7 +95,7 @@ AnswerQ2 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q2, fill =
 
 # Boxplot for Cognitive Load (Q1)
 AnswerQ1 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q1, fill = Cohort)) +
-  geom_boxplot(alpha = 0.5, color = "black") +  # Replace violin plot with boxplot
+  geom_boxplot(alpha = 0.8, color = "black") +  # Replace violin plot with boxplot
   labs(title = "Cognitive Load Distribution", x = NULL, y = NULL) +
   scale_y_continuous(limits = c(1, 6), breaks = seq(1, 6, by = 1)) + 
   theme_minimal()
@@ -104,7 +104,7 @@ AnswerQ1 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q1, fill =
 
 # Boxplot for Physical Stress (Q2)
 AnswerQ2 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q2, fill = Cohort)) +
-  geom_boxplot(alpha = 0.5, color = "black") +  # Replace violin plot with boxplot
+  geom_boxplot(alpha = 0.8, color = "black") +  # Replace violin plot with boxplot
   labs(title = "Physical Load Distribution", x = NULL, y= NULL) +
   scale_y_continuous(limits = c(1, 6), breaks = seq(1, 6, by = 1)) + 
   theme_minimal()
@@ -120,7 +120,7 @@ Q1Q2Combined <- (AnswerQ1 | AnswerQ2) +
 
 # Boxplot for RMSSD by Cohort and Training Version
 RMSSD <- ggplot(filtered_combined_data, aes(x = Trainingsversion, y = RMSSD, fill = Trainingsversion)) +
-  geom_boxplot( color = "black") +
+  geom_boxplot(alpha = 0.8, color = "black") +
   facet_wrap(~ Cohort) +
   labs(title = "RMSSD", x = NULL, y = NULL) +  # Remove x and y axis labels
   scale_y_continuous(limits = c(0, 4000), breaks = seq(0, 4000, by = 1000)) +  # Set y-axis scale
