@@ -162,7 +162,7 @@ RMSSD
 **1. Are there differences between the 2 data cohorts, Linne and Dame?**
 
 ::: {style="padding-left:30px"}
-→ Despite demographic and protocol differences, the two cohorts are similar enough in key characteristics to allow meaningful comparison.
+→ Despite demographic and protocol differences, the two cohorts are similar enough to be combined for meaningful analysis
 :::
 
 </br> [2. How are the stress indicators and the physiological measurements related?]{style="color:lightgray;"}\
