@@ -240,7 +240,7 @@ roundCombinedQ2
 
 **3. Does this correlation change over the rounds?**
 
-::: {style="padding-left : 30px"}
+::: {style="padding-left : 30px; font-size : 20px"}
 → The correlation between physiological measurements and stress indicators shows minimal changes across the rounds, correlation values mostly falling within the range of -0.2 to 0.2 and no consistent trend observed.
 :::
 
@@ -279,7 +279,7 @@ hrQ1TrainingMalesLinne
 hrvQ1ByAgeCombined
 ```
 
-[The plot shows that as cognitive load increases, RMSSD decreases, with high HRV defined as RMSSD values above the 0.9 quantile, indicating lower autonomic flexibility under stress.]{style="font-size:18px;"}
+[Heart rate variability (HRV) is the change in the time between heartbeats, showing how the body manages stress. It is measured using RMSSD, a value that reflects the calming activity of the nervous system. The plot shows that as cognitive load increases, RMSSD decreases, meaning HRV drops, with higher HRV (above the 0.9 quantile) linked to better stress management.]{style="font-size:18px;"}
 
 ## Analytical questions
 
@@ -294,17 +294,15 @@ hrvQ1ByAgeCombined
 
 **4. Are there subgroups within the test subjects that stand out from the rest?**
 
-::: {style="padding-left:30px"}
+::: {style="padding-left:30px; font-size : 20px"}
+- Subgroups:
+--   **Dame Males (Perceived Stress \> 4)**: High cognitive load with low heart rate.
+--   **Linne Adaptive Males**: High cognitive load (Q1) with low to moderate heart rate.
+--   **Age 20-30**: High RMSSD at low stress levels in the combined cohort.
 
--   **Dame Males (Percieved Stress \> 4)**: High cognitive load with low heart rate.
-
--   **Linne Adaptive Males**: High cognitive load (Q1) with low to moderate heart rate.
-
--   **Age 20-30**: High RMSSD at low stress levels in the combined cohort.
-
--   **Outlier**: A 51-year-old subject (the only subject \>50 y/o) with lower cognitive load than the majority of the cohort and with the highest RMSSD in the cohort.
-
--   **Outlier**: A Subject in the NonAdaptive training version in Linne cohort with percieved stress > 3 and very low heart rate.
+-Outliers:
+--  In the 50+ age group (with only one participant aged 51), the subject showed very low perceived stress and recorded the highest RMSSD compared to the rest of the cohort.
+--   A Subject in the NonAdaptive training version in Linne cohort with perceived stress > 3 and very low heart rate.
 :::
 
 ## Outline

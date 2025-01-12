@@ -40,7 +40,7 @@ hrvScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort) {
     geom_point(alpha = 1, size = 2.8, shape = 21, stroke = 0.3, color = "black") + 
     scale_fill_manual(values = palette, name = "Age groups") + 
     labs(
-      title = paste("High HRV Subgroup", "(", cohort, ")"),
+      title = paste("High Heart rate variability (HRV) Subgroup", "(",cohort,")"),
       x = "Cognitive Load",
       y = "RMSSD",
       fill = "Age Group"
@@ -87,16 +87,16 @@ hrQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort, gende
   plot_title <- if (cohort == "Linne") {
     ifelse(
       is.null(gender),
-      paste("Relationship between Heart Rate and Cognitive Load by Training Version (", cohort, ")", sep = ""),
-      paste("Relationship between Heart Rate and Cognitive Load by Training Version in", gender_title, "(", cohort, ")")
+      paste("Relationship between Heart Rate and Cognitive Load by Training Version (",cohort,")", sep = ""),
+      paste("Relationship between Heart Rate and Cognitive Load by Training Version in", gender_title, "(",cohort,")")
     )
   } else if (cohort == "Dame") {
-    paste("Relationship between Heart Rate and Cognitive Load by Gender in", "(", cohort, ")")
+    paste("Relationship between Heart Rate and Cognitive Load by Gender in", "(",cohort,")")
   } else {
     ifelse(
       is.null(gender),
-      paste("Relationship between Heart Rate and Cognitive Load by", col_group, "(", cohort, ")", sep = " "),
-      paste("Relationship between Heart Rate and Cognitive Load by", col_group, "in", gender_title, "(", cohort, ")")
+      paste("Relationship between Heart Rate and Cognitive Load by", col_group, "(",cohort,")", sep = " "),
+      paste("Relationship between Heart Rate and Cognitive Load by", col_group, "in", gender_title, "(",cohort,")")
     )
   }
   
