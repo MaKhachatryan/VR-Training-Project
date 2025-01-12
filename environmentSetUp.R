@@ -14,7 +14,8 @@ packages <- c("tidyr",
               "pheatmap",
               "viridis",
               "patchwork",
-              "scales")
+              "scales",
+              "RColorBrewer")
 
 for (pkg in packages) {
   if (!require(pkg, character.only = TRUE)) {
