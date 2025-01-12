@@ -278,22 +278,32 @@ hrQ1TrainingMalesLinne
 hrvQ1ByAgeCombined
 ```
 
-[The plot shows that as cognitive load increases, RMSSD decreases, with high HRV defined as RMSSD values above the 0.9 quantile, indicating lower autonomic flexibility under stress.]{style="font-size:18px;"}
+[Heart rate variability (HRV) is the change in the time between heartbeats, showing how the body manages stress. It is measured using RMSSD, a value that reflects the calming activity of the nervous system. The plot shows that as cognitive load increases, RMSSD decreases, meaning HRV drops, with higher HRV (above the 0.9 quantile) linked to better stress management.]{style="font-size:18px;"}
 
 ## Analytical questions
 
 [1. Are there differences between the 2 data cohorts, Linne and Dame?]{style="color:lightgray;"}\
-</br>
-
 [2. How are the stress indicators and the physiological measurements related?]{style="color:lightgray;"}\
-</br>
-
 [3. Does this correlation change over the rounds?]{style="color:lightgray;"}\
-</br>
 
 **4. Are there subgroups within the test subjects that stand out from the rest?**
 
 ::: {style="padding-left:30px"}
+<<<<<<< HEAD
+- Subgroups:
+</br>
+--   **Dame Males (Perceived Stress \> 4)**: High cognitive load with low heart rate.
+</br>
+--   **Linne Adaptive Males**: High cognitive load (Q1) with low to moderate heart rate.
+</br>
+--   **Age 20-30**: High RMSSD at low stress levels in the combined cohort.
+</br>
+- Outliers:
+</br>
+--      In the 51+ age group (with only one participant aged 51), the subject showed very low perceived stress and recorded the highest HRV compared to the rest of the cohort.
+</br>
+--      A Subject in the NonAdaptive training version in Linne cohort with perceived stress higher than 3 and very low heart rate.
+=======
 -   **Dame Males (Percieved Stress \> 4)**: High cognitive load with low heart rate.
 
 -   **Linne Adaptive Males**: High cognitive load (Q1) with low to moderate heart rate.
@@ -303,6 +313,7 @@ hrvQ1ByAgeCombined
 -   **Outlier**: A 51-year-old subject (the only subject \>50 y/o) with lower cognitive load than the majority of the cohort and with the highest RMSSD in the cohort.
 
 -   **Outlier**: A Subject in the NonAdaptive training version in Linne cohort with percieved stress \> 3 and very low heart rate.
+>>>>>>> 8ae2e572f641b7a7a7b377228a54e3603dd16dc7
 :::
 
 ## Outline
