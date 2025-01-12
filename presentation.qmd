@@ -94,7 +94,7 @@ source("Analysis/cohortDifferences.R")
 
 ### Physiological Measurement Data (PMD)
 
--   **Heart measurements:** Heart rate (HR), SDNN, RMSSD
+-   **Heart measurements:** Heart rate (HR), Heart rate variability (HRV): SDNN, RMSSD
 -   **Skin conductance response (SCR) measurements:** Skin conductance level (SCL), SCR frequency, SCR amplitude, SCR rising time
 -   **Eye tracking measurements:** Blink rate per minute, Saccade amplitude, Saccade velocity
 
@@ -327,7 +327,7 @@ hrvQ1ByAgeCombined
 ## Summary
 
 -   The 2 cohorts' key characteristics are similar enough to be combined for meaningful analysis.
--   The relationships between Stress indicators and PMD is very weak (Correlation range: -0.15 to 0.1)
+-   The relationships between Stress indicators and PMD are very weak (Correlation range: -0.15 to 0.1)
 -   These relationships show minimal change over the rounds with no consistent patterns (Correlation range: -0.2 to 0.2)
 -   Certain subgroups within the cohorts show distinct patterns of behavior when comparing PMD with stress indicators, along with a few prominent outliers.
 
