@@ -13,6 +13,7 @@ ageVariability <- ggplot(combinedDemoWithCohorts, aes(x = Trainingsversion, y = 
   geom_boxplot(alpha = 0.8) +  
   facet_wrap(~ Cohort, scales = "free_x") +
   scale_y_continuous(breaks = seq(0, 60, by = 10)) +
+  scale_fill_manual(values = c("Adaptive" = "#F8C471", "NonAdaptive" = "#82E0AA", "Control"= "#B0B0B0")) +
   labs(title = "Age Variability by Training Version and Cohort", x = "Training Version", y = "Age") +
   theme_minimal() +
   theme(
@@ -48,8 +49,10 @@ genderDistribution <- ggplot(filtered_combined_data, aes(x = Trainingsversion, f
 
 
 # Density plot for BMI
-BMI <- ggplot(combinedDataWithCohorts, aes(x = BMI, color = Cohort, fill = Cohort)) +
-  geom_density(alpha = 0.6) +
+BMI <- ggplot(combinedDataWithCohorts, aes(x = BMI, fill = Cohort, color = Cohort)) +
+  geom_density(alpha = 0.8) +
+  scale_fill_manual(values = c("Dame" = "#A1887F", "Linne" = "#F5B7B1")) +
+  scale_color_manual(values = c("Dame" = "#A1887F", "Linne" = "#F5B7B1")) +
   labs(title = "BMI Density", x = "BMI", y = "Density") +
   theme_minimal()
 
@@ -60,6 +63,7 @@ BMI <- ggplot(combinedDataWithCohorts, aes(x = BMI, color = Cohort, fill = Cohor
 BMI_histogram <- ggplot(filtered_combined_data, aes(x = BMI)) +
   geom_histogram(aes(y = ..density.., fill = Cohort), bins = 50, alpha = 0.8) +
   facet_wrap(~ Cohort, ncol = 1, scales = "free_y") +
+  scale_fill_manual(values = c("Dame" = "#A1887F", "Linne" = "#F5B7B1")) +
   labs(
     title = "BMI Histogram by Cohort with Age Gradient",
     x = "BMI",
@@ -82,6 +86,7 @@ BMI_histogram <- ggplot(filtered_combined_data, aes(x = BMI)) +
 AnswerQ1 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q1, fill = Cohort)) +
   geom_violin(trim = FALSE, alpha = 0.5) +
   stat_summary(fun = mean, geom = "point", shape = 18, size = 3, color = "black") +
+  scale_fill_manual(values = c("Dame" = "#A1887F", "Linne" = "#F5B7B1")) +
   labs(title = "Cognitive Load Distribution", x = "Cohort", y = "Cognitive Load (Q1)") +
   theme_minimal()
 
@@ -89,6 +94,7 @@ AnswerQ1 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q1, fill =
 AnswerQ2 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q2, fill = Cohort)) +
   geom_violin(trim = FALSE, alpha = 0.5) +
   stat_summary(fun = mean, geom = "point", shape = 18, size = 3, color = "black") +
+  scale_fill_manual(values = c("Dame" = "#A1887F", "Linne" = "#F5B7B1")) +
   labs(title = "Physical Load Distribution") +
   theme_minimal()
 
@@ -96,6 +102,7 @@ AnswerQ2 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q2, fill =
 # Boxplot for Cognitive Load (Q1)
 AnswerQ1 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q1, fill = Cohort)) +
   geom_boxplot(alpha = 0.8, color = "black") +  # Replace violin plot with boxplot
+  scale_fill_manual(values = c("Dame" = "#A1887F", "Linne" = "#F5B7B1")) +
   labs(title = "Cognitive Load Distribution", x = NULL, y = NULL) +
   scale_y_continuous(limits = c(1, 6), breaks = seq(1, 6, by = 1)) + 
   theme_minimal()
@@ -106,6 +113,7 @@ AnswerQ1 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q1, fill =
 AnswerQ2 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q2, fill = Cohort)) +
   geom_boxplot(alpha = 0.8, color = "black") +  # Replace violin plot with boxplot
   labs(title = "Physical Load Distribution", x = NULL, y= NULL) +
+  scale_fill_manual(values = c("Dame" = "#A1887F", "Linne" = "#F5B7B1")) +
   scale_y_continuous(limits = c(1, 6), breaks = seq(1, 6, by = 1)) + 
   theme_minimal()
 
