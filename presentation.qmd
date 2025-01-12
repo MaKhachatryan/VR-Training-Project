@@ -1,5 +1,6 @@
 ---
 title: "VR-Training Project"
+subtitle: "Grundlegendes Praxisprojekt - WS 24/25"
 author: "Arsine Chinaryan, Anh Hoang Minh Dang, Iris Dizdari, Margarita Khachatryan"
 institute: "Dr. Fabian Scheipl, Dr. Sabine Hoffmann, Daniel Schlichting"
 date: "2024-2-13"
@@ -54,17 +55,22 @@ source("Analysis/cohortDifferences.R")
 
 **VR-Training**: Adapting Virtual Reality Training Applications by Dynamically Adjusting Visual Aspects
 
-**Motivation:**\
-- Static training doesn't fit everyone: Too easy → boredom, Too hard → anxiety\
-- Adaptive VR training balances difficulty to improve outcomes.
-
 **Scenario:**\
 - Users move and place parcels in a VR warehouse using controllers.\
 - Visual cues: dynamic lighting and color guidance.
 
+![](VR Training.jpg){fig-align=center}
+
+## Overview of the VR Project
+**Motivation:**\
+- Static training doesn't fit everyone: Too easy → boredom, Too hard → anxiety\
+- Adaptive VR training balances difficulty to improve outcomes.
+
 **Adaptive Features:**\
 - Tracks user behavior (head movement) and performance (time, errors).\
 - Adjusts lighting, object colors, etc., after each training round.
+
+![](VR Training-2.jpg){fig-align=center}
 
 ## Description of data sets
 
@@ -105,21 +111,63 @@ source("Analysis/cohortDifferences.R")
 **2. Data Analysis**
 
 -   Cohorts comparison: Similarities and Differences\
-[-   Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
-[-   Relationship over the rounds]{style="color:lightgray;"}\
-[-   Subgroups and Outliers]{style="color:lightgray;"}
+    [- Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
+    [- Relationship over the rounds]{style="color:lightgray;"}\
+    [- Subgroups and Outliers]{style="color:lightgray;"}
 
 [**3. Summary**]{style="color:lightgray;"}
 
 ## Cohorts comparison
-something something
+
+### Age Patterns Based on Training Versions and Cohort
+
+```{r}
+ageVariability
+```
+
+## Cohorts comparison
+
+### Gender Proportions by Training Versions and Cohort
+
+```{r}
+genderDistribution
+```
+
+## Cohorts comparison
+
+### BMI Density Between Dame and Linne Cohorts
+
+```{r}
+BMI
+```
+
+## Cohorts comparison
+
+### Cognitive and Physical Load Across the Cohorts
+
+```{r}
+Q1Q2Combined
+```
+
+## Cohorts comparison
+
+### RMSSD Training Versions in the Cohorts
+
+```{r}
+RMSSD
+```
 
 ## Analytical questions
 
-**1.  Are there differences between the 2 data cohorts, Linne and Dame?**
+**1. Are there differences between the 2 data cohorts, Linne and Dame?**
 
-Answer something something
+::: {style="padding-left:30px"}
+→ Despite demographic and protocol differences, the two cohorts are similar enough to be combined for meaningful analysis
+:::
 
+</br> [2. How are the stress indicators and the physiological measurements related?]{style="color:lightgray;"}\
+</br> [3. Does this correlation change over the rounds?]{style="color:lightgray;"}\
+</br> [4. Are there subgroups within the test subjects that stand out from the rest?]{style="color:lightgray;"}\
 
 ## Outline
 
@@ -127,27 +175,33 @@ Answer something something
 
 **2. Data Analysis**
 
-[-   Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}\
--   Relationship between Stress indicators and Physiological Measurements\
-[-   Relationship over the rounds]{style="color:lightgray;"}\
-[-   Subgroups and Outliers]{style="color:lightgray;"}
+[- Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}\
+- Relationship between Stress indicators and Physiological Measurements\
+[- Relationship over the rounds]{style="color:lightgray;"}\
+[- Subgroups and Outliers]{style="color:lightgray;"}
 
 [**3. Summary**]{style="color:lightgray;"}
 
 ## Relationship between Stress indicators and Physiological Measurements
+
 ```{r}
 correlation
 ```
 
 ## Analytical questions
-**2.  How are the stress indicators and the physiological measurements related?**
 
+[1. Are there differences between the 2 data cohorts, Linne and Dame?]{style="color:lightgray;"}\
+</br> **2. How are the stress indicators and the physiological measurements related?**
+
+::: {style="padding-left : 30px"}
 -   Positive correlation: Blink rate
 -   Negative correlation: Saccade velocity
 
-⇒   Values of the correlation vary from -0.15 to 0.1, indicating very weak relationship
-between the stress indicators and the physiological measurements
+⇒ Values of the correlation vary from -0.15 to 0.1, indicating very weak relationship between the stress indicators and the physiological measurements
+:::
 
+</br> [3. Does this correlation change over the rounds?]{style="color:lightgray;"}\
+</br> [4. Are there subgroups within the test subjects that stand out from the rest?]{style="color:lightgray;"}\
 
 ## Outline
 
@@ -155,20 +209,42 @@ between the stress indicators and the physiological measurements
 
 **2. Data Analysis**
 
-[-   Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}\
-[-   Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
--   Relationship over the rounds\
-[-   Subgroups and Outliers]{style="color:lightgray;"}
+[- Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}\
+[- Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
+- Relationship over the rounds\
+[- Subgroups and Outliers]{style="color:lightgray;"}
 
 [**3. Summary**]{style="color:lightgray;"}
 
 ## Relationship over the rounds
-something something
+
+```{r}
+roundCombinedQ1
+```
+
+## Relationship over the rounds
+
+```{r}
+roundCombinedQ2
+```
 
 ## Analytical questions
-**3.  Does this correlation change over the rounds?**
 
-Answer something something
+[1. Are there differences between the 2 data cohorts, Linne and Dame?]{style="color:lightgray;"}\
+</br>
+
+[2. How are the stress indicators and the physiological measurements related?]{style="color:lightgray;"}\
+</br>
+
+**3. Does this correlation change over the rounds?**
+
+::: {style="padding-left : 30px"}
+→ The correlation between physiological measurements and stress indicators shows minimal changes across the rounds, correlation values mostly falling within the range of -0.2 to 0.2 and no consistent trend observed.
+:::
+
+</br>
+
+[4. Are there subgroups within the test subjects that stand out from the rest?]{style="color:lightgray;"}\
 
 ## Outline
 
@@ -176,34 +252,56 @@ Answer something something
 
 **2. Data Analysis**
 
-[-   Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}\
-[-   Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
-[-   Relationship over the rounds]{style="color:lightgray;"}\
--   Subgroups and Outliers
+[- Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}\
+[- Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
+[- Relationship over the rounds]{style="color:lightgray;"}\
+- Subgroups and Outliers
 
 [**3. Summary**]{style="color:lightgray;"}
 
-## Stress Resiliant Sugroups 
-```{r}
-hrvQ1ByAgeCombined
-```
-<span style="font-size:18px;">The plot shows that as cognitive load increases, RMSSD decreases, with high HRV defined as RMSSD values above the 0.9 quantile, indicating lower autonomic flexibility under stress.</span>
-
 
 ## Stress Resiliant Sugroups
+
 ```{r}
 hrQ1TrainingGenderDame
 ```
 
 ## Stress Resiliant Sugroups
+
 ```{r}
 hrQ1TrainingMalesLinne
 ```
 
+## Stress Resiliant Sugroups
+
+```{r}
+hrvQ1ByAgeCombined
+```
+
+[The plot shows that as cognitive load increases, RMSSD decreases, with high HRV defined as RMSSD values above the 0.9 quantile, indicating lower autonomic flexibility under stress.]{style="font-size:18px;"}
 
 ## Analytical questions
-**4.  Are there subgroups within the test subjects that stand out from the rest?**
 
+[1. Are there differences between the 2 data cohorts, Linne and Dame?]{style="color:lightgray;"}\
+</br>
+
+[2. How are the stress indicators and the physiological measurements related?]{style="color:lightgray;"}\
+</br>
+
+[3. Does this correlation change over the rounds?]{style="color:lightgray;"}\
+</br>
+
+**4. Are there subgroups within the test subjects that stand out from the rest?**
+
+::: {style="padding-left:30px"}
+-   **Linne Adaptive Males:** High cognitive load (Q1) with low to moderate heart rate.
+
+-   **Age 20-30:** High RMSSD at low stress levels in the combined cohort.
+
+-   **Dame Males (Stress > 4):** High cognitive load with low heart rate.
+
+-   **Outlier:** A 51-year-old subject (only one >50) with lower cognitive load but the highest RMSSD in the cohort.
+:::
 
 ## Outline
 
@@ -213,16 +311,23 @@ hrQ1TrainingMalesLinne
 
 **3. Summary**
 
+
 ## Summary
-something something
+-   The 2 cohorts' key characteristics are similar enough to be combined for meaningful analysis.
+-   The relationships between Stress indicators and PMD is very weak (Correlation range: -0.15 to 0.1)
+-   These relationships show minimal change over the rounds with no consistent patterns (Correlation range: -0.2 to 0.2)
+-   Certain subgroups within the cohorts show distinct patterns of behavior when comparing PMD with stress indicators, along with one prominent outlier.
+
 
 
 ## Appendix
+
 ```{r}
 hrQ1TrainingFemalesLinne
 ```
+
 ## Appendix
+
 ```{r}
 hrQ1TrainingLinne
 ```
-
