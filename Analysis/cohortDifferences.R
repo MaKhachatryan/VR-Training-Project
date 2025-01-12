@@ -130,7 +130,7 @@ Q1Q2Combined <- (AnswerQ1 | AnswerQ2) +
 RMSSD <- ggplot(filtered_combined_data, aes(x = Trainingsversion, y = RMSSD, fill = Trainingsversion)) +
   geom_boxplot(alpha = 0.8, color = "black") +
   facet_wrap(~ Cohort) +
-  labs(title = "RMSSD", x = NULL, y = NULL) +  # Remove x and y axis labels
+  labs(title = "RMSSD (measure of HRV)", x = NULL, y = NULL) +  # Remove x and y axis labels
   scale_y_continuous(limits = c(0, 4000), breaks = seq(0, 4000, by = 1000)) +  # Set y-axis scale
   scale_fill_manual(values = c("Adaptive" = "#F8C471", "NonAdaptive" = "#82E0AA")) +  # Match colors
   theme_minimal() +
