@@ -27,24 +27,22 @@ hrvScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort) {
   data <- data %>%
     mutate(high_hrv = ifelse(!!sym(col_y) >= high_hrv_threshold, "High HRV", "Normal HRV"))
   
-  # Extract a color palette from palette.colors()
-  palette <- palette.colors(n = 5, palette = "Dark 2")
+  # Extract a color palette
+  palette <- brewer.pal(n = 5, name = "YlGnBu") # Yellow-Green-Blue palette
   names(palette) <- c("<20", "21-30", "31-40", "41-50", "51+")
   
-  # Create the plot with discrete colors (similar shades of blue)
-  ggplot(data, aes(x = !!sym(col_x), y = !!sym(col_y), color = !!sym(col_group))) +
-    geom_point(alpha = 0.8, size = 2.8) +
-    #scale_color_manual(values = c("<20" = "#E69F00", "21-30" = "#E68E69", "31-40" = "#E09F99", 
-                                  #"41-50" = "#F99F99", "51+" = "#D22E00")) +  # Shades of blue
-    scale_color_manual(values = palette, name = "Age groups") + 
+  # Create the plot 
+  ggplot(data, aes(x = !!sym(col_x), y = !!sym(col_y), fill = !!sym(col_group))) +
+    geom_point(alpha = 1, size = 2.8, shape = 21, stroke = 0.5, color = "black") + 
+    scale_fill_manual(values = palette, name = "Age groups") + 
     labs(
       title = paste("High HRV Subgroup", "(", cohort, ")"),
       x = "Cognitive Load",
       y = "RMSSD",
-      color = "Age Group"
+      fill = "Age Group" 
     ) +
     theme_minimal() +
-    theme(legend.position = "right") 
+    theme(legend.position = "right")
 }
 
 
