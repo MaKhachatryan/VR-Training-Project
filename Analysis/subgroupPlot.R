@@ -27,22 +27,32 @@ hrvScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort) {
   data <- data %>%
     mutate(high_hrv = ifelse(!!sym(col_y) >= high_hrv_threshold, "High HRV", "Normal HRV"))
   
-  # Extract a color palette
+  # Dynamically assign a color palette based on unique levels of col_group
   palette <- brewer.pal(n = 5, name = "YlGnBu") # Yellow-Green-Blue palette
   names(palette) <- c("<20", "21-30", "31-40", "41-50", "51+")
   
-  # Create the plot 
+  # Calculate dynamic axis limits
+  x_limits <- range(data[[col_x]], na.rm = TRUE)
+  y_limits <- range(data[[col_y]], na.rm = TRUE)
+  
+  # Create the plot
   ggplot(data, aes(x = !!sym(col_x), y = !!sym(col_y), fill = !!sym(col_group))) +
-    geom_point(alpha = 1, size = 2.8, shape = 21, stroke = 0.5, color = "black") + 
+    geom_point(alpha = 1, size = 2.8, shape = 21, stroke = 0.3, color = "black") + 
     scale_fill_manual(values = palette, name = "Age groups") + 
     labs(
       title = paste("High HRV Subgroup", "(", cohort, ")"),
       x = "Cognitive Load",
       y = "RMSSD",
-      fill = "Age Group" 
+      fill = "Age Group"
     ) +
+    coord_cartesian(xlim = c(x_limits[1], x_limits[2]), ylim = c(y_limits[1], y_limits[2])) +
     theme_minimal() +
-    theme(legend.position = "right")
+    theme(
+      legend.position = "right",
+      axis.title = element_text(size = 12),
+      axis.text = element_text(size = 10),
+      plot.title = element_text(size = 14, hjust = 0.5)
+    ) 
 }
 
 
@@ -91,22 +101,26 @@ hrQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort, gende
   }
   
   # Plot
-  plot <- ggplot(data, aes_string(x = col_x, y = col_y, color = col_group)) +
-    geom_point(alpha = 0.8, size = 2.9) +
+  plot <- ggplot(data, aes_string(x = col_x, y = col_y, fill = col_group)) +
+    geom_point(alpha = 1, size = 2.8, shape = 21, stroke = 0.3, color = "black") +
     theme_minimal() +
+    theme(
+      legend.position = "right",
+      axis.title = element_text(size = 12),
+      axis.text = element_text(size = 10),
+      plot.title = element_text(size = 14, hjust = 0.5)
+    ) +
     labs(
       title = plot_title,
       x = "Cognitive Load",
       y = "Heart Rate (Bpm)",
-      color = col_group
+      fill = col_group
     ) +
     coord_cartesian(xlim = c(1.5, 4.7), ylim = c(50, 105)) 
   
-  # Apply custom colors if defined
+  # Apply custom colors to fill
   if (!is.null(custom_colors)) {
-    plot <- plot + scale_color_manual(values = custom_colors)
-  } else {
-    plot <- plot + scale_color_manual(values = custom_colors)
+    plot <- plot + scale_fill_manual(values = custom_colors)
   }
   
   # Add a purple trend line if only males are selected
@@ -129,10 +143,10 @@ hrQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort, gende
   if (cohort == "Dame") {
     plot <- plot +
       geom_vline(
-      xintercept = 4,
-      color = "black",
-      linetype = "dashed",
-      size = 1
+        xintercept = 4,
+        color = "black",
+        linetype = "dashed",
+        size = 1
       ) 
   }
   
