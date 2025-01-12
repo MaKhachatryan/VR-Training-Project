@@ -59,9 +59,10 @@ source("Analysis/cohortDifferences.R")
 - Users move and place parcels in a VR warehouse using controllers.\
 - Visual cues: dynamic lighting and color guidance.
 
-![](VR Training.jpg){fig-align=center}
+![](VR%20Training.jpg){fig-align="center"}
 
 ## Overview of the VR Project
+
 **Motivation:**\
 - Static training doesn't fit everyone: Too easy → boredom, Too hard → anxiety\
 - Adaptive VR training balances difficulty to improve outcomes.
@@ -70,7 +71,7 @@ source("Analysis/cohortDifferences.R")
 - Tracks user behavior (head movement) and performance (time, errors).\
 - Adjusts lighting, object colors, etc., after each training round.
 
-![](VR Training-2.jpg){fig-align=center}
+![](VR%20Training-2.jpg){fig-align="center"}
 
 ## Description of data sets
 
@@ -191,7 +192,8 @@ correlation
 ## Analytical questions
 
 [1. Are there differences between the 2 data cohorts, Linne and Dame?]{style="color:lightgray;"}\
-</br> **2. How are the stress indicators and the physiological measurements related?**
+</br> 
+**2. How are the stress indicators and the physiological measurements related?**
 
 ::: {style="padding-left : 30px"}
 -   Positive correlation: Blink rate
@@ -259,7 +261,6 @@ roundCombinedQ2
 
 [**3. Summary**]{style="color:lightgray;"}
 
-
 ## Stress Resiliant Sugroups
 
 ```{r}
@@ -294,13 +295,16 @@ hrvQ1ByAgeCombined
 **4. Are there subgroups within the test subjects that stand out from the rest?**
 
 ::: {style="padding-left:30px"}
--   **Linne Adaptive Males:** High cognitive load (Q1) with low to moderate heart rate.
 
--   **Age 20-30:** High RMSSD at low stress levels in the combined cohort.
+-   **Dame Males (Percieved Stress \> 4)**: High cognitive load with low heart rate.
 
--   **Dame Males (Stress > 4):** High cognitive load with low heart rate.
+-   **Linne Adaptive Males**: High cognitive load (Q1) with low to moderate heart rate.
 
--   **Outlier:** A 51-year-old subject (only one >50) with lower cognitive load but the highest RMSSD in the cohort.
+-   **Age 20-30**: High RMSSD at low stress levels in the combined cohort.
+
+-   **Outlier**: A 51-year-old subject (the only subject \>50 y/o) with lower cognitive load than the majority of the cohort and with the highest RMSSD in the cohort.
+
+-   **Outlier**: A Subject in the NonAdaptive training version in Linne cohort with percieved stress > 3 and very low heart rate.
 :::
 
 ## Outline
@@ -311,14 +315,12 @@ hrvQ1ByAgeCombined
 
 **3. Summary**
 
-
 ## Summary
+
 -   The 2 cohorts' key characteristics are similar enough to be combined for meaningful analysis.
 -   The relationships between Stress indicators and PMD is very weak (Correlation range: -0.15 to 0.1)
 -   These relationships show minimal change over the rounds with no consistent patterns (Correlation range: -0.2 to 0.2)
--   Certain subgroups within the cohorts show distinct patterns of behavior when comparing PMD with stress indicators, along with one prominent outlier.
-
-
+-   Certain subgroups within the cohorts show distinct patterns of behavior when comparing PMD with stress indicators, along with a few prominent outliers.
 
 ## Appendix
 
