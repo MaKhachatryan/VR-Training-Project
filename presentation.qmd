@@ -289,7 +289,6 @@ hrvQ1ByAgeCombined
 **4. Are there subgroups within the test subjects that stand out from the rest?**
 
 ::: {style="padding-left:30px"}
-
 - Subgroups:
 </br>
 --   **Dame Males (Perceived Stress \> 4)**: High cognitive load with low heart rate.
@@ -303,7 +302,6 @@ hrvQ1ByAgeCombined
 --      The only participant in the 51+ age group showed very low perceived stress and recorded the highest HRV compared to the rest of the cohort.
 </br>
 --      A Subject in the NonAdaptive training version in Linne cohort with perceived stress higher than 3 and very low heart rate.
-
 :::
 
 ## Outline
