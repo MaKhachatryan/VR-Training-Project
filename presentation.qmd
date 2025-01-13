@@ -299,9 +299,9 @@ hrvQ1ByAgeCombined
 </br>
 - Outliers:
 </br>
---      The only participant in the 51+ age group showed very low perceived stress and recorded the highest HRV compared to the rest of the cohort.
+--      The only participant in the 51+ age group showed very low cognitive load but had the highest HRV compared to the rest of the cohort.
 </br>
---      A Subject in the NonAdaptive training version in Linne cohort with perceived stress higher than 3 and very low heart rate.
+--      A Subject (NonAdaptive, Linne) with cognitive load higher than 3 and very low heart rate.
 :::
 
 ## Outline
