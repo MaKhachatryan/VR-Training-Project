@@ -59,8 +59,8 @@ correlation <- plotCorrelation(correlationTableCombined, 0.1)
 
 
 # ## Export plots into Result folder
-if (!file.exists("Result/Q1/correlation.png")) {
-  ggsave("Result/Q1/correlation.png", correlation)
+if (!file.exists("Result/Q2/correlation.png")) {
+  ggsave("Result/Q2/correlation.png", correlation)
 }
 
 
