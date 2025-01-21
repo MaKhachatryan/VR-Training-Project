@@ -103,7 +103,7 @@ roundCombinedQ1
 roundCombinedQ2
 
 # Export the plots
-if (!all(file.exists(c("Result/Q2/roundCombinedQ1.png", "Result/Q2/roundCombinedQ2.png")))) {
-  ggsave("Result/Q2/roundCombinedQ1.png", roundCombinedQ1, width = 12, height = 7, dpi = 300)
-  ggsave("Result/Q2/roundCombinedQ2.png", roundCombinedQ2, width = 12, height = 7, dpi = 300)
+if (!all(file.exists(c("Result/Q3/roundCombinedQ1.png", "Result/Q3/roundCombinedQ2.png")))) {
+  ggsave("Result/Q3/roundCombinedQ1.png", roundCombinedQ1, width = 12, height = 7, dpi = 300)
+  ggsave("Result/Q3/roundCombinedQ2.png", roundCombinedQ2, width = 12, height = 7, dpi = 300)
 }

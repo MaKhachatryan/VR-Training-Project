@@ -162,15 +162,15 @@ RMSSD_SDNN_Combined <- (RMSSD | SDNN) +
 
 
 ## Export plots into Result folder
-if (!all(file.exists(c("Result/Q4/ageVariability.png", "Result/Q4/genderDistribution.png",
-                       "Result/Q4/BMI.png","Result/Q4/BMI_histogram.png", "Result/Q4/Q1Q2Combined.png",
-                       "Result/Q4/RMSSD.png", "Result/Q4/SDNN.png")))) {
-  ggsave("Result/Q4/ageVariability.png", ageVariability)
-  ggsave("Result/Q4/genderDistribution.png", genderDistribution)
-  ggsave("Result/Q4/BMI.png", BMI)
-  ggsave("Result/Q4/BMI_histogram.png", BMI_histogram)
-  ggsave("Result/Q4/Q1Q2Combined.png", Q1Q2Combined)
-  ggsave("Result/Q4/RMSSD.png", RMSSD)
-  ggsave("Result/Q4/SDNN.png", SDNN)
+if (!all(file.exists(c("Result/Q1/ageVariability.png", "Result/Q1/genderDistribution.png",
+                       "Result/Q1/BMI.png","Result/Q1/BMI_histogram.png", "Result/Q1/Q1Q2Combined.png",
+                       "Result/Q1/RMSSD.png", "Result/Q1/SDNN.png")))) {
+  ggsave("Result/Q1/ageVariability.png", ageVariability)
+  ggsave("Result/Q1/genderDistribution.png", genderDistribution)
+  ggsave("Result/Q1/BMI.png", BMI)
+  ggsave("Result/Q1/BMI_histogram.png", BMI_histogram)
+  ggsave("Result/Q1/Q1Q2Combined.png", Q1Q2Combined)
+  ggsave("Result/Q1/RMSSD.png", RMSSD)
+  ggsave("Result/Q1/SDNN.png", SDNN)
 }
 

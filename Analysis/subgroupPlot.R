@@ -165,11 +165,11 @@ hrQ1TrainingFemalesLinne <- hrQ1ScatterPlotFunction(LinnePMDAndDemographicsAndAn
 hrQ1TrainingLinne <- hrQ1ScatterPlotFunction(LinnePMDAndDemographicsAndAnswers, "Answer_Q1", "mean_HR", "Trainingsversion", "Linne", NULL)
 
 ## Export plots into Result folder
-if (!all(file.exists(c("Result/Q3/hrQ1TrainingGenderDame.jpeg", "Result/Q3/hrQ1TrainingMalesLinne.jpeg", "Result/Q3/hrQ1TrainingFemalesLinne.jpeg", 
-                       "Result/Q3/hrQ1TrainingLinne.jpeg", "Result/Q3/hrvQ1ByAgeCombined.jpeg")))) {
-  ggsave("Result/Q3/hrQ1TrainingGenderDame.jpeg", hrQ1TrainingGenderDame)
-  ggsave("Result/Q3/hrQ1TrainingMalesLinne.jpeg", hrQ1TrainingMalesLinne)
-  ggsave("Result/Q3/hrQ1TrainingFemalesLinne.jpeg", hrQ1TrainingFemalesLinne)
-  ggsave("Result/Q3/hrQ1TrainingLinne.jpeg", hrQ1TrainingLinne)
-  ggsave("Result/Q3/hrvQ1ByAgeCombined.jpeg", hrvQ1ByAgeCombined)
+if (!all(file.exists(c("Result/Q4/hrQ1TrainingGenderDame.jpeg", "Result/Q4/hrQ1TrainingMalesLinne.jpeg", "Result/Q4/hrQ1TrainingFemalesLinne.jpeg", 
+                       "Result/Q4/hrQ1TrainingLinne.jpeg", "Result/Q4/hrvQ1ByAgeCombined.jpeg")))) {
+  ggsave("Result/Q4/hrQ1TrainingGenderDame.jpeg", hrQ1TrainingGenderDame)
+  ggsave("Result/Q4/hrQ1TrainingMalesLinne.jpeg", hrQ1TrainingMalesLinne)
+  ggsave("Result/Q4/hrQ1TrainingFemalesLinne.jpeg", hrQ1TrainingFemalesLinne)
+  ggsave("Result/Q4/hrQ1TrainingLinne.jpeg", hrQ1TrainingLinne)
+  ggsave("Result/Q4/hrvQ1ByAgeCombined.jpeg", hrvQ1ByAgeCombined)
 }
