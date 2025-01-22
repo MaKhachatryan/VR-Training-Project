@@ -1,14 +1,12 @@
-#Maga
-#plots for cohort differences
-#plots are official, but anything that has to do with sourcing still needs
-#to be changed a bit, i had a problem with sourceing the environment set up
 source("environmentSetUp.R")
-
-##---------plots for question 4-----------##
-##---------cohort comparison--------------##
+# This script sets up the environment for the analysis
 
 
-## Boxplot for Age by Training Version (faceted by Cohort)
+## --------- Plots for Question 4: Cohort Comparison --------- ##
+# This section focuses on visualizing differences across cohorts.
+
+# Boxplot for Age by Training Version, faceted by Cohort
+# Shows how age varies across training versions within each cohort.
 ageVariability <- ggplot(combinedDemoWithCohorts, aes(x = Trainingsversion, y = Age, fill = Trainingsversion)) +
   geom_boxplot(alpha = 0.8) +  
   facet_wrap(~ Cohort, scales = "free_x") +
@@ -17,21 +15,21 @@ ageVariability <- ggplot(combinedDemoWithCohorts, aes(x = Trainingsversion, y = 
   labs(title = "Age Variability by Training Version and Cohort", x = "Training Version", y = "Age") +
   theme_minimal() +
   theme(
-    strip.text = element_text(size = 14, face = "bold")  # Adjust size and style of facet labels
+    strip.text = element_text(size = 14, face = "bold") 
   )
 
 
-
-
-## Filter data to exclude "Control" group
+# Filter data to exclude the "Control" group for the follow-up  plots
 filtered_combined_data <- combinedDataWithCohorts %>%
   filter(!(Trainingsversion == "Control" & Cohort == "Dame"))
 
+
 # Faceted bar chart for gender distribution
+# Proportional bar chart to show gender distribution within training versions for each cohort.
 genderDistribution <- ggplot(filtered_combined_data, aes(x = Trainingsversion, fill = Gender)) +
-  geom_bar(position = "fill", color = "black", alpha = 0.8) +  # Use "fill" for proportional bars
+  geom_bar(position = "fill", color = "black", alpha = 0.8) +  
   facet_wrap(~ Cohort) +
-  scale_fill_manual(values = c("M" = "#7FB3D5", "F" = "#F1948A")) +  # Same colors as violin plot
+  scale_fill_manual(values = c("M" = "#7FB3D5", "F" = "#F1948A")) +  
   labs(
     title = "Gender Proportions by Training Version and Cohort",
     x = "Training Version",
@@ -49,7 +47,8 @@ genderDistribution <- ggplot(filtered_combined_data, aes(x = Trainingsversion, f
 
 
 # Density plot for BMI
-BMI <- ggplot(combinedDataWithCohorts, aes(x = BMI, fill = Cohort, color = Cohort)) +
+# Displays the distribution of BMI within each cohort.
+BMI <- ggplot(filtered_combined_data, aes(x = BMI, fill = Cohort, color = Cohort)) +
   geom_density(alpha = 0.8) +
   scale_fill_manual(values = c("Dame" = "#A1887F", "Linne" = "#F5B7B1")) +
   scale_color_manual(values = c("Dame" = "#A1887F", "Linne" = "#F5B7B1")) +
@@ -59,7 +58,8 @@ BMI <- ggplot(combinedDataWithCohorts, aes(x = BMI, fill = Cohort, color = Cohor
 
 
 
-## Histogram for BMI
+# Histogram for BMI by Cohort
+# Provides a detailed view of BMI distribution within cohorts, faceted by cohort.
 BMI_histogram <- ggplot(filtered_combined_data, aes(x = BMI)) +
   geom_histogram(aes(y = ..density.., fill = Cohort), bins = 50, alpha = 0.8) +
   facet_wrap(~ Cohort, ncol = 1, scales = "free_y") +
@@ -78,28 +78,12 @@ BMI_histogram <- ggplot(filtered_combined_data, aes(x = BMI)) +
 
 
 
+# Visualizations for Cognitive Load (Answer Q1) and Physical Load (Answer Q2).
 
 
-#-----plots for Answer Q1 and Answer Q2----#
-
-# Violin plot for Cognitive Load (Q1)
-AnswerQ1 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q1, fill = Cohort)) +
-  geom_violin(trim = FALSE, alpha = 0.5) +
-  stat_summary(fun = mean, geom = "point", shape = 18, size = 3, color = "black") +
-  scale_fill_manual(values = c("Dame" = "#A1887F", "Linne" = "#F5B7B1")) +
-  labs(title = "Cognitive Load Distribution", x = "Cohort", y = "Cognitive Load (Q1)") +
-  theme_minimal()
-
-# Violin plot for Physical Stress (Q2)
-AnswerQ2 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q2, fill = Cohort)) +
-  geom_violin(trim = FALSE, alpha = 0.5) +
-  stat_summary(fun = mean, geom = "point", shape = 18, size = 3, color = "black") +
-  scale_fill_manual(values = c("Dame" = "#A1887F", "Linne" = "#F5B7B1")) +
-  labs(title = "Physical Load Distribution") +
-  theme_minimal()
-
-
-# Boxplot for Cognitive Load (Q1)
+#boxplots that were included in the presentation
+# Boxplot for Cognitive Load 
+# Visualizes the distribution of cognitive load scores across cohorts
 AnswerQ1 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q1, fill = Cohort)) +
   geom_boxplot(alpha = 0.8, color = "black") +  # Replace violin plot with boxplot
   scale_fill_manual(values = c("Dame" = "#A1887F", "Linne" = "#F5B7B1")) +
@@ -109,7 +93,8 @@ AnswerQ1 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q1, fill =
 
 
 
-# Boxplot for Physical Stress (Q2)
+# Boxplot for Physical Load 
+# Visualizes the distribution of Physical load scores across cohorts
 AnswerQ2 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q2, fill = Cohort)) +
   geom_boxplot(alpha = 0.8, color = "black") +  # Replace violin plot with boxplot
   labs(title = "Physical Load Distribution", x = NULL, y= NULL) +
@@ -118,15 +103,17 @@ AnswerQ2 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q2, fill =
   theme_minimal()
 
 
-
+# Combined plot for Q1 and Q2
+# Merges the boxplots for Q1 and Q2 side-by-side, sharing a common legend on the right side
 Q1Q2Combined <- (AnswerQ1 | AnswerQ2) + 
-  plot_layout(guides = "collect") +  # Combine legends
+  plot_layout(guides = "collect") + 
   theme(legend.position = "right")
 
 
 
 
 # Boxplot for RMSSD by Cohort and Training Version
+# RMSSD measures heart rate variability. Here, the comparison is done by cohort and training version.
 RMSSD <- ggplot(filtered_combined_data, aes(x = Trainingsversion, y = RMSSD, fill = Trainingsversion)) +
   geom_boxplot(alpha = 0.8, color = "black") +
   facet_wrap(~ Cohort) +
@@ -139,7 +126,9 @@ RMSSD <- ggplot(filtered_combined_data, aes(x = Trainingsversion, y = RMSSD, fil
     legend.position = "none"  # Remove legend for this plot (will combine later)
   )
 
-# Boxplot for SDNN by Cohort and Training Version
+
+# Boxplot for SDNN by Cohort and Training Version (not included in the presentation)
+# SDNN measures heart rate variability. Here, the comparison is done by cohort and training version.
 SDNN <- ggplot(filtered_combined_data, aes(x = Trainingsversion, y = SDNN, fill = Trainingsversion)) +
   geom_boxplot(alpha = 0.5, color = "black") +
   facet_wrap(~ Cohort) +
@@ -150,13 +139,6 @@ SDNN <- ggplot(filtered_combined_data, aes(x = Trainingsversion, y = SDNN, fill 
   theme(
     strip.text = element_text(size = 12, face = "plain"),  # Adjust facet labels
     legend.position = "right"  # Position legend
-  )
-
-# Combine the two plots side by side with a single legend
-RMSSD_SDNN_Combined <- (RMSSD | SDNN) +
-  plot_layout(guides = "collect") +  # Combine legends
-  theme(
-    legend.position = "right"  # Position legend on the right
   )
 
 
