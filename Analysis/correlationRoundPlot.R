@@ -1,7 +1,7 @@
 source("environmentSetUp.R")
-# This function produces the plot to visualize how the relationship between 
+# Here we produce the plots to visualize how the relationship between 
 # the stress indicators (Answer Q1: cognitive load, Answer Q2: physical load)
-# and the physiological measurements (PMD)) of 2 cohorts (Dame and Linne) changes
+# and the physiological measurements (PMD) of the combined data changes
 # in every round. There are 9 rounds in total.
 
 # Define Measurements and Colors
@@ -14,7 +14,14 @@ skinColor <- "#fc8d62"
 blinkSaccadeMeasurements <- c("Mean Blink rate last minute", "Mean Saccade amplitude", "Mean Saccade velocity")
 blinkSaccadeColor <- "#7570b3"
 
-# Function to preprocess data
+# Function to preprocess the data
+# Input:
+# - data: A data frame containing correlation values for different rounds.
+# - question: The specific metric or part of the data to focus on (e.g., a variable name).
+# - measurements: A character vector specifying the measurements to retain (e.g., "Heart Rate").
+# - group: A label representing the group (e.g., "Heart", "Skin").
+# Output:
+# - A preprocessed data frame with selected and transformed data, suitable for plotting.
 prepareData <- function(data, question, measurements, group) {
   data %>%
     mutate(Round_number = as.numeric(Round_number)) %>%
@@ -32,10 +39,17 @@ prepareData <- function(data, question, measurements, group) {
     mutate(PMD = str_replace_all(PMD, "corr", "")) %>%
     mutate(PMD = str_trim(PMD)) %>%
     filter(PMD %in% measurements) %>%
-    mutate(Group = group)  # Add group for legend
+    mutate(Group = group)
 }
 
 # Function to create a single plot
+# Input:
+# - data: A data frame containing preprocessed data (columns: Round_number, correlation, Group, PMD).
+# - color: A named vector of colors for different groups.
+# - x_label: Label for the x-axis (optional).
+# - y_label: Label for the y-axis (optional).
+# Output:
+# - A ggplot object representing a line plot for the given data.
 createPlot <- function(data, color, x_label = NULL, y_label = NULL) {
   ggplot(data, aes(x = Round_number, y = correlation, color = Group)) +
     geom_line(size = 1, alpha = 0.8) +
@@ -44,14 +58,14 @@ createPlot <- function(data, color, x_label = NULL, y_label = NULL) {
     scale_x_continuous(breaks = seq(min(data$Round_number), max(data$Round_number), 1)) + 
     scale_y_continuous(limits = c(-0.4, 0.4)) +
     scale_color_manual(
-      name = NULL,  # Remove the legend title
+      name = NULL,
       values = c("Heart" = heartColor, "Skin" = skinColor, "Blink/Saccade" = blinkSaccadeColor)
     ) +
     facet_wrap(~ PMD, scales = "free_y", nrow = 1) +
     theme_minimal() +
     labs(x = x_label, y = y_label) +
     theme(
-      legend.position = "right",  # Position legend to the right
+      legend.position = "right",
       axis.text.x = element_text(size = 8),
       axis.text.y = element_text(size = 10),
       axis.title.x = if (!is.null(x_label)) element_text(size = 12, face = "bold") else element_blank(),
@@ -60,7 +74,13 @@ createPlot <- function(data, color, x_label = NULL, y_label = NULL) {
     )
 }
 
-# Function to generate combined plot with a single legend
+# Function to generate a combined plot with a single legend
+# Input:
+# - question: The focus of the analysis (e.g., the variable name for filtering the data).
+# - title: The title of the combined plot.
+# - subtitle: The subtitle providing additional context.
+# Output:
+# - A combined plot showing data for Heart, Skin, and Blink/Saccade groups, with a shared legend.
 generateCombinedPlot <- function(question, title, subtitle) {
   heartData <- prepareData(correlationTableWithRoundsCombined, question, heartMeasurements, "Heart")
   skinData <- prepareData(correlationTableWithRoundsCombined, question, skinMeasurements, "Skin")
@@ -80,7 +100,7 @@ generateCombinedPlot <- function(question, title, subtitle) {
         plot.subtitle = element_text(size = 14, face = "plain", hjust = 0)
       )
     ) +
-    plot_layout(guides = "collect") & theme(legend.position = "right")  # Ensure shared legend to the right
+    plot_layout(guides = "collect") & theme(legend.position = "right")
   
   return(combinedPlot)
 }
