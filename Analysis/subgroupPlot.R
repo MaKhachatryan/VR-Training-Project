@@ -40,11 +40,11 @@ hrvScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort) {
     geom_point(alpha = 1, size = 2.8, shape = 21, stroke = 0.3, color = "black") + 
     scale_fill_manual(values = palette, name = "Age groups") + 
     labs(
-      title = paste0("High Heart rate variability (HRV) Subgroup ", "(",cohort,")"),
-      x = "Cognitive Load",
+      title = paste0("High Heart rate variability (HRV) Subgroup ", "(", cohort, ")"),
+      x = if (col_x == "Answer_Q1") "Cognitive Load" else "Physical Load",
       y = "RMSSD",
       fill = "Age Group"
-    ) +
+    )+
     coord_cartesian(xlim = c(x_limits[1], x_limits[2]), ylim = c(y_limits[1], y_limits[2])) +
     theme_minimal() +
     theme(
@@ -156,7 +156,7 @@ hrQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort, gende
 
 # Call Plots for HRV and percievd Stress throughout Agegroups
 hrvQ1ByAgeCombined <- hrvScatterPlotFunction(combinedPMDAndDemographicsAndAnswers, "Answer_Q1", "RMSSD", "Age", "Combined cohorts")
-
+hrvQ2ByAgeCombined <- hrvScatterPlotFunction(combinedPMDAndDemographicsAndAnswers, "Answer_Q2", "RMSSD", "Age", "Combined cohorts")
 # Call Plots for HR and percievd Stress in Males for Training versions
 hrQ1TrainingGenderDame <- hrQ1ScatterPlotFunction(DamePMDAndDemographicsAndAnswers, "Answer_Q1", "mean_HR", "Gender", "Dame", NULL)
 
@@ -166,10 +166,11 @@ hrQ1TrainingLinne <- hrQ1ScatterPlotFunction(LinnePMDAndDemographicsAndAnswers, 
 
 ## Export plots into Result folder
 if (!all(file.exists(c("Result/Q4/hrQ1TrainingGenderDame.jpeg", "Result/Q4/hrQ1TrainingMalesLinne.jpeg", "Result/Q4/hrQ1TrainingFemalesLinne.jpeg", 
-                       "Result/Q4/hrQ1TrainingLinne.jpeg", "Result/Q4/hrvQ1ByAgeCombined.jpeg")))) {
+                       "Result/Q4/hrQ1TrainingLinne.jpeg", "Result/Q4/hrvQ1ByAgeCombined.jpeg", "Result/Q4/hrvQ2ByAgeCombined.jpeg")))) {
   ggsave("Result/Q4/hrQ1TrainingGenderDame.jpeg", hrQ1TrainingGenderDame)
   ggsave("Result/Q4/hrQ1TrainingMalesLinne.jpeg", hrQ1TrainingMalesLinne)
   ggsave("Result/Q4/hrQ1TrainingFemalesLinne.jpeg", hrQ1TrainingFemalesLinne)
   ggsave("Result/Q4/hrQ1TrainingLinne.jpeg", hrQ1TrainingLinne)
   ggsave("Result/Q4/hrvQ1ByAgeCombined.jpeg", hrvQ1ByAgeCombined)
+  ggsave("Result/Q4/hrvQ2ByAgeCombined.jpeg", hrvQ2ByAgeCombined)
 }

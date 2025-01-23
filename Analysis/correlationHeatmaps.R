@@ -7,41 +7,7 @@ source("environmentSetUp.R")
 #output: dataframe, heatmap
 
 
-
-# Add the BMI column
-combinedPMDAndDemographicsAndAnswers <- calculateBMI(combinedPMDAndDemographicsAndAnswers)
-DamePMDAndDemographicsAndAnswers <- calculateBMI(DamePMDAndDemographicsAndAnswers)
-LinnePMDAndDemographicsAndAnswers <- calculateBMI(LinnePMDAndDemographicsAndAnswers)
-
-# Split by training
-grouped_data <- split(combinedPMDAndDemographicsAndAnswers,
-                      combinedPMDAndDemographicsAndAnswers$Trainingsversion)
-
-# Function to select numeric columns from a data frame
-select_numeric_columns <- function(df) {
-  df %>% select(where(is.numeric))
-}
-
-# Apply the function to each data frame in the list
-numeric_data_list <- lapply(grouped_data, select_numeric_columns)
-
-# Compute the correlation matrix for each subset
-cor_matrices <- lapply(numeric_data_list, function(df) {
-  cor(df, use = "complete.obs")
-})
-
-# Create heatmaps for each correlation matrix
-for (name in names(cor_matrices)) {
-  pheatmap(
-    cor_matrices[[name]],
-    color = colorRampPalette(c("blue", "white", "red"))(50),
-    display_numbers = TRUE,
-    main = paste("Correlation Matrix for Training Version:", name)
-  )
-}
-
-
-### Checking agegroups for both training versions
+### Heatmaps for Agegroups using RMSSD, Answer_Q1, Answer_Q2
  
 # Clean correlation matrix
 clean_correlation_matrix <- function(cor_matrix) {
@@ -50,23 +16,31 @@ clean_correlation_matrix <- function(cor_matrix) {
 }
 
 # Split age subgroups into a list of data frames
-ageSubgroups <- DamePMDAndDemographicsAndAnswers %>%
-  mutate(AgeGroup = cut(Age, breaks = c(-Inf, 20, 30, 40, Inf), 
-                        labels = c("15-30", "31-45", "45+"))) %>%
+ageSubgroups <- combinedPMDAndDemographicsAndAnswers %>%
+  mutate(AgeGroup = cut(Age, breaks = c(-Inf, 20, 30, 40, 50, Inf), 
+                        labels = c("<20", "21-30", "31-40", "41-50", "51+"), include.lowest = TRUE, right=FALSE)) %>%
+  filter(!is.na(AgeGroup)) %>%
   group_by(AgeGroup) %>%
   group_split()
 
 # Compute correlation matrices
-cor_matrices <- lapply(grouped_data, function(group) {
-  numeric_data <- select(group, where(is.numeric))
+cor_matrices <- lapply(ageSubgroups, function(group) {
+  # Select only the desired variables
+  selected_data <- select(group, RMSSD, Answer_Q1, Answer_Q2)
+  
+  # Ensure only numeric columns are used
+  numeric_data <- select(selected_data, where(is.numeric))
+  
   if (nrow(numeric_data) > 1) {
     cor_matrix <- round(cor(scale(numeric_data)), 2)
-    clean_correlation_matrix(cor_matrix)
+    cor_matrix <- clean_correlation_matrix(cor_matrix)
+    rownames(cor_matrix) <- colnames(cor_matrix) <- colnames(numeric_data)
+    cor_matrix
   } else if (nrow(numeric_data) == 1) {
     matrix(1, 
            nrow = ncol(numeric_data), 
            ncol = ncol(numeric_data), 
-           dimnames = list(names(numeric_data), names(numeric_data)))
+           dimnames = list(colnames(numeric_data), colnames(numeric_data)))
   } else {
     NULL
   }
@@ -75,60 +49,60 @@ cor_matrices <- lapply(grouped_data, function(group) {
 # Create heatmaps
 for (i in seq_along(cor_matrices)) {
   cor_matrix <- cor_matrices[[i]]
-  group_name <- levels(DamePMDAndDemographicsAndAnswers$AgeGroup)[i]
+  group_name <- levels(factor(sapply(ageSubgroups, 
+                          function(x) unique(x$AgeGroup))))[i]
   if (!is.null(cor_matrix)) {
     pheatmap(cor_matrix, 
-             color = colorRampPalette(c("blue", "white", "red"))(50),
+             color = colorRampPalette(c("powderblue", "white", "pink"))(50),
              display_numbers = TRUE,
-             main = paste("Heatmap for Group:", group_name))
+             main = paste("Heatmap for Age Group:", group_name))
   }
 }
 
 
 
-### Dividing the training version groups into BMI subgroups
+### Heatmaps for Training versions or Gender, using mean_HR, Answer_Q1, Answer_Q2
 
-# Filter for BMI ranges
-filtered_data <- DamePMDAndDemographicsAndAnswers %>%
-  filter(Age <= 26 ) %>%
-  select(mean_HR, SDNN, RMSSD, Answer_Q1, Answer_Q2)
+# Split by training
+grouped_data_by_training <- split(LinnePMDAndDemographicsAndAnswers,
+                      LinnePMDAndDemographicsAndAnswers$Trainingsversion)
+# Split by gender
+grouped_data_by_gender <- split(DamePMDAndDemographicsAndAnswers,
+                      DamePMDAndDemographicsAndAnswers$Gender)
 
-
-# Check if there is enough data for correlation
-if (nrow(filtered_data) > 1) {
-  # Compute the correlation matrix
-  cor_matrix <- round(cor(filtered_data, use = "complete.obs"), 2)
+# For training versions
+for (training_version in names(grouped_data_by_training)) {
+  # Filter for heart rate and perceived stress variables
+  filtered_data <- grouped_data_by_training[[training_version]] %>%
+    select(mean_HR, Answer_Q1, Answer_Q2)
   
-  # Create a heatmap of the correlation matrix
-  pheatmap(cor_matrix,
-           color = colorRampPalette(c("blue", "white", "red"))(50),
-           display_numbers = TRUE,
-           main = "Correlation Matrix")
-} else {
-  message("Not enough data to calculate correlations.")
+  if (nrow(filtered_data) > 1) {
+    cor_matrix <- round(cor(filtered_data, use = "complete.obs"), 2)
+    
+    pheatmap(cor_matrix,
+             color = colorRampPalette(c("powderblue", "white", "pink"))(50),
+             display_numbers = TRUE,
+             main = paste("Linne Correlation Matrix - Training Version:", training_version))
+  } else {
+    message(paste("Not enough data for Training Version:", training_version))
+  }
+}
+
+# For gender
+for (gender in names(grouped_data_by_gender)) {
+  filtered_data <- grouped_data_by_gender[[gender]] %>%
+    select(mean_HR, Answer_Q1, Answer_Q2)
+  
+  if (nrow(filtered_data) > 1) {
+    cor_matrix <- round(cor(filtered_data, use = "complete.obs"), 2)
+    
+    pheatmap(cor_matrix,
+             color = colorRampPalette(c("powderblue", "white", "pink"))(50),
+             display_numbers = TRUE,
+             main = paste("Dame Correlation Matrix - Gender:", gender))
+  } else {
+    message(paste("Not enough data for Gender:", gender))
+  }
 }
 
 
-# Create a plot with BMI on the x-axis, stress (Q1) on the y-axis, and lines/dots for HR and SCR-amplitude
-ggplot(DamePMDAndDemographicsAndAnswers, aes(x = BMI)) +
-  # HR points
-  geom_point(aes(y = Answer_Q1, color = "HR"), size = 3, alpha = 0.7) +
-  # SCR-amplitude points
-  geom_point(aes(y = Answer_Q1, color = "SCR-amplitude"), size = 3, alpha = 0.7) +
-  # HR line
-  geom_line(aes(y = mean_HR, color = "HR"), size = 1) +
-  # SCR-amplitude line
-  geom_line(aes(y = mean_SCR_amplitude_raw, color = "SCR-amplitude"), size = 1) +
-  labs(
-    title = "Stress vs. BMI with HR and SCR-amplitude",
-    x = "BMI",
-    y = "Stress Level (Q1)",
-    color = "Metric"
-  ) +
-  scale_color_manual(values = c("HR" = "blue", "SCR-amplitude" = "red")) +
-  theme_minimal() +
-  theme(
-    axis.title = element_text(size = 12),
-    axis.text = element_text(size = 10),
-    plot.title = element_text(hjust = 0.5, size = 14)
-  )
