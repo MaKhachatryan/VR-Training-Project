@@ -1,22 +1,29 @@
-#Reshape the Answer_Q... columns from RoundLogs to match Round_number
-#taking the round number from the column names "_Rx" and making a separate column for it
-#input: data frame
-#output: longer pivoted data frame
+# Reshape the Answer_Q... columns from RoundLogs to align with Round_number
+# This function processes a data frame by:
+# 1. Selecting columns containing answers for rounds (e.g., _R1 to _R9) while excluding others (e.g., _R10, _R11).
+# 2. Transforming these columns from wide to long format using the round number as a separate column.
+# Input: A data frame with columns named in the format "Answer_QX_RY".
+# Output: A longer, pivoted data frame with a separate column for round numbers.
+
 pivotedData <- function(data) {
-  # First, select only the columns that have '_R1' to '_R9' (exclude _R10 and _R11 columns)
+  # Step 1: Exclude columns ending in _R10 or _R11 (if they exist in the dataset)
   data <- data %>%
     select(-matches("_R10$|_R11$"))  # Exclude columns ending in _R10 or _R11
   
-  # Now, apply the pivot_longer on the remaining columns (those with _R1 to _R9)
+  # Step 2: Pivot columns ending with _R1 to _R9 into a longer format
   data_long <- data %>%
     pivot_longer(
-      cols = matches("_R[1-9]$"),  # Select columns ending with _R1 to _R9
-      names_to = c(".value", "Round_number"),
-      names_pattern = "(.*)_R(\\d+)"  # Extract column prefix and round number
+      # Match columns with names ending in _R1 to _R9
+      cols = matches("_R[1-9]$"),    
+      # Split the names into two parts: prefix and round number
+      names_to = c(".value", "Round_number"), 
+      # Regex to extract column prefix and round number
+      names_pattern = "(.*)_R(\\d+)"  
     ) %>%
-    mutate(Round_number = as.numeric(Round_number))  # Ensure round numbers are numeric
+    # Convert round numbers to numeric for consistency
+    mutate(Round_number = as.numeric(Round_number))  
   
-  # Return the transformed data
+  # Step 3: Return the reshaped data
   return(data_long)
 }
 
@@ -27,23 +34,33 @@ pivotedData <- function(data) {
 
 
 
-#function for selecting columns from a data frame by a given pattern
-#will mostly be used on round logs but its general
+# Function for selecting columns from a data frame by a given pattern
+# This function:
+# - Selects columns from a data frame whose names match the provided patterns.
+# - Supports general usage but is particularly useful for selecting columns in round logs.
+# Input: 
+#   - data: A data frame to select columns from.
+#   - patterns: A character vector of patterns to match column names.
+# Output: A data frame with columns that match the provided patterns.
+
 selectColumnsByPatterns <- function(data, patterns) {
-  # Validate input: Ensure data is a data frame
+  # Step 1: Validate that the input 'data' is a data frame
   checkmate::assertDataFrame(data)
   
-  # Validate input: Ensure patterns is a character vector
+  # Step 2: Validate that 'patterns' is a non-empty character vector
   checkmate::assertCharacter(patterns, any.missing = FALSE, min.len = 1)
   
-  # Use select() with matches() for pattern-based column selection
+  # Step 3: Use select() with matches() for pattern-based column selection
+  # - 'any_of(patterns)': Selects columns with exact names in 'patterns'.
+  # - 'matches(paste(patterns, collapse = "|"))': Selects columns whose names contain any of the patterns.
   selected_data <- data %>%
     select(any_of(patterns), matches(paste(patterns, collapse = "|")))
   
-  # Check if no columns matched
+  # Step 4: Check if no columns matched the provided patterns
   if (ncol(selected_data) == 0) {
     stop("No columns matched the provided patterns.")
   }
   
+  # Step 5: Return the data frame with selected columns
   return(selected_data)
 }

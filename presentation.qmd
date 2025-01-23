@@ -289,19 +289,8 @@ hrvQ1ByAgeCombined
 **4. Are there subgroups within the test subjects that stand out from the rest?**
 
 ::: {style="padding-left:30px"}
-- Subgroups:
-</br>
---   **Dame Males (Perceived Stress \> 4)**: High cognitive load with low heart rate.
-</br>
---   **Linne Adaptive Males**: High cognitive load (Q1) with low to moderate heart rate.
-</br>
---   **Age 20-30**: High RMSSD at low stress levels in the combined cohort.
-</br>
-- Outliers:
-</br>
---      The only participant in the 51+ age group showed very low cognitive load but had the highest HRV compared to the rest of the cohort.
-</br>
---      A Subject (NonAdaptive, Linne) with cognitive load higher than 3 and very low heart rate.
+-   Subgroups: </br> -- **Dame Males (Perceived Stress \> 4)**: High cognitive load with low heart rate. </br> -- **Linne Adaptive Males**: High cognitive load (Q1) with low to moderate heart rate. </br> -- **Age 20-30**: High RMSSD at low stress levels in the combined cohort. </br>
+-   Outliers: </br> -- The only participant in the 51+ age group showed very low cognitive load but had the highest HRV compared to the rest of the cohort. </br> -- A Subject (NonAdaptive, Linne) with cognitive load higher than 3 and very low heart rate.
 :::
 
 ## Outline
