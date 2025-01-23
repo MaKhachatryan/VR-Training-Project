@@ -260,19 +260,19 @@ roundCombinedQ2
 
 [**3. Summary**]{style="color:lightgray;"}
 
-## Stress Resiliant Sugroups
+## Stress Resiliant Subgroups
 
 ```{r}
 hrQ1TrainingGenderDame
 ```
 
-## Stress Resiliant Sugroups
+## Stress Resiliant Subgroups
 
 ```{r}
 hrQ1TrainingMalesLinne
 ```
 
-## Stress Resiliant Sugroups
+## Stress Resiliant Subgroups
 
 ```{r}
 hrvQ1ByAgeCombined
