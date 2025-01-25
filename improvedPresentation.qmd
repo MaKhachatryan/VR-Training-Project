@@ -1,9 +1,12 @@
 ---
 title: "VR-Training Project"
 subtitle: "Grundlegendes Praxisprojekt - WS 24/25"
-author: "Arsine Chinaryan, Anh Hoang Minh Dang, Iris Dizdari, Margarita Khachatryan"
-institute: "Dr. Fabian Scheipl, Dr. Sabine Hoffmann, Daniel Schlichting"
+author:
+  - name: "Arsine Chinaryan, Anh Hoang Minh Dang, Iris Dizdari, Margarita Khachatryan"
+    affiliation: "Dr. Fabian Scheipl, Dr. Sabine Hoffmann, Daniel Schlichting"
+institute: "Cip-Pool Raum III (Ludwigstrasse 28)"
 date: "2025-1-13"
+
 format: 
   revealjs:
     css: customstyle.css
@@ -55,11 +58,13 @@ source("Analysis/cohortDifferences.R")
 
 **VR-Training**: Adapting Virtual Reality Training Applications by Dynamically Adjusting Visual Aspects
 
+**Authors:** Fabio Genz and Dieter Kranzlmüller
+
 **Scenario:**\
 - Users move and place parcels in a VR warehouse using controllers.\
 - Visual cues: dynamic lighting and color guidance.
 
-![](VR%20Training.jpg){fig-align="center"}
+![](VR Training.jpg){fig-align="center"}
 
 ## Overview of the VR Project
 
@@ -71,7 +76,7 @@ source("Analysis/cohortDifferences.R")
 - Tracks user behavior (head movement) and performance (time, errors).\
 - Adjusts lighting, object colors, etc., after each training round.
 
-![](VR%20Training-2.jpg){fig-align="center"}
+![](VR Training-2.jpg){fig-align="center"}
 
 ## Description of data sets
 
@@ -183,11 +188,14 @@ RMSSD
 
 [**3. Summary**]{style="color:lightgray;"}
 
-## Relationship between Stress indicators and Physiological Measurements
+## Relationship
 
 ```{r}
 correlation
 ```
+
+-   Spearman correlation
+-   Correlation absolute values > 0.1
 
 ## Analytical questions
 
@@ -260,19 +268,19 @@ roundCombinedQ2
 
 [**3. Summary**]{style="color:lightgray;"}
 
-## Stress Resiliant Sugroups
+## Stress Resiliant Subgroups
 
 ```{r}
 hrQ1TrainingGenderDame
 ```
 
-## Stress Resiliant Sugroups
+## Stress Resiliant Subgroups
 
 ```{r}
 hrQ1TrainingMalesLinne
 ```
 
-## Stress Resiliant Sugroups
+## Stress Resiliant Subgroups
 
 ```{r}
 hrvQ1ByAgeCombined
