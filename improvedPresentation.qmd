@@ -30,7 +30,7 @@ source("Analysis/cohortDifferences.R")
 -   VR-Project\
 -   Description of data sets\
 -   Terminology\
--   Analytical questions
+-   Research questions
 
 **2. Data Analysis**
 
@@ -48,7 +48,7 @@ source("Analysis/cohortDifferences.R")
 -   VR-Project\
 -   Description of data sets\
 -   Terminology\
--   Analytical questions
+-   Research questions
 
 [**2. Data Analysis**]{style="color:lightgray;"}\
 
@@ -64,7 +64,7 @@ source("Analysis/cohortDifferences.R")
 - Users move and place parcels in a VR warehouse using controllers.\
 - Visual cues: dynamic lighting and color guidance.
 
-![](VR Training.jpg){fig-align="center"}
+![](VR%20Training.jpg){fig-align="center"}
 
 ## Overview of the VR Project
 
@@ -76,7 +76,7 @@ source("Analysis/cohortDifferences.R")
 - Tracks user behavior (head movement) and performance (time, errors).\
 - Adjusts lighting, object colors, etc., after each training round.
 
-![](VR Training-2.jpg){fig-align="center"}
+![](VR%20Training-2.jpg){fig-align="center"}
 
 ## Description of data sets
 
@@ -103,7 +103,7 @@ source("Analysis/cohortDifferences.R")
 -   **Skin conductance response (SCR) measurements:** Skin conductance level (SCL), SCR frequency, SCR amplitude, SCR rising time
 -   **Eye tracking measurements:** Blink rate per minute, Saccade amplitude, Saccade velocity
 
-## Analytical questions
+## Research questions
 
 1.  Are there differences between the 2 data cohorts, Linne and Dame?
 2.  How are the stress indicators and the physiological measurements related?
@@ -133,7 +133,7 @@ ageVariability
 
 ## Cohorts comparison
 
-### Gender Proportions by Training Versions and Cohort
+### Gender Proportions Based on Training Versions and Cohort
 
 ```{r}
 genderDistribution
@@ -141,10 +141,10 @@ genderDistribution
 
 ## Cohorts comparison
 
-### BMI Density Between Dame and Linne Cohorts
+### BMI Across Between Dame and Linne Cohorts
 
 ```{r}
-BMI
+BMI_boxplot
 ```
 
 ## Cohorts comparison
@@ -157,13 +157,13 @@ Q1Q2Combined
 
 ## Cohorts comparison
 
-### RMSSD across Training Versions in the Cohorts
+### RMSSD Across Training Versions in the Cohorts
 
 ```{r}
 RMSSD
 ```
 
-## Analytical questions
+## Research questions
 
 **1. Are there differences between the 2 data cohorts, Linne and Dame?**
 
@@ -195,9 +195,9 @@ correlation
 ```
 
 -   Spearman correlation
--   Correlation absolute values > 0.1
+-   Correlation absolute values \> 0.1
 
-## Analytical questions
+## Research questions
 
 [1. Are there differences between the 2 data cohorts, Linne and Dame?]{style="color:lightgray;"}\
 </br> **2. How are the stress indicators and the physiological measurements related?**
@@ -237,7 +237,7 @@ roundCombinedQ1
 roundCombinedQ2
 ```
 
-## Analytical questions
+## Research questions
 
 [1. Are there differences between the 2 data cohorts, Linne and Dame?]{style="color:lightgray;"}\
 </br>
@@ -288,7 +288,7 @@ hrvQ1ByAgeCombined
 
 [Heart rate variability (HRV) is the change in the time between heartbeats, showing how the body manages stress. It is measured using RMSSD, a value that reflects the calming activity of the nervous system. The plot shows that as cognitive load increases, RMSSD decreases, meaning HRV drops, with higher HRV (above the 0.9 quantile) linked to better stress management.]{style="font-size:18px;"}
 
-## Analytical questions
+## Research questions
 
 [1. Are there differences between the 2 data cohorts, Linne and Dame?]{style="color:lightgray;"}\
 [2. How are the stress indicators and the physiological measurements related?]{style="color:lightgray;"}\

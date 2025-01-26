@@ -1,9 +1,8 @@
 source("environmentSetUp.R")
-# This script sets up the environment for the analysis
-
-
-## --------- Plots for Question 4: Cohort Comparison --------- ##
-# This section focuses on visualizing differences across cohorts.
+# Here we produce the plots to visualize the differences and similarities 
+# between the two Cohorts.
+# We analyse the variables: Age, gender, BMI, Cognitive and Physical load, 
+# RMSSD and SDNN.
 
 # Boxplot for Age by Training Version, faceted by Cohort
 # Shows how age varies across training versions within each cohort.
@@ -11,8 +10,12 @@ ageVariability <- ggplot(combinedDemoWithCohorts, aes(x = Trainingsversion, y = 
   geom_boxplot(alpha = 0.8) +  
   facet_wrap(~ Cohort, scales = "free_x") +
   scale_y_continuous(breaks = seq(0, 60, by = 10)) +
-  scale_fill_manual(values = c("Adaptive" = "#F8C471", "NonAdaptive" = "#82E0AA", "Control"= "#B0B0B0")) +
-  labs(title = "Age Variability by Training Version and Cohort", x = "Training Version", y = "Age") +
+  scale_x_discrete(labels = c("NonAdaptive" = "Non Adaptive")) +
+  scale_fill_manual(values = c("#F8C471", "#B0B0B0", "#82E0AA"),
+                    labels = c("Adaptive", "Control", "Non Adaptive")) +
+  labs(x = "Training Version",
+       y = "Age",
+       fill= "Training Version") +
   theme_minimal() +
   theme(
     strip.text = element_text(size = 14, face = "bold") 
@@ -29,12 +32,13 @@ filtered_combined_data <- combinedDataWithCohorts %>%
 genderDistribution <- ggplot(filtered_combined_data, aes(x = Trainingsversion, fill = Gender)) +
   geom_bar(position = "fill", color = "black", alpha = 0.8) +  
   facet_wrap(~ Cohort) +
-  scale_fill_manual(values = c("M" = "#7FB3D5", "F" = "#F1948A")) +  
-  labs(
-    title = "Gender Proportions by Training Version and Cohort",
-    x = "Training Version",
-    y = "Proportion",
-    fill = "Gender"
+  scale_x_discrete(labels = c("Adaptive" = "Adaptive",
+                              "NonAdaptive" = "Non Adaptive")) +
+  scale_fill_manual(values = c("M" = "#7FB3D5",
+                               "F" = "#F1948A")) +  
+  labs(x = "Training Version",
+       y = "Proportion",
+       fill = "Gender"
   ) +
   theme_minimal()+
   theme(
@@ -43,19 +47,15 @@ genderDistribution <- ggplot(filtered_combined_data, aes(x = Trainingsversion, f
 
 
 
-
-
-
 # Density plot for BMI
 # Displays the distribution of BMI within each cohort.
+# included in the original presentation.
 BMI <- ggplot(filtered_combined_data, aes(x = BMI, fill = Cohort, color = Cohort)) +
   geom_density(alpha = 0.8) +
   scale_fill_manual(values = c("Dame" = "#A1887F", "Linne" = "#F5B7B1")) +
   scale_color_manual(values = c("Dame" = "#A1887F", "Linne" = "#F5B7B1")) +
   labs(title = "BMI Density", x = "BMI", y = "Density") +
   theme_minimal()
-
-
 
 
 # Histogram for BMI by Cohort
@@ -75,19 +75,35 @@ BMI_histogram <- ggplot(filtered_combined_data, aes(x = BMI)) +
     legend.position = "right"
   )
 
-
+# Boxplot for BMI
+# Visualizes the distribution of BMI across cohorts
+# included in the improved presentation 
+BMI_boxplot <- ggplot(filtered_combined_data, aes(x = "", y = BMI, fill = Cohort)) +
+  geom_boxplot(alpha = 0.8, color = "black") +  
+  facet_grid(. ~ Cohort) +
+  scale_fill_manual(values = c("Dame" = "#A1887F", "Linne" = "#F5B7B1")) +
+  labs(caption = "BMI = weight (kg) / [height (m)]^2",
+       x = NULL) +
+  scale_y_continuous(limits = c(16, 34), breaks = seq(16, 34, by = 4)) + 
+  theme_minimal() +
+  theme(
+    strip.text = element_text(face = "bold", size = 14),  # Bold facet labels
+    axis.text.x = element_blank(),  # Remove x-axis text
+    axis.ticks.x = element_blank(), # Remove x-axis ticks
+    panel.spacing = unit(1, "lines") # Add spacing between facets
+  )
 
 
 # Visualizations for Cognitive Load (Answer Q1) and Physical Load (Answer Q2).
 
-
-#boxplots that were included in the presentation
 # Boxplot for Cognitive Load 
 # Visualizes the distribution of cognitive load scores across cohorts
 AnswerQ1 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q1, fill = Cohort)) +
-  geom_boxplot(alpha = 0.8, color = "black") +  # Replace violin plot with boxplot
+  geom_boxplot(alpha = 0.8, color = "black") +  
   scale_fill_manual(values = c("Dame" = "#A1887F", "Linne" = "#F5B7B1")) +
-  labs(title = "Cognitive Load Distribution", x = NULL, y = NULL) +
+  labs(title = "Cognitive Load Distribution",
+       y = "Cognitive Load score",
+       x = NULL) +
   scale_y_continuous(limits = c(1, 6), breaks = seq(1, 6, by = 1)) + 
   theme_minimal()
 
@@ -96,8 +112,10 @@ AnswerQ1 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q1, fill =
 # Boxplot for Physical Load 
 # Visualizes the distribution of Physical load scores across cohorts
 AnswerQ2 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q2, fill = Cohort)) +
-  geom_boxplot(alpha = 0.8, color = "black") +  # Replace violin plot with boxplot
-  labs(title = "Physical Load Distribution", x = NULL, y= NULL) +
+  geom_boxplot(alpha = 0.8, color = "black") +  
+  labs(title = "Physical Load Distribution",
+       y = "Physical Load score",
+       x = NULL) +
   scale_fill_manual(values = c("Dame" = "#A1887F", "Linne" = "#F5B7B1")) +
   scale_y_continuous(limits = c(1, 6), breaks = seq(1, 6, by = 1)) + 
   theme_minimal()
@@ -106,8 +124,9 @@ AnswerQ2 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q2, fill =
 # Combined plot for Q1 and Q2
 # Merges the boxplots for Q1 and Q2 side-by-side, sharing a common legend on the right side
 Q1Q2Combined <- (AnswerQ1 | AnswerQ2) + 
-  plot_layout(guides = "collect") + 
-  theme(legend.position = "right")
+  plot_layout(guides = "collect", heights = c(1, 1.1)) + 
+  theme(legend.position = "right") 
+
 
 
 
@@ -117,40 +136,51 @@ Q1Q2Combined <- (AnswerQ1 | AnswerQ2) +
 RMSSD <- ggplot(filtered_combined_data, aes(x = Trainingsversion, y = RMSSD, fill = Trainingsversion)) +
   geom_boxplot(alpha = 0.8, color = "black") +
   facet_wrap(~ Cohort) +
-  labs(title = "RMSSD (measure of HRV)", x = NULL, y = NULL) +  # Remove x and y axis labels
-  scale_y_continuous(limits = c(0, 4000), breaks = seq(0, 4000, by = 1000)) +  # Set y-axis scale
-  scale_fill_manual(values = c("Adaptive" = "#F8C471", "NonAdaptive" = "#82E0AA")) +  # Match colors
+  labs(x = NULL,
+       fill= "Training Version") +  
+  scale_y_continuous(limits = c(0, 4000), breaks = seq(0, 4000, by = 1000)) +
+  scale_x_discrete(labels = c("Adaptive" = "Adaptive",
+                              "NonAdaptive" = "Non Adaptive")) +
+  scale_fill_manual(values = c("#F8C471", "#82E0AA"),
+                    labels = c("Adaptive", "Non Adaptive")) +  
   theme_minimal() +
   theme(
-    strip.text = element_text(size = 12, face = "plain"),  # Adjust facet labels
-    legend.position = "none"  # Remove legend for this plot (will combine later)
-  )
+    strip.text = element_text(size = 14, face = "bold"),
+    legend.position = "right"
+    )
 
 
 # Boxplot for SDNN by Cohort and Training Version (not included in the presentation)
 # SDNN measures heart rate variability. Here, the comparison is done by cohort and training version.
 SDNN <- ggplot(filtered_combined_data, aes(x = Trainingsversion, y = SDNN, fill = Trainingsversion)) +
-  geom_boxplot(alpha = 0.5, color = "black") +
+  geom_boxplot(alpha = 0.8, color = "black") +
   facet_wrap(~ Cohort) +
-  labs(title = "SDNN", x = NULL, y = NULL) +  # Remove x and y axis labels
-  scale_y_continuous(limits = c(0, 4000), breaks = seq(0, 4000, by = 1000)) +  # Set y-axis scale
-  scale_fill_manual(values = c("Adaptive" = "#F8C471", "NonAdaptive" = "#82E0AA")) +  # Match colors
+  labs(title = "SDNN",
+       x = NULL,
+       fill= "Training Version") +  
+  scale_y_continuous(limits = c(0, 4000), breaks = seq(0, 4000, by = 1000)) +  
+  scale_x_discrete(labels = c("Adaptive" = "Adaptive",
+                              "NonAdaptive" = "Non Adaptive")) +
+  scale_fill_manual(values = c("#F8C471", "#82E0AA"),
+                    labels = c("Adaptive", "Non Adaptive")) +  
   theme_minimal() +
   theme(
-    strip.text = element_text(size = 12, face = "plain"),  # Adjust facet labels
-    legend.position = "right"  # Position legend
+    strip.text = element_text(size = 14, face = "bold"),  
+    legend.position = "right"  
   )
 
 
 
 ## Export plots into Result folder
 if (!all(file.exists(c("Result/Q1/ageVariability.png", "Result/Q1/genderDistribution.png",
-                       "Result/Q1/BMI.png","Result/Q1/BMI_histogram.png", "Result/Q1/Q1Q2Combined.png",
+                       "Result/Q1/BMI.png","Result/Q1/BMI_boxplot.png", 
+                       "Result/Q1/BMI_histogram.png", "Result/Q1/Q1Q2Combined.png",
                        "Result/Q1/RMSSD.png", "Result/Q1/SDNN.png")))) {
   ggsave("Result/Q1/ageVariability.png", ageVariability)
   ggsave("Result/Q1/genderDistribution.png", genderDistribution)
   ggsave("Result/Q1/BMI.png", BMI)
   ggsave("Result/Q1/BMI_histogram.png", BMI_histogram)
+  ggsave("Result/Q1/BMI_boxplot.png", BMI_boxplot)
   ggsave("Result/Q1/Q1Q2Combined.png", Q1Q2Combined)
   ggsave("Result/Q1/RMSSD.png", RMSSD)
   ggsave("Result/Q1/SDNN.png", SDNN)
