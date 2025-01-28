@@ -78,6 +78,3 @@ correlation <- plotCorrelation(correlationTableCombined, 0.1)
 if (!file.exists("Result/Q2/correlation.png")) {
   ggsave("Result/Q2/correlation.png", correlation)
 }
-
-#--------------------
-
