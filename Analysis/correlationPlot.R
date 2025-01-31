@@ -17,21 +17,42 @@ source("environmentSetUp.R")
 plotCorrelation <- function(correlationTable, minCorr) {
   
   # Change the structure of the data frame
-  correlationTable <- correlationTable %>%
-    pivot_longer(cols = -row_name, names_to = "pmd", values_to = "correlation") %>%
-    filter(abs(as.numeric(correlation)) >= minCorr) %>%
+  correlationTable <- correlationTable |>
+    pivot_longer(cols = -row_name, names_to = "pmd", values_to = "correlation") |>
+    filter(abs(as.numeric(correlation)) >= minCorr) 
+  
+  # Define measurements and their groups
+  heartMeasurements <- c("HR", "RMSSD", "SDNN")
+  skinMeasurements <- c("SCL", "SCR amplitude", "SCR frequency", "SCR rise time")
+  blinkSaccadeMeasurements <- c("Blink rate last minute", "Saccade amplitude", "Saccade velocity")
+  
+  # Add a new column for the group based on measurement type
+  correlationTable <- correlationTable |>
+    filter(pmd != "IBI") |>
     mutate(
-      correlation = as.numeric(correlation),
       pmd = str_replace_all(pmd, "_", " "),
       pmd = str_replace_all(pmd, "raw|Raw", ""),
-      pmd = str_replace_all(pmd, "mean", "")
+      pmd = str_replace_all(pmd, "mean", ""),
+      pmd = trimws(pmd),
+      group = case_when(
+        pmd %in% heartMeasurements ~ "Heart",
+        pmd %in% skinMeasurements ~ "Skin",
+        pmd %in% blinkSaccadeMeasurements ~ "Blink/Saccade",
+      )
     )
   
-  # Create the plot with faceting for different stress indicators
+  # Define group colors
+  groupColors <- c(
+    "Heart" = "#66c2a5",
+    "Skin" = "#fc8d62",
+    "Blink/Saccade" = "#7570b3"
+  )
+  
+  # Create the plot
   ggplot(correlationTable, aes(
     x = reorder(pmd, correlation, decreasing = TRUE), 
     y = correlation, 
-    fill = row_name
+    fill = group
   )) +
     geom_bar(stat = "identity", position = "dodge", color = "black", alpha = 0.8) +
     geom_hline(yintercept = 0, linetype = "dashed", color = "gray") +
@@ -39,16 +60,11 @@ plotCorrelation <- function(correlationTable, minCorr) {
     labs(
       x = "Physiological Measurements",
       y = "Correlation",
-      title = "Correlation between Physiological Measurements and Stress Indicators"
+      title = "Correlation between Physiological Measurements and Stress Indicators",
+      fill = "Group"
     ) +
     theme(strip.text = element_text(size = 16)) +
-    scale_fill_manual(
-      values = c(
-        "Cognitive Load" = "#C39BD3",
-        "Physical Load" = "#FFE066" 
-      ),
-      guide = "none"
-    ) +
+    scale_fill_manual(values = groupColors) +
     scale_x_discrete(labels = label_wrap(12)) +
     facet_wrap(~row_name, scales = "free_x")
 }
@@ -62,7 +78,3 @@ correlation <- plotCorrelation(correlationTableCombined, 0.1)
 if (!file.exists("Result/Q2/correlation.png")) {
   ggsave("Result/Q2/correlation.png", correlation)
 }
-
-
-
-

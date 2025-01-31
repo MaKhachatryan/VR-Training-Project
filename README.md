@@ -25,7 +25,7 @@ The following files are all in the Analysis folder:
 
 3.  makingCorrelationTables.R: This will create correlation tables for further analysis. All these tables are exported to "Data/ProcessedData".
 
-4.  cohortDifferences.R, correlationPlot.R, correlationRoundPlot.R, subgroupPlot.R: These will analyse and produce plots, using the processed data sets and tables, to answer the analytical questions. All these plots are exported to folder "Result".
+4.  cohortDifferences.R, correlationPlot.R, correlationRoundPlot.R, subgroupPlot.R: These will analyse and produce plots, using the processed data sets and tables, to answer the research questions. All these plots are exported to folder "Result".
 
 ## Directory structure
 
@@ -36,7 +36,11 @@ The following files are all in the Analysis folder:
 -   Files for the Presentation:
     -   presentation.qmd
 
-    -   presentation.html
+    -   presentation.html: original presentation
+
+    -   improvedPresentation.qmd
+
+    -   improvedPresenation.html: improved presentation after feedbacks
 
     -   customstyle.css: Used for customizing the style in the presentation.
 
@@ -48,7 +52,7 @@ All the files in this directory are data that are used in this project.
 
 -   rawData: This subfolder contains all the raw data provided for the project.
 
--   dataDescription: This subfolder includes files that were provided as is; no processing or changes have been made. It contains analytical questions, raw data documentation, and explanations about the VR project background.
+-   dataDescription: This subfolder includes files that were provided as is; no processing or changes have been made. It contains research questions, raw data documentation, and explanations about the VR project background.
 
 -   processedData: All the files in this subfolder are csv files. These are all cleaned, processed and created from the raw data for further analysis.
 
@@ -96,7 +100,7 @@ Further detailed explanations of what each script does will be clearly provided 
 
 All the files in this directory are images under png format. These are the exported plots and visualization that are created in Analysis. Due to the requirements of the project, especially to analyse the subgroups' behavior and the comparison between two cohorts, we have to create as many plots as possible to be able to compare them and draw the final decision in choosing which plots are important enough to put in the presentation and the final report. Therefore some plots in this directory do not appear in the presentation and the final report.
 
-The plots are divided into 4 subfolders according to 4 analytical questions:
+The plots are divided into 4 subfolders according to 4 research questions:
 
 -   Q1: Are there differences between the 2 data cohorts, Linne and Dame?
 

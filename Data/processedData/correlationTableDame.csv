@@ -1,3 +1,0 @@
-"row_name","RMSSD","SDNN","mean_HR","mean_IBI","mean_SCL_Raw","mean_SCR_amplitude_raw","mean_SCR_frequency_raw","mean_SCR_rise_time_raw","mean_Blink_rate_last_minute","mean_Saccade_amplitude_raw","mean_Saccade_velocity_raw"
-"Cognitive Load",0.029,0.027,0.059,-0.06,0.041,-0.209,0.033,-0.081,0.133,-0.108,-0.104
-"Physical Load",0.093,0.108,0.033,0.003,-0.013,-0.122,-0.016,-0.007,0.095,-0.067,-0.057
