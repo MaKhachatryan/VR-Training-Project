@@ -1,101 +1,14 @@
 source("environmentSetUp.R")
 
-#using the computeAndSaveCorrelation for making correlation tables
-computeAndSaveCorrelation(clean_dame_data, "Data/processedData/correlationTableDame.csv")
-computeAndSaveCorrelation(clean_linne_data, "Data/processedData/correlationTableLinne.csv")
+# Using the computeAndSaveCorrelation function to generate correlation tables
+# The generated CSV files will contain Spearman correlations between "Answer_Q1" (Cognitive Load) 
+# and "Answer_Q2" (Physical Load) with other numeric variables in the dataset.
 
-computeAndSaveCorrelation(combinedPMDAndRoundLogs, "Data/processedData/correlationTableCombined.csv")
+# Compute correlations across the entire dataset (not grouped by rounds)
+computeAndSaveCorrelation(combinedPMDAndRoundLogs,
+                          "Data/processedData/correlationTableCombined.csv")
 
-# List of measurement columns (excluding Round_number, Answer_Q1, and Answer_Q2)
-measurement_columns <- dame_linne_combined %>%
-  select(where(is.numeric)) %>%
-  select(-c(Answer_Q1, Answer_Q2, Round_number)) %>%
-  colnames()
-
-
-# Calculate correlations for each round
-correlation_table_with_rounds <- dame_linne_combined %>%
-  group_by(Round_number) %>%
-  summarise(
-    across(
-      all_of(measurement_columns), 
-      list(
-        Q1_corr = ~ cor(.x, Answer_Q1, method = "spearman", use = "complete.obs"),
-        Q2_corr = ~ cor(.x, Answer_Q2, method = "spearman", use = "complete.obs")
-      ),
-      .names = "{.col}_{.fn}"
-    )
-  ) %>%
-  ungroup()
-
-write_csv(correlation_table_with_rounds, "Data/processedData/correlationTableWithRounds.csv")
-
-
-
-####################################
-# Calculate correlations for each round only for Dame
-correlation_table_with_rounds_dame <- clean_dame_data %>%
-  group_by(Round_number) %>%
-  summarise(
-    across(
-      all_of(measurement_columns), 
-      list(
-        Q1_corr = ~ cor(.x, Answer_Q1, method = "spearman", use = "complete.obs"),
-        Q2_corr = ~ cor(.x, Answer_Q2, method = "spearman", use = "complete.obs")
-      ),
-      .names = "{.col}_{.fn}"
-    )
-  ) %>%
-  ungroup()
-
-# Round all numeric columns to 3 decimal places
-correlation_table_with_rounds_dame <- correlation_table_with_rounds_dame %>%
-  mutate(across(where(is.numeric), ~ round(.x, 3)))
-
-write_csv(correlation_table_with_rounds_dame, "Data/processedData/correlationTableWithRoundsDame.csv")
-
-
-
-
-####################################
-# Calculate correlations for each round only for Linne
-correlation_table_with_rounds_linne <- clean_linne_data %>%
-  group_by(Round_number) %>%
-  summarise(
-    across(
-      all_of(measurement_columns), 
-      list(
-        Q1_corr = ~ cor(.x, Answer_Q1, method = "spearman", use = "complete.obs"),
-        Q2_corr = ~ cor(.x, Answer_Q2, method = "spearman", use = "complete.obs")
-      ),
-      .names = "{.col}_{.fn}"
-    )
-  ) %>%
-  ungroup()
-
-correlation_table_with_rounds_linne <- correlation_table_with_rounds_linne %>%
-  mutate(across(where(is.numeric), ~ round(.x, 3)))
-
-write_csv(correlation_table_with_rounds_linne, "Data/processedData/correlationTableWithRoundsLinne.csv")
-
-
-####################################
-# Calculate correlations for each round COMBINED COHORTS
-correlation_table_with_rounds_combined <- combinedPMDAndRoundLogs %>%
-  group_by(Round_number) %>%
-  summarise(
-    across(
-      all_of(measurement_columns), 
-      list(
-        Q1_corr = ~ cor(.x, Answer_Q1, method = "spearman", use = "complete.obs"),
-        Q2_corr = ~ cor(.x, Answer_Q2, method = "spearman", use = "complete.obs")
-      ),
-      .names = "{.col}_{.fn}"
-    )
-  ) %>%
-  ungroup()
-
-correlation_table_with_rounds_combined <- correlation_table_with_rounds_combined %>%
-  mutate(across(where(is.numeric), ~ round(.x, 3)))
-
-write_csv(correlation_table_with_rounds_combined, "Data/processedData/correlationTableWithRoundsCombined.csv")
+# Compute correlations grouped by rounds
+computeAndSaveCorrelation(combinedPMDAndRoundLogs,
+                          "Data/processedData/correlationTableWithRoundsCombined.csv",
+                          over_rounds = TRUE)
