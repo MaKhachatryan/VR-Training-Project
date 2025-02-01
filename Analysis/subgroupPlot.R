@@ -132,7 +132,7 @@ hrQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort, gende
       geom_smooth(
         data = adaptive_data,
         aes_string(x = col_x, y = col_y),
-        method = "loess", 
+        method = "lm", 
         color = "#F8C471",
         linetype = "dashed",
         se = FALSE 
@@ -156,7 +156,6 @@ hrQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort, gende
 
 # Call Plots for HRV and percievd Stress throughout Agegroups
 hrvQ1ByAgeCombined <- hrvScatterPlotFunction(combinedPMDAndDemographicsAndAnswers, "Answer_Q1", "RMSSD", "Age", "Combined cohorts")
-hrvQ2ByAgeCombined <- hrvScatterPlotFunction(combinedPMDAndDemographicsAndAnswers, "Answer_Q2", "RMSSD", "Age", "Combined cohorts")
 # Call Plots for HR and percievd Stress in Males for Training versions
 hrQ1TrainingGenderDame <- hrQ1ScatterPlotFunction(DamePMDAndDemographicsAndAnswers, "Answer_Q1", "mean_HR", "Gender", "Dame", NULL)
 
@@ -166,11 +165,10 @@ hrQ1TrainingLinne <- hrQ1ScatterPlotFunction(LinnePMDAndDemographicsAndAnswers, 
 
 ## Export plots into Result folder
 if (!all(file.exists(c("Result/Q4/hrQ1TrainingGenderDame.jpeg", "Result/Q4/hrQ1TrainingMalesLinne.jpeg", "Result/Q4/hrQ1TrainingFemalesLinne.jpeg", 
-                       "Result/Q4/hrQ1TrainingLinne.jpeg", "Result/Q4/hrvQ1ByAgeCombined.jpeg", "Result/Q4/hrvQ2ByAgeCombined.jpeg")))) {
+                       "Result/Q4/hrQ1TrainingLinne.jpeg", "Result/Q4/hrvQ1ByAgeCombined.jpeg")))) {
   ggsave("Result/Q4/hrQ1TrainingGenderDame.jpeg", hrQ1TrainingGenderDame)
   ggsave("Result/Q4/hrQ1TrainingMalesLinne.jpeg", hrQ1TrainingMalesLinne)
   ggsave("Result/Q4/hrQ1TrainingFemalesLinne.jpeg", hrQ1TrainingFemalesLinne)
   ggsave("Result/Q4/hrQ1TrainingLinne.jpeg", hrQ1TrainingLinne)
   ggsave("Result/Q4/hrvQ1ByAgeCombined.jpeg", hrvQ1ByAgeCombined)
-  ggsave("Result/Q4/hrvQ2ByAgeCombined.jpeg", hrvQ2ByAgeCombined)
 }
