@@ -60,9 +60,6 @@ hrvScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort) {
 #different behaviours between percieved stress and meassured heartrate
 hrQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort, gender) {
   
-  library(ggplot2)
-  library(dplyr)
-  
   # Optionally filter the data based on gender
   if (!is.null(gender)) {
     data <- data.frame(data) %>%
