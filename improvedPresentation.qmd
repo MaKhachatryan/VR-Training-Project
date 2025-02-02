@@ -286,7 +286,7 @@ hrQ1TrainingMalesLinne
 hrvQ1ByAgeCombined
 ```
 
-[Heart rate variability (HRV) is the change in the time between heartbeats, showing how the body manages stress. It is measured using RMSSD, a value that reflects the calming activity of the nervous system. The plot shows that as cognitive load increases, RMSSD decreases, meaning HRV drops, with higher HRV (above the 0.9 quantile) linked to better stress management.]{style="font-size:18px;"}
+[Heart rate variability (HRV), measured by RMSSD, reflects stress management. The threshold for high HRV was measured using the 0.9 quantile.]{style="font-size:18px;"}
 
 ## Research questions
 

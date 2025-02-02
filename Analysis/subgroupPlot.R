@@ -69,8 +69,10 @@ hrQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort, gende
   # Dynamically set colors based on col_group
   if (col_group == "Trainingsversion") {
     custom_colors <- c("Adaptive" = "#F8C471", "NonAdaptive" = "#82E0AA")
+    lab_title <- "Training Version"
   } else if (col_group == "Gender") {
     custom_colors <- c("M" = "#7FB3D5", "F" = "#F1948A")
+    lab_title <- "Gender"
   } else {
     custom_colors <- NULL # Default colors
   }
@@ -100,7 +102,7 @@ hrQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort, gende
     )
   }
   
-  # Plot
+  # Base plot
   plot <- ggplot(data, aes_string(x = col_x, y = col_y, fill = col_group)) +
     geom_point(alpha = 1, size = 2.8, shape = 21, stroke = 0.3, color = "black") +
     theme_minimal() +
@@ -116,6 +118,7 @@ hrQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort, gende
       y = "Heart Rate (Bpm)",
       fill = col_group
     ) +
+    guides(fill = guide_legend(title = lab_title)) +
     coord_cartesian(xlim = c(1.5, 4.7), ylim = c(50, 105)) 
   
   # Apply custom colors to fill
@@ -139,17 +142,18 @@ hrQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort, gende
       )
   }
   
-  # Add a vertical line if cohort is "Dame"
+  # Add a circle around the points when cohort is "Dame"
   if (cohort == "Dame") {
     plot <- plot +
-      geom_vline(
-        xintercept = 4,
-        color = "black",
-        linetype = "dashed",
-        size = 1
-      ) 
-  }
+      annotate("path", 
+               x = 4.5 + 0.34 * cos(seq(0, 2 * pi, length.out = 100)),  
+               y = 74 + 8.2 * sin(seq(0, 2 * pi, length.out = 100)),  
+               color = "black", 
+               linetype = "dashed",
+               size = 0.9)
   
+      
+  }
   return(plot)
 }
 
