@@ -194,8 +194,8 @@ Q1Q2Combined
 correlation
 ```
 
--   Spearman correlation
--   Correlation absolute values \> 0.1
+[-    Spearman correlation\
+-   Correlation absolute values \> 0.1]{style="font-size:18px;"}
 
 ## Research questions
 
@@ -286,8 +286,8 @@ hrQ1TrainingMalesLinne
 hrvQ1ByAgeCombined
 ```
 
-[Heart rate variability (HRV), measured by RMSSD, reflects stress management.\
-The threshold for high HRV was measured using the 0.9 quantile.]{style="font-size:18px;"}
+[-    Heart rate variability (HRV), measured by RMSSD, reflects stress management.\
+-   The threshold for high HRV was measured using the 0.9 quantile.]{style="font-size:18px;"}
 
 ## Research questions
 
