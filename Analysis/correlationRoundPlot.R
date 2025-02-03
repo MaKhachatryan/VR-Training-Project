@@ -58,7 +58,7 @@ createPlot <- function(data, color, x_label = NULL, y_label = NULL) {
     scale_x_continuous(breaks = seq(min(data$Round_number), max(data$Round_number), 1)) + 
     scale_y_continuous(limits = c(-0.4, 0.4)) +
     scale_color_manual(
-      name = NULL,
+      name = "Group",
       values = c("Heart" = heartColor, "Skin" = skinColor, "Blink/Saccade" = blinkSaccadeColor)
     ) +
     facet_wrap(~ PMD, scales = "free_y", nrow = 1) +
@@ -71,8 +71,10 @@ createPlot <- function(data, color, x_label = NULL, y_label = NULL) {
       axis.title.x = if (!is.null(x_label)) element_text(size = 12, face = "bold") else element_blank(),
       axis.title.y = if (!is.null(y_label)) element_text(size = 12, face = "bold") else element_blank(),
       strip.text.x = element_text(size = 10, face = "bold")
-    )
+    ) +
+    guides(color = guide_legend(title = "Group"))
 }
+
 
 # Function to generate a combined plot with a single legend
 # Input:
@@ -87,23 +89,29 @@ generateCombinedPlot <- function(question, title, subtitle) {
   blinkSaccadeData <- prepareData(correlationTableWithRoundsCombined, question, blinkSaccadeMeasurements, "Blink/Saccade")
   
   heartPlot <- createPlot(heartData, heartColor)
-  skinPlot <- createPlot(skinData, skinColor, y_label = "Correlation")
-  blinkSaccadePlot <- createPlot(blinkSaccadeData, blinkSaccadeColor, x_label = "Round Number")
+  
+  skinPlot <- createPlot(skinData, skinColor, y_label = "Correlation") + 
+    theme(legend.title = element_blank())
+  
+  blinkSaccadePlot <- createPlot(blinkSaccadeData, blinkSaccadeColor, x_label = "Round Number") + 
+    theme(legend.title = element_blank())
   
   # Combine plots and ensure one legend
   combinedPlot <- (heartPlot / skinPlot / blinkSaccadePlot) +
+    plot_layout(guides = "collect") +
     plot_annotation(
       title = title,
       subtitle = subtitle,
       theme = theme(
         plot.title = element_text(size = 16, face = "bold", hjust = 0),
-        plot.subtitle = element_text(size = 14, face = "plain", hjust = 0)
+        plot.subtitle = element_text(size = 14, face = "plain", hjust = 0),
+        legend.position = "right"
       )
-    ) +
-    plot_layout(guides = "collect") & theme(legend.position = "right")
+    )
   
   return(combinedPlot)
 }
+
 
 # Generate Q1 and Q2 plots
 roundCombinedQ1 <- generateCombinedPlot(
