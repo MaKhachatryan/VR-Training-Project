@@ -286,7 +286,8 @@ hrQ1TrainingMalesLinne
 hrvQ1ByAgeCombined
 ```
 
-[Heart rate variability (HRV), measured by RMSSD, reflects stress management. The threshold for high HRV was measured using the 0.9 quantile.]{style="font-size:18px;"}
+[Heart rate variability (HRV), measured by RMSSD, reflects stress management.\
+The threshold for high HRV was measured using the 0.9 quantile.]{style="font-size:18px;"}
 
 ## Research questions
 
