@@ -11,7 +11,7 @@
 
 This is the repository for the VR-Training Project. Please read these instructions carefully to ensure optimal program performance before running the code.
 
-We use R version 4.3.2. Some of the packages in this project may require the latest version of R, so please ensure it is installed before proceeding.
+We use R version 4.4.2. Some of the packages in this project may require the latest version of R, so please ensure it is installed before proceeding.
 
 ## Usage
 
@@ -25,7 +25,7 @@ The following files are all in the Analysis folder:
 
 3.  makingCorrelationTables.R: This will create correlation tables for further analysis. All these tables are exported to "Data/ProcessedData".
 
-4.  cohortDifferences.R, correlationPlot.R, correlationRoundPlot.R, subgroupPlot.R: These will analyse and produce plots, using the processed data sets and tables, to answer the research questions. All these plots are exported to folder "Result".
+4.  cohortDifferences.R, correlationPlot.R, correlationRoundPlot.R, correlationHeatmaps.R, subgroupPlot.R: These will analyse and produce plots, using the processed data sets and tables, to answer the research questions. All these plots are exported to folder "Result".
 
 ## Directory structure
 
@@ -34,8 +34,6 @@ The following files are all in the Analysis folder:
 -   README.md
 -   environmentSetUp.R
 -   Files for the Presentation:
-    -   presentation.qmd
-
     -   presentation.html: original presentation
 
     -   improvedPresentation.qmd
@@ -89,8 +87,6 @@ All the files in this directory are R scripts containing further analysis based 
 -   dataProcess.R
 
 -   makingCorrelationTables.R
-
--   scatterPlotsForQ3Q4.R
 
 -   subgroupPlot.R
 
