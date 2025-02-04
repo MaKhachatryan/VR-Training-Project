@@ -64,7 +64,7 @@ source("Analysis/cohortDifferences.R")
 - Users move and place parcels in a VR warehouse using controllers.\
 - Visual cues: dynamic lighting and color guidance.
 
-![](VR%20Training.jpg){fig-align="center"}
+![](VR Training.jpg){fig-align="center"}
 
 ## Overview of the VR Project
 
@@ -76,7 +76,7 @@ source("Analysis/cohortDifferences.R")
 - Tracks user behavior (head movement) and performance (time, errors).\
 - Adjusts lighting, object colors, etc., after each training round.
 
-![](VR%20Training-2.jpg){fig-align="center"}
+![](VR Training-2.jpg){fig-align="center"}
 
 ## Description of data sets
 
