@@ -33,6 +33,7 @@ The following files are all in the Analysis folder:
 
 -   README.md
 -   environmentSetUp.R
+-   Executive summary.pdf
 -   Files for the Presentation:
     -   presentation.html: original presentation
 
