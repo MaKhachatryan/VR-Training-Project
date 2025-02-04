@@ -37,7 +37,7 @@ source("Analysis/cohortDifferences.R")
 -   Cohorts comparison: Similarities and Differences\
 -   Relationship between Stress indicators and Physiological Measurements\
 -   Relationship over the rounds\
--   Subgroups and Outliers
+-   Subgroups
 
 **3. Summary**
 
@@ -119,7 +119,7 @@ source("Analysis/cohortDifferences.R")
 -   Cohorts comparison: Similarities and Differences\
     [- Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
     [- Relationship over the rounds]{style="color:lightgray;"}\
-    [- Subgroups and Outliers]{style="color:lightgray;"}
+    [- Subgroups]{style="color:lightgray;"}
 
 [**3. Summary**]{style="color:lightgray;"}
 
@@ -184,7 +184,7 @@ Q1Q2Combined
 [- Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}\
 - Relationship between Stress indicators and Physiological Measurements\
 [- Relationship over the rounds]{style="color:lightgray;"}\
-[- Subgroups and Outliers]{style="color:lightgray;"}
+[- Subgroups]{style="color:lightgray;"}
 
 [**3. Summary**]{style="color:lightgray;"}
 
@@ -221,7 +221,7 @@ correlation
 [- Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}\
 [- Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
 - Relationship over the rounds\
-[- Subgroups and Outliers]{style="color:lightgray;"}
+[- Subgroups]{style="color:lightgray;"}
 
 [**3. Summary**]{style="color:lightgray;"}
 
@@ -264,7 +264,7 @@ roundCombinedQ2
 [- Cohorts comparison: Similarities and Differences]{style="color:lightgray;"}\
 [- Relationship between Stress indicators and Physiological Measurements]{style="color:lightgray;"}\
 [- Relationship over the rounds]{style="color:lightgray;"}\
-- Subgroups and Outliers
+- Subgroups
 
 [**3. Summary**]{style="color:lightgray;"}
 
@@ -298,8 +298,10 @@ hrvQ1ByAgeCombined
 **4. Are there subgroups within the test subjects that stand out from the rest?**
 
 ::: {style="padding-left:30px"}
--   Subgroups: </br> -- **Dame Males (Perceived Stress \> 4)**: High cognitive load with low heart rate. </br> -- **Linne Adaptive Males**: High cognitive load (Q1) with low to moderate heart rate. </br> -- **Age 20-30**: High RMSSD at low stress levels in the combined cohort. </br>
--   Outliers: </br> -- The only participant in the 51+ age group showed very low cognitive load but had the highest HRV compared to the rest of the cohort. </br> -- A Subject (NonAdaptive, Linne) with cognitive load higher than 3 and very low heart rate.
+-  Subgroups: 
+</br> --  **Dame Males (Perceived Stress \> 4)**: High cognitive load with low heart rate. 
+</br> --  **Linne Adaptive Males**: High cognitive load with low to moderate heart rate. 
+</br> --  **Age 20-30**: High RMSSD at low stress levels in the combined cohort. </br>
 :::
 
 ## Outline
@@ -315,7 +317,7 @@ hrvQ1ByAgeCombined
 -   The 2 cohorts' key characteristics are similar enough to be combined for meaningful analysis.
 -   The relationships between Stress indicators and PMD are very weak (Correlation range: -0.15 to 0.1)
 -   These relationships show minimal change over the rounds with no consistent patterns (Correlation range: -0.2 to 0.2)
--   Certain subgroups within the cohorts show distinct patterns of behavior when comparing PMD with stress indicators, along with a few prominent outliers.
+-   Certain subgroups within the cohorts show distinct patterns of behavior when comparing PMD with stress indicators.
 
 ## Question
 

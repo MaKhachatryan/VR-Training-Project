@@ -36,7 +36,7 @@ hrvScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort) {
   y_limits <- range(data[[col_y]], na.rm = TRUE)
   
   # Create the plot
-  ggplot(data, aes(x = !!sym(col_x), y = !!sym(col_y), fill = !!sym(col_group))) +
+  plot <- ggplot(data, aes(x = !!sym(col_x), y = !!sym(col_y), fill = !!sym(col_group))) +
     geom_point(alpha = 1, size = 2.8, shape = 21, stroke = 0.3, color = "black") + 
     scale_fill_manual(values = palette, name = "Age groups") + 
     labs(
@@ -51,8 +51,17 @@ hrvScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort) {
       legend.position = "right",
       axis.title = element_text(size = 12),
       axis.text = element_text(size = 10),
-      plot.title = element_text(size = 14, hjust = 0.5)
+      plot.title = element_text(size = 14, hjust = 0)
     ) 
+  
+  plot <- plot +
+    annotate("path", 
+             x = 3.1 + 0.4 * cos(seq(0, 2 * pi, length.out = 100)),  
+             y = 3200 + 300 * sin(seq(0, 2 * pi, length.out = 100)),  
+             color = "black", 
+             linetype = "dashed",
+             size = 0.8)
+  return(plot)
 }
 
 
@@ -110,7 +119,7 @@ hrQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort, gende
       legend.position = "right",
       axis.title = element_text(size = 12),
       axis.text = element_text(size = 10),
-      plot.title = element_text(size = 14, hjust = 0.5)
+      plot.title = element_text(size = 14, hjust = 0)
     ) +
     labs(
       title = plot_title,
@@ -123,7 +132,7 @@ hrQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort, gende
   
   # Apply custom colors to fill
   if (!is.null(custom_colors)) {
-    plot <- plot + scale_fill_manual(values = custom_colors)
+    plot <- plot + scale_fill_manual(values = custom_colors, labels = c("Adaptive" ,"NonAdaptive" = "Non Adaptive"))
   }
   
   # Add a purple trend line if only males are selected
@@ -147,10 +156,10 @@ hrQ1ScatterPlotFunction <- function(data, col_x, col_y, col_group, cohort, gende
     plot <- plot +
       annotate("path", 
                x = 4.5 + 0.34 * cos(seq(0, 2 * pi, length.out = 100)),  
-               y = 74 + 8.2 * sin(seq(0, 2 * pi, length.out = 100)),  
+               y = 73 + 8 * sin(seq(0, 2 * pi, length.out = 100)),  
                color = "black", 
                linetype = "dashed",
-               size = 0.9)
+               size = 0.8)
   
       
   }
