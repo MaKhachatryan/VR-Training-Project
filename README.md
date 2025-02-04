@@ -64,8 +64,6 @@ All the files in this directory are R scripts containing general functions essen
 
 -   computeAndSaveCorrelation.R
 
--   createScatterPlot.R
-
 -   fixPMD.R
 
 -   pivotedData.R
