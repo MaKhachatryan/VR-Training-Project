@@ -17,8 +17,8 @@ clean_correlation_matrix <- function(cor_matrix) {
 
 # Split age subgroups into a list of data frames
 ageSubgroups <- combinedPMDAndDemographicsAndAnswers %>%
-  mutate(AgeGroup = cut(Age, breaks = c(-Inf, 20, 30, 40, 50, Inf), 
-                        labels = c("<20", "21-30", "31-40", "41-50", "51+"), include.lowest = TRUE, right=FALSE)) %>%
+  mutate(AgeGroup = cut(Age, breaks = unique(c(-Inf, 20, 30, 40, 50, Inf)), 
+                        labels = c("<20", "21-30", "31-40", "41-50", "51+"), include.lowest = TRUE, right=TRUE)) %>%
   filter(!is.na(AgeGroup)) %>%
   group_by(AgeGroup) %>%
   group_split()
@@ -50,15 +50,19 @@ cor_matrices <- lapply(ageSubgroups, function(group) {
 for (i in seq_along(cor_matrices)) {
   cor_matrix <- cor_matrices[[i]]
   group_name <- levels(factor(sapply(ageSubgroups, 
-                          function(x) unique(x$AgeGroup))))[i]
-  if (!is.null(cor_matrix)) {
-    pheatmap(cor_matrix, 
-             color = colorRampPalette(c("powderblue", "white", "pink"))(50),
-             display_numbers = TRUE,
-             main = paste("Heatmap for Age Group:", group_name))
+                                     function(x) unique(x$AgeGroup))))[i]
+  
+  # Falls cor_matrix NULL oder NA-Werte enthält, überspringen
+  if (is.null(cor_matrix) || any(is.na(cor_matrix)) || all(cor_matrix == cor_matrix[1])) {
+    message("Skipping Heatmap for Age Group: ", group_name, " (invalid correlation matrix)")
+    next
   }
+  
+  pheatmap(cor_matrix, 
+           color = colorRampPalette(c("powderblue", "white", "pink"))(50),
+           display_numbers = TRUE,
+           main = paste("Heatmap for Age Group:", group_name))
 }
-
 
 
 ### Heatmaps for Training versions or Gender, using mean_HR, Answer_Q1, Answer_Q2
@@ -104,5 +108,3 @@ for (gender in names(grouped_data_by_gender)) {
     message(paste("Not enough data for Gender:", gender))
   }
 }
-
-
