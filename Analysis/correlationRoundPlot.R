@@ -5,13 +5,13 @@ source("environmentSetUp.R")
 # in every round. There are 9 rounds in total.
 
 # Define Measurements and Colors
-heartMeasurements <- c("Mean HR", "RMSSD", "SDNN")
+heartMeasurements <- c("HR", "RMSSD", "SDNN")
 heartColor <- "#66c2a5"
 
-skinMeasurements <- c("Mean SCL", "Mean SCR amplitude", "Mean SCR frequency", "Mean SCR rise time")
+skinMeasurements <- c("SCL", "SCR amplitude", "SCR frequency", "SCR rise time")
 skinColor <- "#fc8d62"
 
-blinkSaccadeMeasurements <- c("Mean Blink rate last minute", "Mean Saccade amplitude", "Mean Saccade velocity")
+blinkSaccadeMeasurements <- c("Blink rate last minute", "Saccade amplitude", "Saccade velocity")
 blinkSaccadeColor <- "#7570b3"
 
 # Function to preprocess the data
@@ -34,7 +34,7 @@ prepareData <- function(data, question, measurements, group) {
     mutate(correlation = as.numeric(correlation)) %>%
     mutate(PMD = str_replace_all(PMD, "_", " ")) %>%
     mutate(PMD = str_replace_all(PMD, "raw|Raw", "")) %>%
-    mutate(PMD = str_replace_all(PMD, "mean", "Mean")) %>%
+    mutate(PMD = str_replace_all(PMD, "mean", "")) %>%
     mutate(PMD = str_replace_all(PMD, question, "")) %>%
     mutate(PMD = str_replace_all(PMD, "corr", "")) %>%
     mutate(PMD = str_trim(PMD)) %>%
