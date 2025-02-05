@@ -13,11 +13,13 @@ ageVariability <- ggplot(combinedDemoWithCohorts, aes(x = Trainingsversion, y = 
   scale_x_discrete(labels = c("NonAdaptive" = "Non Adaptive")) +
   scale_fill_manual(values = c("#F8C471", "#B0B0B0", "#82E0AA"),
                     labels = c("Adaptive", "Control", "Non Adaptive")) +
-  labs(x = "Training Version",
+  labs(title = "Age Patterns Based on Training Versions and Cohort",
+       x = "Training Version",
        y = "Age",
        fill= "Training Version") +
   theme_minimal() +
   theme(
+    plot.title = element_text(face = "bold"),
     strip.text = element_text(size = 14, face = "bold") 
   )
 
@@ -36,12 +38,14 @@ genderDistribution <- ggplot(filtered_combined_data, aes(x = Trainingsversion, f
                               "NonAdaptive" = "Non Adaptive")) +
   scale_fill_manual(values = c("M" = "#7FB3D5",
                                "F" = "#F1948A")) +  
-  labs(x = "Training Version",
+  labs(title = "Gender Proportions Based on Training Versions and Cohort",
+       x = "Training Version",
        y = "Proportion",
        fill = "Gender"
   ) +
   theme_minimal()+
   theme(
+    plot.title = element_text(face = "bold"),
     strip.text = element_text(size = 14, face = "bold") 
   )
 
@@ -82,11 +86,13 @@ BMI_boxplot <- ggplot(filtered_combined_data, aes(x = "", y = BMI, fill = Cohort
   geom_boxplot(alpha = 0.8, color = "black") +  
   facet_grid(. ~ Cohort) +
   scale_fill_manual(values = c("Dame" = "#A1887F", "Linne" = "#F5B7B1")) +
-  labs(caption = "BMI = weight (kg) / [height (m)]^2",
+  labs(title = "BMI Across Between Dame and Linne Cohorts",
+       caption = "BMI = weight (kg) / [height (m)]^2",
        x = NULL) +
   scale_y_continuous(limits = c(16, 34), breaks = seq(16, 34, by = 4)) + 
   theme_minimal() +
   theme(
+    plot.title = element_text(face = "bold"),
     strip.text = element_text(face = "bold", size = 14),  # Bold facet labels
     axis.text.x = element_blank(),  # Remove x-axis text
     axis.ticks.x = element_blank(), # Remove x-axis ticks
@@ -125,8 +131,10 @@ AnswerQ2 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q2, fill =
 # Merges the boxplots for Q1 and Q2 side-by-side, sharing a common legend on the right side
 Q1Q2Combined <- (AnswerQ1 | AnswerQ2) + 
   plot_layout(guides = "collect", heights = c(1, 1.1)) + 
+  plot_annotation(title = "Cognitive and Physical Load Across the Cohorts",
+                  theme = theme(plot.title = element_text(face = "bold", size = 18))) +
   theme(legend.position = "right") 
-
+  
 
 
 
@@ -136,7 +144,8 @@ Q1Q2Combined <- (AnswerQ1 | AnswerQ2) +
 RMSSD <- ggplot(filtered_combined_data, aes(x = Trainingsversion, y = RMSSD, fill = Trainingsversion)) +
   geom_boxplot(alpha = 0.8, color = "black") +
   facet_wrap(~ Cohort) +
-  labs(x = NULL,
+  labs(title = "RMSSD Across Training Versions in the Cohorts", 
+       x = NULL,
        fill= "Training Version") +  
   scale_y_continuous(limits = c(0, 4000), breaks = seq(0, 4000, by = 1000)) +
   scale_x_discrete(labels = c("Adaptive" = "Adaptive",
@@ -145,6 +154,7 @@ RMSSD <- ggplot(filtered_combined_data, aes(x = Trainingsversion, y = RMSSD, fil
                     labels = c("Adaptive", "Non Adaptive")) +  
   theme_minimal() +
   theme(
+    plot.title = element_text(face = "bold"),
     strip.text = element_text(size = 14, face = "bold"),
     legend.position = "right"
     )

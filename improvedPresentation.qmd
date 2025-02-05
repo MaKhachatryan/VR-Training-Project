@@ -64,7 +64,7 @@ source("Analysis/cohortDifferences.R")
 - Users move and place parcels in a VR warehouse using controllers.\
 - Visual cues: dynamic lighting and color guidance.
 
-![](VR Training.jpg){fig-align="center"}
+![](VR%20Training.jpg){fig-align="center"}
 
 ## Overview of the VR Project
 
@@ -76,7 +76,7 @@ source("Analysis/cohortDifferences.R")
 - Tracks user behavior (head movement) and performance (time, errors).\
 - Adjusts lighting, object colors, etc., after each training round.
 
-![](VR Training-2.jpg){fig-align="center"}
+![](VR%20Training-2.jpg){fig-align="center"}
 
 ## Description of data sets
 
@@ -125,15 +125,11 @@ source("Analysis/cohortDifferences.R")
 
 ## Cohorts comparison
 
-### Age Patterns Based on Training Versions and Cohort
-
 ```{r}
 ageVariability
 ```
 
 ## Cohorts comparison
-
-### Gender Proportions Based on Training Versions and Cohort
 
 ```{r}
 genderDistribution
@@ -141,23 +137,17 @@ genderDistribution
 
 ## Cohorts comparison
 
-### BMI Across Between Dame and Linne Cohorts
-
 ```{r}
 BMI_boxplot
 ```
 
 ## Cohorts comparison
 
-### RMSSD Across Training Versions in the Cohorts
-
 ```{r}
 RMSSD
 ```
 
 ## Cohorts comparison
-
-### Cognitive and Physical Load Across the Cohorts
 
 ```{r}
 Q1Q2Combined
@@ -194,8 +184,8 @@ Q1Q2Combined
 correlation
 ```
 
-[-    Spearman correlation\
--   Correlation absolute values \> 0.1]{style="font-size:18px;"}
+[- Spearman correlation\
+- Correlation absolute values \> 0.1]{style="font-size:18px;"}
 
 ## Research questions
 
@@ -286,8 +276,8 @@ hrQ1TrainingMalesLinne
 hrvQ1ByAgeCombined
 ```
 
-[-    Heart rate variability (HRV), measured by RMSSD, reflects stress management.\
--   The threshold for high HRV was measured using the 0.9 quantile.]{style="font-size:18px;"}
+[- Heart rate variability (HRV), measured by RMSSD, reflects stress management.\
+- The threshold for high HRV was measured using the 0.9 quantile.]{style="font-size:18px;"}
 
 ## Research questions
 
@@ -298,10 +288,7 @@ hrvQ1ByAgeCombined
 **4. Are there subgroups within the test subjects that stand out from the rest?**
 
 ::: {style="padding-left:30px"}
--  Subgroups: 
-</br> --  **Dame Males (Perceived Stress \> 4)**: High cognitive load with low heart rate. 
-</br> --  **Linne Adaptive Males**: High cognitive load with low to moderate heart rate. 
-</br> --  **Age 20-30**: High RMSSD at low stress levels in the combined cohort. </br>
+-   Subgroups: </br> -- **Dame Males (Perceived Stress \> 4)**: High cognitive load with low heart rate. </br> -- **Linne Adaptive Males**: High cognitive load with low to moderate heart rate. </br> -- **Age 20-30**: High RMSSD at low stress levels in the combined cohort. </br>
 :::
 
 ## Outline
