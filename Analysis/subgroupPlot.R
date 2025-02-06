@@ -179,9 +179,9 @@ hrQ1TrainingLinne <- hrQ1ScatterPlotFunction(LinnePMDAndDemographicsAndAnswers, 
 ## Export plots into Result folder
 if (!all(file.exists(c("Result/Q4/hrQ1TrainingGenderDame.jpeg", "Result/Q4/hrQ1TrainingMalesLinne.jpeg", "Result/Q4/hrQ1TrainingFemalesLinne.jpeg", 
                        "Result/Q4/hrQ1TrainingLinne.jpeg", "Result/Q4/hrvQ1ByAgeCombined.jpeg")))) {
-  ggsave("Result/Q4/hrQ1TrainingGenderDame.jpeg", hrQ1TrainingGenderDame)
-  ggsave("Result/Q4/hrQ1TrainingMalesLinne.jpeg", hrQ1TrainingMalesLinne)
-  ggsave("Result/Q4/hrQ1TrainingFemalesLinne.jpeg", hrQ1TrainingFemalesLinne)
-  ggsave("Result/Q4/hrQ1TrainingLinne.jpeg", hrQ1TrainingLinne)
-  ggsave("Result/Q4/hrvQ1ByAgeCombined.jpeg", hrvQ1ByAgeCombined)
+  ggsave("Result/Q4/hrQ1TrainingGenderDame.jpeg", hrQ1TrainingGenderDame, width = 13.73, height = 8.76, dpi = 300)
+  ggsave("Result/Q4/hrQ1TrainingMalesLinne.jpeg", hrQ1TrainingMalesLinne, width = 13.73, height = 8.76, dpi = 300)
+  ggsave("Result/Q4/hrQ1TrainingFemalesLinne.jpeg", hrQ1TrainingFemalesLinne, width = 13.73, height = 8.76, dpi = 300)
+  ggsave("Result/Q4/hrQ1TrainingLinne.jpeg", hrQ1TrainingLinne, width = 13.73, height = 8.76, dpi = 300)
+  ggsave("Result/Q4/hrvQ1ByAgeCombined.jpeg", hrvQ1ByAgeCombined, width = 13.73, height = 8.76, dpi = 300)
 }
