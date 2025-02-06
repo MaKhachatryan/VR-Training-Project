@@ -103,8 +103,8 @@ generateCombinedPlot <- function(question, title, subtitle) {
       title = title,
       subtitle = subtitle,
       theme = theme(
-        plot.title = element_text(size = 16, face = "bold", hjust = 0),
-        plot.subtitle = element_text(size = 14, face = "plain", hjust = 0),
+        plot.title = element_text(size = 14, face = "plain", hjust = 0),
+        plot.subtitle = element_text(size = 12, face = "plain", hjust = 0),
         legend.position = "right"
       )
     )
