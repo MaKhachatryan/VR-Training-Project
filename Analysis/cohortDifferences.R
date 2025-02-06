@@ -186,13 +186,13 @@ if (!all(file.exists(c("Result/Q1/ageVariability.png", "Result/Q1/genderDistribu
                        "Result/Q1/BMI.png","Result/Q1/BMI_boxplot.png", 
                        "Result/Q1/BMI_histogram.png", "Result/Q1/Q1Q2Combined.png",
                        "Result/Q1/RMSSD.png", "Result/Q1/SDNN.png")))) {
-  ggsave("Result/Q1/ageVariability.png", ageVariability)
-  ggsave("Result/Q1/genderDistribution.png", genderDistribution)
-  ggsave("Result/Q1/BMI.png", BMI)
-  ggsave("Result/Q1/BMI_histogram.png", BMI_histogram)
-  ggsave("Result/Q1/BMI_boxplot.png", BMI_boxplot)
-  ggsave("Result/Q1/Q1Q2Combined.png", Q1Q2Combined)
-  ggsave("Result/Q1/RMSSD.png", RMSSD)
-  ggsave("Result/Q1/SDNN.png", SDNN)
+  ggsave("Result/Q1/ageVariability.png", ageVariability, width = 13.73, height = 8.76, dpi = 300)
+  ggsave("Result/Q1/genderDistribution.png", genderDistribution, width = 13.73, height = 8.76, dpi = 300)
+  ggsave("Result/Q1/BMI.png", BMI, width = 13.73, height = 8.76, dpi = 300)
+  ggsave("Result/Q1/BMI_histogram.png", BMI_histogram, width = 13.73, height = 8.76, dpi = 300)
+  ggsave("Result/Q1/BMI_boxplot.png", BMI_boxplot, width = 13.73, height = 8.76, dpi = 300)
+  ggsave("Result/Q1/Q1Q2Combined.png", Q1Q2Combined, width = 13.73, height = 8.76, dpi = 300)
+  ggsave("Result/Q1/RMSSD.png", RMSSD, width = 13.73, height = 8.76, dpi = 300)
+  ggsave("Result/Q1/SDNN.png", SDNN, width = 13.73, height = 8.76, dpi = 300)
 }
 
