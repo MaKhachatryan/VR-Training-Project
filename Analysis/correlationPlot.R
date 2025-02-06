@@ -63,7 +63,7 @@ plotCorrelation <- function(correlationTable, minCorr) {
       title = "Correlation between Physiological Measurements and Stress Indicators",
       fill = "Group"
     ) +
-    theme(strip.text = element_text(size = 16),
+    theme(strip.text = element_text(size = 12),
           plot.title = element_text(size = 14, hjust = 0)) +
     scale_fill_manual(values = groupColors) +
     scale_x_discrete(labels = label_wrap(12)) +
