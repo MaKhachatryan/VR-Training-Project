@@ -19,8 +19,8 @@ ageVariability <- ggplot(combinedDemoWithCohorts, aes(x = Trainingsversion, y = 
        fill= "Training Version") +
   theme_minimal() +
   theme(
-    plot.title = element_text(face = "bold"),
-    strip.text = element_text(size = 14, face = "bold") 
+    plot.title = element_text(size = 14),
+    strip.text = element_text(size = 12) 
   )
 
 
@@ -45,8 +45,8 @@ genderDistribution <- ggplot(filtered_combined_data, aes(x = Trainingsversion, f
   ) +
   theme_minimal()+
   theme(
-    plot.title = element_text(face = "bold"),
-    strip.text = element_text(size = 14, face = "bold") 
+    plot.title = element_text(size = 14),
+    strip.text = element_text(size = 12) 
   )
 
 
@@ -75,7 +75,7 @@ BMI_histogram <- ggplot(filtered_combined_data, aes(x = BMI)) +
   ) +
   theme_minimal() +
   theme(
-    strip.text = element_text(size = 14, face = "bold"),
+    strip.text = element_text(size = 14),
     legend.position = "right"
   )
 
@@ -92,8 +92,8 @@ BMI_boxplot <- ggplot(filtered_combined_data, aes(x = "", y = BMI, fill = Cohort
   scale_y_continuous(limits = c(16, 34), breaks = seq(16, 34, by = 4)) + 
   theme_minimal() +
   theme(
-    plot.title = element_text(face = "bold"),
-    strip.text = element_text(face = "bold", size = 14),  # Bold facet labels
+    plot.title = element_text(size = 14),
+    strip.text = element_text(size = 12),  # Bold facet labels
     axis.text.x = element_blank(),  # Remove x-axis text
     axis.ticks.x = element_blank(), # Remove x-axis ticks
     panel.spacing = unit(1, "lines") # Add spacing between facets
@@ -132,7 +132,7 @@ AnswerQ2 <- ggplot(filtered_combined_data, aes(x = Cohort, y = Answer_Q2, fill =
 Q1Q2Combined <- (AnswerQ1 | AnswerQ2) + 
   plot_layout(guides = "collect", heights = c(1, 1.1)) + 
   plot_annotation(title = "Cognitive and Physical Load Across the Cohorts",
-                  theme = theme(plot.title = element_text(face = "bold", size = 18))) +
+                  theme = theme(plot.title = element_text(size = 14))) +
   theme(legend.position = "right") 
   
 
@@ -154,8 +154,8 @@ RMSSD <- ggplot(filtered_combined_data, aes(x = Trainingsversion, y = RMSSD, fil
                     labels = c("Adaptive", "Non Adaptive")) +  
   theme_minimal() +
   theme(
-    plot.title = element_text(face = "bold"),
-    strip.text = element_text(size = 14, face = "bold"),
+    plot.title = element_text(size = 14),
+    strip.text = element_text(size = 12),
     legend.position = "right"
     )
 
